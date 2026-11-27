@@ -213,6 +213,7 @@ nav button{position:relative}
 .hist li span{color:var(--mu);white-space:nowrap}
 input[type=date]{background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:12px;padding:8px 12px;font:inherit;min-height:44px;width:100%}
 
+#hCmd{color:var(--ac);background:var(--acs)}#hCmd.rec{background:var(--bad);color:#fff;animation:pulse 1.4s infinite}
 #toast{position:fixed;inset-inline:16px;bottom:calc(84px + env(safe-area-inset-bottom));background:var(--tx);color:var(--bg);padding:12px 16px;border-radius:12px;display:none;max-width:560px;margin:auto;z-index:30;box-shadow:0 8px 24px rgba(0,0,0,.2)}
 @media (min-width:820px){#toast{bottom:24px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -276,7 +277,7 @@ input[type=date]{background:var(--card);color:var(--tx);border:1px solid var(--b
 
 <!-- ================= APP ================= -->
 <div id="app">
-<header><div class="hin"><h1><span class="logo" data-i="tr"></span><span data-t="title"></span></h1><span id="engPill" class="pill"></span><button id="hMode" class="ghost icon" data-a="themeBtn"></button><button id="hSet" class="ghost icon" data-i="gear" data-a="nSt"></button><button id="hLock" class="ghost icon" data-i="lock" data-a="lockNow"></button></div></header>
+<header><div class="hin"><h1><span class="logo" data-i="tr"></span><span data-t="title"></span></h1><span id="engPill" class="pill"></span><button id="hCmd" class="ghost icon" data-i="cmd" data-a="cmdBtn"></button><button id="hMode" class="ghost icon" data-a="themeBtn"></button><button id="hSet" class="ghost icon" data-i="gear" data-a="nSt"></button><button id="hLock" class="ghost icon" data-i="lock" data-a="lockNow"></button></div></header>
 <nav>
  <button data-tab="tr" data-i="tr"><span data-t="nTr"></span></button>
  <button data-tab="cv" data-i="cv"><span data-t="nCv"></span></button>
@@ -489,6 +490,12 @@ input[type=date]{background:var(--card);color:var(--tx);border:1px solid var(--b
   <label class="chk"><input type="checkbox" id="sWake"><span data-t="wakeLbl"></span></label>
  </div>
 
+ <div class="card" id="cmdCard">
+  <h2 data-t="cmdTitle"></h2>
+  <div class="note" data-t="cmdIntro" style="margin:0 0 10px"></div>
+  <div id="cmdList" class="diag"></div>
+ </div>
+
  <div class="card">
   <h2 data-t="stDiag"></h2>
   <div id="diag" class="diag"></div>
@@ -526,7 +533,7 @@ themeBtn:'تبديل الثيم',lockNow:'قفل التطبيق',from:'من',to:
 speakTr:'انطق الترجمة بصوت المساعد',start:'ابدأ الترجمة الفورية',stop:'إيقاف',clear:'مسح',trHint:'يستمر الاستماع بدون توقف حتى تضغط إيقاف، والشاشة تبقى مضاءة.',typePh:'أو اكتب نصًا لترجمته',translate:'ترجم',phrases:'عباراتي المحفوظة',noPhrases:'اضغط النجمة بجانب أي ترجمة لحفظها هنا وتشغيلها لاحقًا.',
 cvMeL:'لغتي',cvThemL:'لغة الطرف الآخر',cvAutoL:'تبادل تلقائي بدون لمس (يستمع لك ثم للطرف الآخر وهكذا)',cvFlipL:'عرض الترجمة مقلوبة للشخص المقابل',me:'أنا',them:'الطرف الآخر',tapTalk:'اضغط وتكلم',listening:'جارٍ الاستماع…',stopAll:'إيقاف المحادثة',cvEmpty:'اختر اللغتين ثم اضغط زر المتحدث. في الوضع التلقائي تستمر المحادثة بدون لمس.',
 nosr:'المتصفح لا يدعم التعرف على الصوت. استخدم Chrome على أندرويد أو Safari على آيفون.',notr:'تعذرت الترجمة. تأكد من الاتصال بالإنترنت أو غيّر محرك الترجمة من الإعدادات.',notrDev:'الترجمة على الجهاز غير متاحة هنا (تحتاج Chrome للكمبيوتر). اختر محركًا آخر من الإعدادات.',offline:'لا يوجد اتصال بالإنترنت.',notrS:'تعذرت الترجمة، الملخص بلغة الاجتماع.',net:'مشكلة في الشبكة، أعيد المحاولة…',
-mic:'اسمح باستخدام الميكروفون من إعدادات المتصفح.',micAsk:'سيطلب المتصفح إذن الميكروفون مرة واحدة. اختر «سماح» ثم تكلم.',micIOS:'الميكروفون مرفوض. على آيفون: الإعدادات ← Safari ← الميكروفون ← سماح، أو من زر «aA» في شريط العنوان ← إعدادات الموقع ← الميكروفون ← سماح. ثم أعد فتح الصفحة.',micAnd:'الميكروفون مرفوض. اضغط أيقونة القفل بجانب الرابط ← الأذونات ← الميكروفون ← سماح، ثم أعد تحميل الصفحة.',micPC:'الميكروفون مرفوض. اضغط أيقونة القفل بجانب الرابط ← الميكروفون ← سماح، ثم أعد تحميل الصفحة.',micNone:'لم يتم العثور على ميكروفون، أو يستخدمه تطبيق آخر الآن (مكالمة أو تسجيل). أغلقه وحاول مرة أخرى.',srIOS:'التعرف على الصوت متوقف على الجهاز. على آيفون: الإعدادات ← عام ← لوحة المفاتيح ← فعّل «الإملاء»، والإعدادات ← Siri ← فعّل Siri. ثم أعد المحاولة.',srIOSApp:'على آيفون، التعرف على الصوت لا يعمل من أيقونة الشاشة الرئيسية. افتح الرابط في Safari مباشرة لاستخدام الميكروفون.',srNet:'التعرف على الصوت يحتاج إنترنت. تأكد من الاتصال، ولو تستخدم متصفح Brave جرّب Chrome.',srLang:'لغة التعرف غير مدعومة على هذا الجهاز.',noHttps:'الميكروفون يحتاج فتح التطبيق من رابط https وليس من ملف على الجهاز.',srcLang:'لغة الاجتماع',mtLiveTrL:'ترجمة فورية للعربية أثناء الاجتماع',mtRecL:'حفظ التسجيل الصوتي (قد لا يعمل مع التفريغ على آيفون)',startMt:'ابدأ التسجيل',stopMt:'إيقاف وتلخيص',mtTitle:'عنوان الاجتماع',transcript:'النص المفرغ (يمكنك تعديله)',summarize:'لخّص',working:'جارٍ العمل…',short:'النص قصير جدًا للتلخيص.',exportTxt:'تحميل نصي',
+mic:'اسمح باستخدام الميكروفون من إعدادات المتصفح.',micAsk:'سيطلب المتصفح إذن الميكروفون مرة واحدة. اختر «سماح» ثم تكلم.',micIOS:'الميكروفون مرفوض. على آيفون: الإعدادات ← Safari ← الميكروفون ← سماح، أو من زر «aA» في شريط العنوان ← إعدادات الموقع ← الميكروفون ← سماح. ثم أعد فتح الصفحة.',micAnd:'الميكروفون مرفوض. اضغط أيقونة القفل بجانب الرابط ← الأذونات ← الميكروفون ← سماح، ثم أعد تحميل الصفحة.',micPC:'الميكروفون مرفوض. اضغط أيقونة القفل بجانب الرابط ← الميكروفون ← سماح، ثم أعد تحميل الصفحة.',micNone:'لم يتم العثور على ميكروفون، أو يستخدمه تطبيق آخر الآن (مكالمة أو تسجيل). أغلقه وحاول مرة أخرى.',srIOS:'التعرف على الصوت متوقف على الجهاز. على آيفون: الإعدادات ← عام ← لوحة المفاتيح ← فعّل «الإملاء»، والإعدادات ← Siri ← فعّل Siri. ثم أعد المحاولة.',srIOSApp:'على آيفون، التعرف على الصوت لا يعمل من أيقونة الشاشة الرئيسية. افتح الرابط في Safari مباشرة لاستخدام الميكروفون.',srNet:'التعرف على الصوت يحتاج إنترنت. تأكد من الاتصال، ولو تستخدم متصفح Brave جرّب Chrome.',srLang:'لغة التعرف غير مدعومة على هذا الجهاز.',noHttps:'الميكروفون يحتاج فتح التطبيق من رابط https وليس من ملف على الجهاز.',cmdBtn:'أمر صوتي',cmdListen:'قل الأمر الآن… (قل «الأوامر» لعرض القائمة)',cmdUnknown:'لم أفهم الأمر: «{x}». قل «الأوامر» لعرض القائمة.',cmdTitle:'الأوامر الصوتية',cmdIntro:'اضغط زر الأمر الصوتي أعلى الشاشة وقل أمرًا واحدًا. لو الاستماع أو التسجيل شغال، يتوقف لحظة ويكمل بعد الأمر. الأوامر تعمل فقط عند الضغط على الزر.',cmdAll:'في أي قسم',cmdTask:'تمت إضافة المهمة: {x}',srcLang:'لغة الاجتماع',mtLiveTrL:'ترجمة فورية للعربية أثناء الاجتماع',mtRecL:'حفظ التسجيل الصوتي (قد لا يعمل مع التفريغ على آيفون)',startMt:'ابدأ التسجيل',stopMt:'إيقاف وتلخيص',mtTitle:'عنوان الاجتماع',transcript:'النص المفرغ (يمكنك تعديله)',summarize:'لخّص',working:'جارٍ العمل…',short:'النص قصير جدًا للتلخيص.',exportTxt:'تحميل نصي',
 sumAr:'الملخص بالعربية',sumEn:'Summary in English',key:'النقاط الرئيسية',actions:'المهام والمطلوب',saved:'الاجتماعات المحفوظة',open:'فتح',del:'حذف',dl:'تحميل التسجيل',none:'لا توجد اجتماعات محفوظة.',searchPh:'ابحث في الاجتماعات',
 listen:'استمع',slow:'ببطء',speak:'تحدث',stopS:'إيقاف',next:'جملة أخرى',use:'استخدم',own:'اكتب جملتك بالإنجليزية',acc:'الكلمات الصحيحة',clar:'وضوح الصوت',perfect:'ممتاز، نطقك واضح.',fix:'الكلمات الحمراء تحتاج تدريب. اضغط على أي كلمة لسماع نطقها، ثم أعد المحاولة.',heard:'سُمع',nohear:'لم أسمع شيئًا. حاول مرة أخرى بصوت أوضح.',
 recv:'إيميل وصلك',emInPh:'ألصق نص الإيميل هنا (مع سطر Subject والتوقيع إن وجد)',emTr:'ترجم وافهم',paste:'لصق',reply:'ردّك',toName:'اسم المستلم',toMail:'إيميل المستلم',replyLang:'لغة الرد',tone:'النبرة',toneAuto:'تلقائي حسب أسلوبي',quick:'رد سريع بدون كتابة',orWrite:'أو اكتب ردّك بأي لغة',emOutPh:'اكتب فكرة الرد بالعربي أو بأي لغة، وسأترجمها وأصيغها بأسلوبك',styleTr:'ترجم بأسلوبي',polish:'حسّن الصياغة (ذكاء على الجهاز)',subject:'الموضوع',copy:'نسخ وتعلّم',openMail:'فتح في البريد',copied:'تم النسخ',myPhrases:'جُمل من أسلوبك',
@@ -559,7 +566,7 @@ themeBtn:'Toggle theme',lockNow:'Lock app',from:'From',to:'To',swap:'Swap langua
 speakTr:'Speak the translation aloud',start:'Start live translation',stop:'Stop',clear:'Clear',trHint:'Listening continues nonstop until you press Stop, and the screen stays on.',typePh:'Or type text to translate',translate:'Translate',phrases:'Saved phrases',noPhrases:'Tap the star next to any translation to save it here and play it later.',
 cvMeL:'My language',cvThemL:'Other person’s language',cvAutoL:'Hands-free turn taking (listens to you, then the other person, and so on)',cvFlipL:'Show the translation upside down for the person facing you',me:'Me',them:'Other person',tapTalk:'Tap and speak',listening:'Listening…',stopAll:'Stop conversation',cvEmpty:'Pick both languages, then tap a speaker button. In hands-free mode the conversation keeps going without touching.',
 nosr:'This browser has no speech recognition. Use Chrome on Android or Safari on iPhone.',notr:'Translation failed. Check your internet connection or change the engine in Settings.',notrDev:'On-device translation is unavailable here (needs desktop Chrome). Pick another engine in Settings.',offline:'No internet connection.',notrS:'Translation failed; summary shown in the meeting language.',net:'Network problem, retrying…',
-mic:'Allow microphone access in your browser settings.',micAsk:'The browser will ask for microphone access once. Choose Allow, then speak.',micIOS:'Microphone is blocked. On iPhone: Settings → Safari → Microphone → Allow, or tap “aA” in the address bar → Website Settings → Microphone → Allow. Then reopen the page.',micAnd:'Microphone is blocked. Tap the lock icon next to the address → Permissions → Microphone → Allow, then reload.',micPC:'Microphone is blocked. Click the lock icon next to the address → Microphone → Allow, then reload.',micNone:'No microphone found, or another app is using it (a call or recording). Close it and try again.',srIOS:'Speech recognition is off on this device. On iPhone: Settings → General → Keyboard → turn on Dictation, and Settings → Siri → turn on Siri. Then try again.',srIOSApp:'On iPhone, speech recognition does not work from the Home Screen icon. Open the link in Safari to use the microphone.',srNet:'Speech recognition needs internet. Check the connection; if you use Brave, try Chrome.',srLang:'This recognition language is not supported on this device.',noHttps:'The microphone needs the app opened from an https link, not from a file on the device.',srcLang:'Meeting language',mtLiveTrL:'Live Arabic translation during the meeting',mtRecL:'Keep the audio recording (may conflict with transcription on iPhone)',startMt:'Start recording',stopMt:'Stop and summarize',mtTitle:'Meeting title',transcript:'Transcript (editable)',summarize:'Summarize',working:'Working…',short:'Transcript is too short to summarize.',exportTxt:'Download text',
+mic:'Allow microphone access in your browser settings.',micAsk:'The browser will ask for microphone access once. Choose Allow, then speak.',micIOS:'Microphone is blocked. On iPhone: Settings → Safari → Microphone → Allow, or tap “aA” in the address bar → Website Settings → Microphone → Allow. Then reopen the page.',micAnd:'Microphone is blocked. Tap the lock icon next to the address → Permissions → Microphone → Allow, then reload.',micPC:'Microphone is blocked. Click the lock icon next to the address → Microphone → Allow, then reload.',micNone:'No microphone found, or another app is using it (a call or recording). Close it and try again.',srIOS:'Speech recognition is off on this device. On iPhone: Settings → General → Keyboard → turn on Dictation, and Settings → Siri → turn on Siri. Then try again.',srIOSApp:'On iPhone, speech recognition does not work from the Home Screen icon. Open the link in Safari to use the microphone.',srNet:'Speech recognition needs internet. Check the connection; if you use Brave, try Chrome.',srLang:'This recognition language is not supported on this device.',noHttps:'The microphone needs the app opened from an https link, not from a file on the device.',cmdBtn:'Voice command',cmdListen:'Say the command now… (say “commands” to see the list)',cmdUnknown:'I did not understand: “{x}”. Say “commands” to see the list.',cmdTitle:'Voice commands',cmdIntro:'Tap the voice command button at the top and say one command. If listening or recording is running, it pauses for a moment and continues after the command. Commands only work when you tap the button.',cmdAll:'Anywhere',cmdTask:'Task added: {x}',srcLang:'Meeting language',mtLiveTrL:'Live Arabic translation during the meeting',mtRecL:'Keep the audio recording (may conflict with transcription on iPhone)',startMt:'Start recording',stopMt:'Stop and summarize',mtTitle:'Meeting title',transcript:'Transcript (editable)',summarize:'Summarize',working:'Working…',short:'Transcript is too short to summarize.',exportTxt:'Download text',
 sumAr:'الملخص بالعربية',sumEn:'Summary in English',key:'Key points',actions:'Action items',saved:'Saved meetings',open:'Open',del:'Delete',dl:'Download recording',none:'No saved meetings.',searchPh:'Search meetings',
 listen:'Listen',slow:'Slow',speak:'Speak',stopS:'Stop',next:'Next sentence',use:'Use',own:'Type your own English sentence',acc:'Words correct',clar:'Voice clarity',perfect:'Excellent, clear pronunciation.',fix:'Red words need practice. Tap any word to hear it, then try again.',heard:'heard',nohear:'Nothing heard. Try again, a bit louder.',
 recv:'Email you received',emInPh:'Paste the email here (include the Subject line and signature if any)',emTr:'Translate and explain',paste:'Paste',reply:'Your reply',toName:'Recipient name',toMail:'Recipient email',replyLang:'Reply language',tone:'Tone',toneAuto:'Auto, from my style',quick:'Quick reply, no typing',orWrite:'Or write your reply in any language',emOutPh:'Write the idea of your reply in Arabic or any language; I will translate and phrase it in your style',styleTr:'Translate in my style',polish:'Polish wording (on-device AI)',subject:'Subject',copy:'Copy and learn',openMail:'Open in mail',copied:'Copied',myPhrases:'Sentences in your style',
@@ -594,6 +601,7 @@ gear:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1
 bell:'<path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>',
 cal:'<rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
 plus:'<path d="M12 5v14M5 12h14"/>',
+cmd:'<rect x="7" y="3" width="6" height="10" rx="3"/><path d="M3.5 10a6.5 6.5 0 0 0 13 0M10 16.5V20M6.5 20h7"/><path d="m19.5 3-1.6 3.2h3.2L19.5 9.5"/>',
 sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
 moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>'};
 const svg=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
@@ -1328,6 +1336,88 @@ function addTasksFrom(items,src,notes){const n=items.filter(x=>x&&x.trim()).map(
 /* service worker: offline + background daily summary on installed apps (needs https hosting with sw.js next to this file) */
 if('serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('sw.js').then(async reg=>{try{if('periodicSync' in reg){const p=await navigator.permissions.query({name:'periodic-background-sync'});if(p.state==='granted')await reg.periodicSync.register('ma-digest',{minInterval:6*3600e3})}}catch(e){}}).catch(()=>{})}
 
+/* ================= VOICE COMMANDS (tap the button, say one command) ================= */
+const nAr=x=>String(x||'').toLowerCase().replace(/[ً-ٰٟـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/[.,،؟?!:;"'«»“”]/g,' ').replace(/\s+/g,' ').trim();
+const TABN={tr:['ترجمه','الترجمه','translate','translation'],cv:['محادثه','المحادثه','talk','conversation'],mt:['اجتماعات','الاجتماعات','اجتماع','الاجتماع','meetings','meeting'],tk:['مهام','المهام','tasks','task'],em:['ايميلات','الايميلات','ايميل','الايميل','البريد','emails','email'],co:['تدريب','التدريب','coach','practice'],st:['اعدادات','الاعدادات','settings']};
+let lastField=null;
+addEventListener('focusin',e=>{const a=e.target;if(a&&a.matches&&a.matches('textarea:not([readonly]),input[type=text]'))lastField=a});
+function cmdTarget(){if(lastField&&lastField.closest('.pane.on'))return lastField;return $({mt:'mtText',em:'emDraft',tk:'tkTitle',tr:'trType',co:'coIn',cv:'trType'}[V.set.tab]||'mtText')}
+function putText(el,x,mode){
+ const mt=el===$('mtText')&&cur;let v=mt?cur.transcript:el.value;
+ if(mode==='undo'){v=v.replace(/\s+$/,'').replace(/[^.!?؟\n]+[.!?؟]*$/,'').replace(/[ \t]+$/,'');if(mt&&v&&!v.endsWith('\n'))v+='\n'}
+ else if(mode==='line')v=v.replace(/[ \t]+$/,'')+x;
+ else{v=v.replace(/\s+$/,'')+x+(mt?'\n':' ')}
+ if(mt){cur.transcript=v;$('mtText').value=v;save()}else{el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}))}
+}
+const pmark=(el,a,e)=>AR.test((el.value||'').slice(-120))?a:e;
+const lastTr=()=>{const d=qa('#trOut .line').pop();return d&&d.dataset.y};
+const CMDS=[
+ {g:'all',say:['افتح المهام','open tasks'],d:['ينقلك لأي قسم: الترجمة، المحادثة، الاجتماعات، المهام، الإيميلات، التدريب، الإعدادات','Opens a section: translate, talk, meetings, tasks, emails, coach, settings'],re:/^(?:افتح|روح علي|روح ل|روح|اذهب الي|انتقل الي|اعرض|open|go to|show)\s+(.+)$/,run:m=>{for(const k in TABN)if(TABN[k].some(x=>(' '+m[1]+' ').includes(' '+x+' '))){showTab(k);return'ok'}return'unknown'}},
+ {g:'all',say:['أضف مهمة: اتصل بالمورد','add task: call the supplier'],d:['يضيف اللي قلته بعدها كمهمة جديدة','Adds what you say after it as a new task'],re:/^(اضف مهمه|ضيف مهمه|سجل مهمه|مهمه جديده|add task|new task|add a task)(?:\s|$)/,run:(m,raw)=>{const n=m[1].split(' ').length,ttl=raw.trim().split(/\s+/).slice(n).join(' ').replace(/^[:：،,\-–]\s*/,'').trim();if(!ttl){showTab('tk');$('tkTitle').focus();return'ok'}addTask(ttl,{src:'voice'});tasksChanged();toast(t('cmdTask',{x:ttl}),4000);return'quiet'}},
+ {g:'all',say:['وقف','stop'],d:['يوقف أي استماع أو تسجيل أو نطق','Stops any listening, recording or speech'],m:['وقف','اوقف','ايقاف','توقف','استوب','stop','pause'],run:()=>{stopAll();return'stop'}},
+ {g:'all',say:['نقطة','period'],d:['يكتب نقطة في الخانة المفتوحة','Types a period in the open field'],m:['نقطه','period','full stop'],run:()=>{putText(cmdTarget(),'.')}},
+ {g:'all',say:['فاصلة','comma'],d:['يكتب فاصلة','Types a comma'],m:['فاصله','comma'],run:()=>{const el=cmdTarget();putText(el,pmark(el,'،',','))}},
+ {g:'all',say:['علامة استفهام','question mark'],d:['يكتب علامة استفهام','Types a question mark'],m:['علامه استفهام','استفهام','question mark'],run:()=>{const el=cmdTarget();putText(el,pmark(el,'؟','?'))}},
+ {g:'all',say:['سطر جديد','new line'],d:['ينزل سطر جديد','Starts a new line'],m:['سطر جديد','new line','next line'],run:()=>{putText(cmdTarget(),'\n','line')}},
+ {g:'all',say:['فقرة جديدة','new paragraph'],d:['يبدأ فقرة جديدة','Starts a new paragraph'],m:['فقره جديده','new paragraph'],run:()=>{putText(cmdTarget(),'\n\n','line')}},
+ {g:'all',say:['امسح آخر جملة','delete last sentence'],d:['يمسح آخر جملة أو سطر اتكتب','Deletes the last sentence or line'],m:['امسح اخر جمله','امسح اخر سطر','احذف اخر جمله','احذف اخر سطر','امسح اللي فات','delete last sentence','delete last line','undo that'],run:()=>{putText(cmdTarget(),'','undo')}},
+ {g:'all',say:['قفل','lock'],d:['يقفل التطبيق','Locks the app'],m:['اقفل التطبيق','قفل التطبيق','اقفل','قفل','lock','lock app'],run:()=>{lock();return'stop'}},
+ {g:'all',say:['الأوامر','commands'],d:['يعرض قائمة الأوامر','Shows this list'],m:['الاوامر','اوامر','مساعده','commands','help'],run:()=>{showTab('st');setTimeout(()=>$('cmdCard').scrollIntoView({behavior:'smooth'}),150)}},
+ {g:'tr',say:['ابدأ','start'],d:['يبدأ الترجمة الفورية','Starts live translation'],m:['ابدا','ابدء','شغل','ابدا الترجمه','start','begin'],run:()=>{setTimeout(()=>{if(!trOn)$('trBtn').click()},400);return'stop'}},
+ {g:'tr',say:['اقرأ','read'],d:['ينطق آخر ترجمة','Reads the last translation aloud'],m:['اقرا','كرر','اعد','read','repeat','say it'],run:()=>{const y=lastTr();if(y)say(y,$('trTo').value);return'quiet'}},
+ {g:'tr',say:['بدّل اللغتين','swap'],d:['يبدّل لغة المصدر والهدف','Swaps the two languages'],m:['بدل اللغتين','بدل اللغات','بدل','اعكس','swap','switch'],run:()=>{$('trSwap').click()}},
+ {g:'tr',say:['ترجم','translate'],d:['يترجم النص المكتوب في الخانة','Translates the typed text'],m:['ترجم','translate'],run:()=>{$('trTypeGo').click()}},
+ {g:'tr',say:['انسخ','copy'],d:['ينسخ كل الترجمات','Copies all translations'],m:['انسخ','نسخ','copy'],run:()=>{$('trCopy').click()}},
+ {g:'tr',say:['شارك','share'],d:['يشارك الترجمات','Shares the translations'],m:['شارك','share'],run:()=>{$('trShare').click()}},
+ {g:'tr',say:['امسح','clear'],d:['يمسح الترجمات من الشاشة','Clears the translations'],m:['امسح','امسح الكل','clear'],run:()=>{$('trClr').click()}},
+ {g:'cv',say:['ابدأ','start'],d:['يبدأ المحادثة من عندك','Starts the conversation with you'],m:['ابدا','ابدء','شغل','start','begin','انا'],run:()=>{setTimeout(()=>$('cvBtnMe').click(),400);return'stop'}},
+ {g:'cv',say:['الطرف الآخر','other person'],d:['يسمع الطرف التاني','Listens to the other person'],m:['الطرف الاخر','الطرف التاني','هو','other person','them'],run:()=>{setTimeout(()=>$('cvBtnThem').click(),400);return'stop'}},
+ {g:'cv',say:['امسح','clear'],d:['يمسح المحادثة','Clears the conversation'],m:['امسح','clear'],run:()=>{$('cvClr').click()}},
+ {g:'mt',say:['ابدأ التسجيل','start recording'],d:['يبدأ تسجيل الاجتماع','Starts recording the meeting'],m:['ابدا التسجيل','ابدا','سجل','ابدء','start recording','start','record'],run:()=>{setTimeout(()=>{if(!mOn)$('mtBtn').click()},400);return'stop'}},
+ {g:'mt',say:['لخّص','summarize'],d:['يوقف التسجيل ويلخص الاجتماع','Stops recording and summarizes'],m:['لخص','تلخيص','ملخص','summarize','summary'],run:()=>{if(mOn){mStop();return'stop'}doSum()}},
+ {g:'mt',say:['انسخ','copy'],d:['ينسخ النص والملخص','Copies the transcript and summary'],m:['انسخ','نسخ','copy'],run:()=>{$('mtCopy').click()}},
+ {g:'mt',say:['حمّل','download'],d:['ينزل الاجتماع كملف نصي','Downloads the meeting as text'],m:['حمل','نزل','تحميل','download','export'],run:()=>{$('mtExport').click()}},
+ {g:'em',say:['ترجم','translate'],d:['يترجم الإيميل اللي لصقته','Translates the pasted email'],m:['ترجم','افهم','translate'],run:()=>{$('emGo').click()}},
+ {g:'em',say:['الصق','paste'],d:['يلصق الإيميل من الحافظة','Pastes the email from the clipboard'],m:['الصق','لصق','paste'],run:()=>{$('emPaste').click()}},
+ {g:'em',say:['صِغ الرد','write reply'],d:['يترجم ردك ويصيغه بأسلوبك','Translates your reply in your style'],m:['صيغ الرد','اكتب الرد','ترجم الرد','write reply','reply'],run:()=>{$('emRep').click()}},
+ {g:'em',say:['انسخ','copy'],d:['ينسخ الرد','Copies the reply'],m:['انسخ','نسخ','copy'],run:()=>{$('emCopy').click()}},
+ {g:'co',say:['استمع','listen'],d:['ينطق الجملة','Plays the sentence'],m:['استمع','اسمع','كرر','اقرا','listen','repeat'],run:()=>{$('coListen').click();return'quiet'}},
+ {g:'co',say:['ببطء','slow'],d:['ينطق الجملة بالراحة','Plays it slowly'],m:['ببطء','ببطئ','بالراحه','بشويش','slow','slowly'],run:()=>{$('coSlow').click();return'quiet'}},
+ {g:'co',say:['التالي','next'],d:['جملة جديدة','Next sentence'],m:['التالي','اللي بعده','جمله تانيه','جمله اخري','next'],run:()=>{$('coNext').click()}},
+ {g:'co',say:['ابدأ','start'],d:['يبدأ يسمع نطقك','Starts listening to you'],m:['ابدا','ابدء','تحدث','اتكلم','start','speak'],run:()=>{setTimeout(()=>$('coBtn').click(),400);return'stop'}}
+];
+function runCmd(raw){
+ const w=nAr(raw),tab=V.set.tab,list=CMDS.filter(c=>c.g==='all'||c.g===tab);
+ const ok=(c,r)=>{if(r!=='quiet')toast('✓ «'+raw.trim()+'»',2500);return r||'ok'};
+ for(const c of list)if(c.re){const m=w.match(c.re);if(m){const r=c.run(m,raw);if(r!=='unknown')return ok(c,r)}}
+ const ph=[];list.forEach(c=>(c.m||[]).forEach(p=>ph.push([nAr(p),c])));ph.sort((a,b)=>b[0].length-a[0].length);
+ const pad=' '+w+' ';
+ for(const [p,c] of ph)if(pad.includes(' '+p+' '))return ok(c,c.run(null,raw));
+ toast(t('cmdUnknown',{x:raw}),6000);return'ok';
+}
+let cmdR=null;
+async function cmdListen(){
+ if(cmdR){cmdR.stop();return}
+ if(!V)return;
+ if(!(await micReady()))return;
+ const paused=[];
+ if(trOn&&trR){trR.pause();paused.push(()=>trOn&&trR&&trR.resume())}
+ if(mOn&&mrec){mrec.pause();paused.push(()=>mOn&&mrec&&mrec.resume())}
+ if(cvOn)cvStop();if(coOn&&coRec)coRec.stop();if(tkDict)tkDict.stop();
+ try{speechSynthesis.cancel()}catch(e){}
+ let got=false,res='ok';
+ const btn=$('hCmd');btn.classList.add('rec');toast(t('cmdListen'),6000);
+ cmdR=startRec(L==='ar'?'ar-SA':'en-US',{
+  interim:x=>{if(x)toast('🎤 '+x,4000)},
+  final:x=>{if(got)return;got=true;try{res=runCmd(x)}catch(e){toast(String(e&&e.message||e))}},
+  end:()=>{cmdR=null;btn.classList.remove('rec');if(!got)toast(t('nohear'));if(res!=='stop'){const later=()=>{if(speechSynthesis.speaking||speechSynthesis.pending)return setTimeout(later,300);paused.forEach(f=>f())};setTimeout(later,400)}}});
+ if(!cmdR){btn.classList.remove('rec');paused.forEach(f=>f())}
+}
+$('hCmd').onclick=cmdListen;
+function renderCmds(){const w=$('cmdList');if(!w)return;w.innerHTML='';const li=L==='ar'?0:1;
+ [['all',t('cmdAll')],['tr',t('nTr')],['cv',t('nCv')],['mt',t('nMt')],['em',t('nEm')],['co',t('nCo')]].forEach(([g,title])=>{
+  w.append(mk('h3',null,title));CMDS.filter(c=>c.g===g).forEach(c=>{const r=mk('div'),a=mk('b',null,'«'+c.say[li]+'»'),b=mk('span',null,c.d[li]);b.className='mu small';b.style.textAlign='end';r.append(a,b);w.append(r)})})}
+
 /* ================= SETTINGS ================= */
 function setUi(l){L=l;DEV.ui=l;saveDev();applyUI()}
 qa('#segUi button').forEach(b=>b.onclick=()=>setUi(b.dataset.v));
@@ -1378,7 +1468,7 @@ function applyUI(){
  $('aUi').textContent=L==='ar'?'EN':'عربي';
  qa('#segUi button').forEach(b=>b.classList.toggle('on',b.dataset.v===L));
  renderUsers();
- if(V){refresh();renderList();renderProfile();renderPhrases();renderIntents();renderVoice();renderDiag();trEmpty();cvEmpty();tkLabels();renderTasks();permStatus();if(lastEng){const m=lastEng;lastEng='';setEng(m)}}
+ if(V){renderCmds();refresh();renderList();renderProfile();renderPhrases();renderIntents();renderVoice();renderDiag();trEmpty();cvEmpty();tkLabels();renderTasks();permStatus();if(lastEng){const m=lastEng;lastEng='';setEng(m)}}
 }
 let inited=false;
 function enterApp(){
