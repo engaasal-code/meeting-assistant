@@ -967,10 +967,11 @@ function lock(){stopAll();saveVault(true).finally(()=>location.reload())}
 const RESET_API_DEFAULT='';/* optional: paste the Apps Script web-app URL here so every device uses it */
 const resetApi=()=>(localStorage.getItem('ma_reset_api')||RESET_API_DEFAULT).trim();
 async function rApi(q,ms=20000){const url=resetApi();if(!url)throw'eNoSvc';if(!navigator.onLine)throw'offline';
- let r;try{r=await withTimeout(fetch(url+(url.includes('?')?'&':'?')+new URLSearchParams(q),{redirect:'follow'}),ms,'eSvc')}catch(e){throw e==='eSvc'?e:'eSvcAccess'}if(!r.ok)throw'eSvc';
- let j;try{j=await r.json()}catch(e){throw'eSvcAccess'}return j}
+ let r;try{r=await withTimeout(fetch(url+(url.includes('?')?'&':'?')+new URLSearchParams(q),{redirect:'follow'}),ms,'eSvc')}catch(e){throw e==='eSvc'?{k:'eSvc',d:'timeout'}:{k:'eSvcAccess',d:String(e&&e.message||e)}}
+ if(!r.ok)throw{k:'eSvc',d:'HTTP '+r.status};
+ let j,tx='';try{tx=await r.text();j=JSON.parse(tx)}catch(e){throw{k:'eSvcAccess',d:'not JSON: '+tx.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,90)}}return j}
 /* registers this account with the email service: the data key is sealed with a key only the service can re-derive */
-async function enrollMail(u,raw){const j=await rApi({a:'enroll'});if(!j.ok||!j.id||!j.k)throw'eSvc';const k=unb64(j.k);if(k.length!==32)throw'eSvc';
+async function enrollMail(u,raw){const j=await rApi({a:'enroll'});if(!j.ok||!j.id||!j.k)throw{k:'eSvc',d:'enroll: '+(j.e||JSON.stringify(j).slice(0,80))};let k;try{k=unb64(j.k)}catch(e){k=[]}if(k.length!==32)throw{k:'eSvc',d:'enroll key '+k.length};
  const rec=USERS[u];rec.mid=j.id;rec.mbox=await seal(await aesKey(k),raw);rec.mapi=resetApi();saveUsers();return true}
 async function ensureMail(){if(!U||!DKraw||!resetApi())return false;const rec=USERS[U];if(rec.mid&&rec.mapi===resetApi())return true;try{return await enrollMail(U,DKraw)}catch(e){return false}}
 const mailReady=rec=>!!(rec&&rec.mid&&rec.mbox&&resetApi());
@@ -2281,9 +2282,9 @@ function renderMailSt(){if(!$('mrSt'))return;const on=!!(U&&mailReady(USERS[U]))
 $('mrOn').onclick=async()=>{const url=$('mrUrl').value.trim(),b=$('mrOn'),old=b.textContent;
  if(!/^https:\/\/script\.google(usercontent)?\.com\/.+/.test(url))return toast(t('mrBadUrl'),6000);
  b.disabled=true;b.textContent=t('checking');const prev=localStorage.getItem('ma_reset_api');
- try{localStorage.setItem('ma_reset_api',url);const j=await rApi({a:'ping'});if(!j.ok)throw'eSvc';delete USERS[U].mid;await enrollMail(U,DKraw);toast(t('mrDone'),5000)}
- catch(x){if(prev)localStorage.setItem('ma_reset_api',prev);else localStorage.removeItem('ma_reset_api');toast(typeof x==='string'&&T.ar[x]?t(x):t('eSvc'),7000)}
- finally{b.disabled=false;b.textContent=old;renderMailSt();if(!(U&&mailReady(USERS[U])))$('mrUrl').value=url}};
+ let fail='';try{localStorage.setItem('ma_reset_api',url);const j=await rApi({a:'ping'});if(!j.ok)throw{k:'eSvc',d:'ping: '+(j.e||JSON.stringify(j).slice(0,80))};delete USERS[U].mid;await enrollMail(U,DKraw);toast(t('mrDone'),5000)}
+ catch(x){if(prev)localStorage.setItem('ma_reset_api',prev);else localStorage.removeItem('ma_reset_api');const k=x&&x.k||x;fail=(typeof k==='string'&&T.ar[k]?t(k):t('eSvc'))+' ['+(x&&x.d||x&&x.message||String(x))+']';toast(fail,9000)}
+ finally{b.disabled=false;b.textContent=old;renderMailSt();if(!(U&&mailReady(USERS[U])))$('mrUrl').value=url;if(fail){$('mrSt').textContent=fail;$('mrSt').style.color='var(--bad)'}}};
 $('mrOff').onclick=()=>{localStorage.removeItem('ma_reset_api');renderMailSt()};
 function renderDiag(){const d=$('diag');d.innerHTML='';const devOk='Translator' in self;
  [['dSR',!!SR],['dTTS','speechSynthesis' in self],['dDev',devOk],['dWake','wakeLock' in navigator],['dShare',!!navigator.share],['dSec',isSecureContext],['dNet',navigator.onLine]].forEach(([k,ok])=>{const r=mk('div');r.append(mk('span',null,t(k)),mk('b',null,(ok?'✓ ':'✗ ')+t(ok?'yes':'no')));r.lastChild.style.color=ok?'var(--ok)':'var(--mu)';d.append(r)})}
