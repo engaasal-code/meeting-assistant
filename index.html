@@ -179,6 +179,7 @@ body.locked #app{display:none}
 .biglogo svg{width:40px;height:40px}
 .pw{position:relative}
 .pw input{padding-inline-end:48px}
+[dir=rtl] .pw input[dir=ltr]{padding-left:48px;padding-right:12px}
 .pw button{position:absolute;inset-inline-end:2px;top:2px;border:0;background:none;color:var(--mu);width:42px;min-height:40px;padding:0}
 .meter{height:6px;border-radius:9px;background:var(--bd);overflow:hidden;margin-top:6px}
 .meter i{display:block;height:100%;width:0;transition:width .2s,background .2s}
@@ -186,6 +187,13 @@ body.locked #app{display:none}
 .users{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .radios{display:flex;gap:16px;flex-wrap:wrap}
 .radios label{display:flex;gap:6px;align-items:center;cursor:pointer}
+
+/* email reset */
+.mailwait{display:flex;gap:12px;align-items:flex-start;background:var(--acs);border-radius:14px;padding:12px 14px}
+.mailwait p{margin:4px 0 0}
+.spin{width:22px;height:22px;border-radius:50%;border:3px solid color-mix(in srgb,var(--ac) 25%,transparent);border-top-color:var(--ac);animation:spin 1s linear infinite;flex:none;margin-top:3px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.okline{color:var(--ok);font-weight:600}
 
 /* tasks */
 nav button{position:relative}
@@ -216,6 +224,111 @@ input[type=date]{background:var(--card);color:var(--tx);border:1px solid var(--b
 #hCmd{color:var(--ac);background:var(--acs)}#hCmd.rec{background:var(--bad);color:#fff;animation:pulse 1.4s infinite}
 #toast{position:fixed;inset-inline:16px;bottom:calc(84px + env(safe-area-inset-bottom));background:var(--tx);color:var(--bg);padding:12px 16px;border-radius:12px;display:none;max-width:560px;margin:auto;z-index:30;box-shadow:0 8px 24px rgba(0,0,0,.2)}
 @media (min-width:820px){#toast{bottom:24px}}
+
+/* AI assistant */
+input[type=url]{background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;font:inherit;min-width:0;min-height:44px;width:100%}
+.aibar{display:flex;gap:6px;align-items:center;margin-bottom:12px}
+.aibar .seg button{flex-direction:row;gap:5px;font-size:.86rem;padding:6px 4px}
+.aibar .seg svg{width:1.05em;height:1.05em}
+@media (max-width:420px){.aibar .seg svg{display:none}.aibar .seg button{font-size:.8rem}}
+.card.slim{padding:10px 14px}
+.ailog{min-height:calc(100dvh - 330px);padding:4px 2px 12px}
+.msg{margin:14px 0;display:flex;gap:10px;align-items:flex-start}
+.msg.usr{justify-content:flex-end}
+.msg.usr .mb{background:var(--acs);border-radius:20px;padding:9px 15px;max-width:85%;white-space:pre-wrap;word-break:break-word}
+.msg.bot .mav{width:30px;height:30px;border-radius:50%;flex:none;overflow:hidden;display:grid;place-items:center;background:var(--acs);color:var(--ac)}
+.msg.bot .mav svg{width:100%;height:100%}
+.msg.bot .mav.orbi{background:radial-gradient(circle at 35% 30%,var(--o1),var(--o2) 55%,var(--o3))}
+.msg.bot .mc{flex:1;min-width:0}
+.mtx{word-break:break-word;line-height:1.75}
+.mtx p{margin:0 0 .6em}.mtx p:last-child{margin:0}
+.mtx ul,.mtx ol{margin:.2em 0 .7em;padding-inline-start:1.4em}
+.mtx li{margin:.15em 0}
+.mtx code{background:var(--card2);border:1px solid var(--bd);border-radius:6px;padding:0 5px;font-size:.88em;font-family:ui-monospace,Menlo,Consolas,monospace}
+.mtx pre{background:var(--card2);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;overflow:auto;direction:ltr;text-align:left}
+.mtx pre code{border:0;padding:0;background:none}
+.mtx .fixl{background:color-mix(in srgb,#d97706 12%,var(--card));border-inline-start:4px solid #d97706;border-radius:10px;padding:6px 10px;margin:.5em 0;font-size:.94em}
+.mtx h4{margin:.6em 0 .3em;font-size:1rem}
+.mtx a{word-break:break-all}
+.msrc{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.msrc a{font-size:.76rem;text-decoration:none;border:1px solid var(--bd);border-radius:99px;padding:3px 10px;color:var(--mu);max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--card)}
+.macts{display:flex;gap:2px;margin-top:4px}
+.macts button{width:34px;min-height:34px;padding:0;border:0;background:none;color:var(--mu)}
+.macts button svg{width:1.05em;height:1.05em}
+.mtr{color:var(--mu);font-size:.9rem;border-top:1px dashed var(--bd);margin-top:6px;padding-top:6px}
+.merr{color:var(--bad)}
+.typing{display:inline-flex;gap:5px;padding:8px 2px}
+.typing i{width:8px;height:8px;border-radius:50%;background:var(--mu);animation:tdot 1.2s infinite ease-in-out}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tdot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-4px)}}
+.aiempty{text-align:center;padding:26px 8px 10px}
+.aiempty .big{width:96px;height:96px;margin:0 auto 12px;border-radius:50%;overflow:hidden}
+.aiempty .big.orbi{background:radial-gradient(circle at 35% 30%,var(--o1),var(--o2) 55%,var(--o3));box-shadow:0 12px 40px color-mix(in srgb,var(--o3) 35%,transparent);animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.05)}}
+.aiempty h2{font-size:1.2rem;margin:0 0 4px}
+.aiempty .chips{justify-content:center;margin-top:14px}
+.aicomp{position:sticky;bottom:12px;z-index:4;display:flex;gap:6px;align-items:flex-end;background:var(--card);border:1px solid var(--bd);border-radius:26px;padding:6px;box-shadow:0 6px 24px rgba(16,24,40,.12)}
+.aicomp textarea{flex:1;min-height:44px;max-height:180px;border:0;background:none;resize:none;padding:10px 6px;line-height:1.5}
+.aicomp textarea:focus-visible{outline:none}
+button.round{border-radius:50%}
+.aicomp button{flex:none}
+@media (max-width:819px){.aicomp{bottom:calc(76px + env(safe-area-inset-bottom))}}
+.hitem{display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--bd);padding:4px 0}
+.hitem:last-child{border:0}
+.hitem>button:first-child{flex:1;justify-content:flex-start;border:0;background:none;text-align:start;min-width:0;padding:8px 4px}
+.hitem span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+.hitem small{display:block;color:var(--mu);font-size:.75rem}
+.hitem.on>button:first-child{color:var(--ac);font-weight:600}
+.hitem .x{width:38px;min-height:38px;padding:0;border:0;background:none;color:var(--mu)}
+
+.macts .via{font-size:.7rem;color:var(--mu);opacity:.75;align-self:center;margin-inline-start:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55%}
+.keysbn{background:var(--acs);border-radius:16px;padding:12px 14px;margin:12px auto 0;max-width:460px;font-size:.9rem;display:grid;gap:10px;justify-items:center}
+/* look editor */
+.lookwrap{display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:start}
+@media (max-width:480px){.lookwrap{grid-template-columns:1fr}.lookprev{margin:auto}}
+.lookprev{width:130px;height:130px;border-radius:50%;overflow:hidden;position:relative}
+.lookprev svg{width:100%;height:100%}
+.lookprev.orbi{background:radial-gradient(circle at 35% 30%,var(--o1),var(--o2) 55%,var(--o3));animation:breathe 4s ease-in-out infinite}
+.lrow{margin-bottom:10px}
+.lrow>b{display:block;font-size:.8rem;color:var(--mu);font-weight:600;margin-bottom:4px}
+.lopts{display:flex;flex-wrap:wrap;gap:6px}
+.lopts .sw{width:32px;height:32px;min-height:32px;border:2px solid var(--bd)}
+.lopts .chip{min-height:34px;padding:4px 11px;font-size:.82rem}
+.lopts .chip.on{background:var(--ac);color:var(--on);border-color:var(--ac)}
+.lopts .orbsw{width:38px;height:38px;min-height:38px;border-radius:50%;padding:0;border:3px solid var(--card)}
+
+/* voice mode */
+#vm{position:fixed;inset:0;z-index:25;display:flex;flex-direction:column;align-items:center;background:var(--bg);padding:calc(env(safe-area-inset-top) + 10px) 16px calc(env(safe-area-inset-bottom) + 18px);overflow:hidden}
+#vm[hidden]{display:none!important}
+.vmtop{display:flex;gap:8px;align-items:center;width:100%;max-width:560px}
+.vmname{font-weight:700;font-size:1.05rem}
+.vmstage{flex:1;display:grid;place-items:center;width:100%;max-width:560px;cursor:pointer;min-height:240px;outline:none;-webkit-tap-highlight-color:transparent}
+.vmstage>*{grid-area:1/1}
+#vmOrb{width:min(300px,72vw);height:min(300px,72vw)}
+.vmav{width:min(270px,66vw);height:min(270px,66vw);border-radius:50%;overflow:hidden;position:relative;box-shadow:0 0 0 0 color-mix(in srgb,var(--ac) 40%,transparent);transition:box-shadow .15s}
+.vmav svg{width:100%;height:100%;display:block}
+#vm[data-st=listening] .vmav{box-shadow:0 0 0 calc(6px + var(--lv,0) * 18px) color-mix(in srgb,var(--ac) 30%,transparent)}
+#vm[data-st=speaking] .vmav{box-shadow:0 0 0 calc(4px + var(--lv,0) * 10px) color-mix(in srgb,var(--ok) 28%,transparent)}
+#vm[data-st=thinking] .vmav{animation:thinkring 1.4s ease-in-out infinite}
+@keyframes thinkring{0%,100%{box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 15%,transparent)}50%{box-shadow:0 0 0 14px color-mix(in srgb,var(--ac) 30%,transparent)}}
+.vmstatus{color:var(--mu);font-weight:600;min-height:1.6em;margin:6px 0}
+.vmcap{width:100%;max-width:560px;min-height:84px;max-height:30vh;overflow:auto;text-align:center;margin-bottom:12px}
+.vmcap #vmYou{color:var(--mu);font-size:.95rem;margin-bottom:6px}
+.vmcap #vmBot{font-size:1.12rem;font-weight:600}
+#vm.nocap .vmcap{visibility:hidden}
+.vmbar{display:flex;gap:22px;align-items:center;justify-content:center}
+.vround{width:64px;height:64px;min-height:64px;border-radius:50%;padding:0;background:var(--card);border:1px solid var(--bd)}
+.vround svg{width:26px;height:26px}
+.vround.sm{width:44px;height:44px;min-height:44px}
+.vround.sm svg{width:21px;height:21px}
+.vround.end{background:var(--bad);border-color:var(--bad);color:#fff}
+.vround.lang{font-weight:700;font-size:.95rem}
+.vround.off{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+.vround.on{color:var(--ac);border-color:var(--ac)}
+.vmpanel{position:absolute;inset-inline:0;bottom:0;max-height:72vh;overflow:auto;background:var(--card);border-top:1px solid var(--bd);border-radius:22px 22px 0 0;padding:14px 16px calc(env(safe-area-inset-bottom) + 18px);box-shadow:0 -10px 40px rgba(0,0,0,.2);z-index:2}
+.vmpanel .lookprev{display:none}
+.vmpanel .lookwrap{grid-template-columns:1fr}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -254,18 +367,28 @@ input[type=date]{background:var(--card);color:var(--tx);border:1px solid var(--b
    <div id="fg1">
     <p class="small mu" data-t="fgIntro"></p>
     <label class="field"><span data-t="user"></span><input type="text" id="gUser" autocapitalize="none" autocorrect="off" spellcheck="false"></label>
-    <button type="button" id="gMake" class="main wide" data-t="fgMake"></button>
+    <button type="button" id="gSend" class="main wide" data-t="fgSendMail"></button>
    </div>
-   <div id="fg2" hidden>
-    <p class="small" data-t="fgStep1"></p>
-    <textarea id="gCode" class="code" readonly></textarea>
-    <div class="row mt"><a id="gMail" class="btn main" style="text-decoration:none;font-weight:600" data-t="fgSend"></a><button type="button" id="gCopy" data-t="copy2"></button></div>
-    <p class="small mt" data-t="fgStep2"></p>
-    <label class="field"><span data-t="fgKey"></span><input type="text" id="gKey" dir="ltr" autocapitalize="none" autocorrect="off" spellcheck="false"></label>
+   <div id="fgWait" hidden>
+    <div class="mailwait"><span class="spin" aria-hidden="true"></span><div><b data-t="fgSent"></b><p class="small" id="gWaitTx"></p></div></div>
+    <div class="row mt between"><button type="button" id="gResend" class="link" data-t="fgResend"></button><span id="gTimer" class="small mu time"></span></div>
+   </div>
+   <div id="fgNew" hidden>
+    <p class="okline" data-t="fgVerified"></p>
     <label class="field"><span data-t="newPass"></span><div class="pw"><input type="password" id="gPass" autocomplete="new-password"><button type="button" class="eye" data-i="eye" data-a="showPw"></button></div></label>
     <label class="field"><span data-t="pass2"></span><div class="pw"><input type="password" id="gPass2" autocomplete="new-password"><button type="button" class="eye" data-i="eye" data-a="showPw"></button></div></label>
-    <button type="submit" class="main wide" data-t="fgSet"></button>
+    <button type="submit" class="main wide" data-t="fgSetIn"></button>
    </div>
+   <div id="fgNoSvc" hidden class="note" data-t="fgNoSvc"></div>
+   <details id="fgAlt" hidden class="mt"><summary data-t="fgAltT"></summary>
+    <p class="small mu" data-t="fgAltIntro"></p>
+    <textarea id="gCode" class="code" readonly></textarea>
+    <div class="row mt"><button type="button" id="gCopy" data-t="copy2"></button></div>
+    <label class="field"><span data-t="fgKey"></span><input type="text" id="gKey" dir="ltr" autocapitalize="none" autocorrect="off" spellcheck="false"></label>
+    <label class="field"><span data-t="newPass"></span><div class="pw"><input type="password" id="gAPass" autocomplete="new-password"><button type="button" class="eye" data-i="eye" data-a="showPw"></button></div></label>
+    <label class="field"><span data-t="pass2"></span><div class="pw"><input type="password" id="gAPass2" autocomplete="new-password"><button type="button" class="eye" data-i="eye" data-a="showPw"></button></div></label>
+    <button type="button" id="gAltSet" class="wide" data-t="fgSet"></button>
+   </details>
    <div class="row mt"><button type="button" class="link" data-go="Login" data-t="back"></button></div>
   </form>
 
@@ -280,6 +403,7 @@ input[type=date]{background:var(--card);color:var(--tx);border:1px solid var(--b
 <header><div class="hin"><h1><span class="logo" data-i="tr"></span><span data-t="title"></span></h1><span id="engPill" class="pill"></span><button id="hCmd" class="ghost icon" data-i="cmd" data-a="cmdBtn"></button><button id="hMode" class="ghost icon" data-a="themeBtn"></button><button id="hSet" class="ghost icon" data-i="gear" data-a="nSt"></button><button id="hLock" class="ghost icon" data-i="lock" data-a="lockNow"></button></div></header>
 <nav>
  <button data-tab="tr" data-i="tr"><span data-t="nTr"></span></button>
+ <button data-tab="ai" data-i="ai"><span data-t="nAi"></span></button>
  <button data-tab="cv" data-i="cv"><span data-t="nCv"></span></button>
  <button data-tab="mt" data-i="mt"><span data-t="nMt"></span></button>
  <button data-tab="tk" data-i="tk"><span data-t="nTk"></span><b class="nb" id="tkBadge" hidden></b></button>
@@ -299,6 +423,79 @@ input[type=date]{background:var(--card);color:var(--tx);border:1px solid var(--b
  <div class="out"><div id="trOut"></div><div id="trLive" class="live"></div></div>
  <div class="row mt"><input type="text" id="trType" dir="auto" data-p="typePh"><button id="trTypeGo" class="main" data-t="translate"></button></div>
  <div class="card mt"><h2 data-t="phrases"></h2><div id="phList"></div></div>
+</section>
+
+<!-- AI assistant -->
+<section id="ai" class="pane">
+ <div class="aibar">
+  <button id="aiHistB" class="ghost icon" data-i="list" data-a="aiHist"></button>
+  <div class="seg grow" id="aiMode"><button data-v="ask" data-i="srch"><span data-t="mAsk"></span></button><button data-v="learn" data-i="co"><span data-t="mLearn"></span></button><button data-v="practice" data-i="cv"><span data-t="mPract"></span></button></div>
+  <button id="aiNew" class="ghost icon" data-i="plus" data-a="aiNewChat"></button>
+  <button id="aiCfgB" class="ghost icon" data-i="st" data-a="aiCfgT"></button>
+ </div>
+
+ <div id="aiHist" class="card" hidden>
+  <div class="row between"><h2 style="margin:0" data-t="aiHist"></h2><button id="aiHistClr" class="link danger" data-t="aiClrAll"></button></div>
+  <div id="aiHistList"></div>
+ </div>
+
+ <div id="aiCfg" class="card" hidden>
+  <h2 data-t="aiCfgT"></h2>
+  <div class="grid2">
+   <label class="field"><span data-t="aiNameL"></span><input type="text" id="aiName" dir="auto" data-p="aiNamePh"></label>
+   <label class="field"><span data-t="aiPersL"></span><select id="aiPers"><option value="friendly" data-t="pFriendly"></option><option value="pro" data-t="pPro"></option><option value="fun" data-t="pFun"></option><option value="calm" data-t="pCalm"></option></select></label>
+   <label class="field"><span data-t="aiSLangL"></span><select id="aiSLang"></select></label>
+   <label class="field"><span data-t="aiRLangL"></span><select id="aiRLang"><option value="auto" data-t="aiRAuto"></option></select></label>
+   <label class="field"><span data-t="aiDialL"></span><select id="aiDial"><option value="auto" data-t="dAuto"></option><option value="msa" data-t="dMsa"></option><option value="sa" data-t="dSa"></option><option value="gulf" data-t="dGulf"></option><option value="eg" data-t="dEg"></option><option value="sd" data-t="dSd"></option><option value="lev" data-t="dLev"></option></select></label>
+  </div>
+  <div class="note" data-t="aiVoiceNote" style="margin:-4px 0 6px"></div>
+
+  <h3 data-t="aiLookT"></h3>
+  <div id="aiLook"></div>
+
+  <h3 data-t="aiProvT"></h3>
+  <label class="field"><span data-t="aiProvL"></span><select id="aiProv"><option value="auto" data-t="prAuto"></option><option value="gemini" data-t="prGem"></option><option value="github" data-t="prGh"></option><option value="groq" data-t="prGroq"></option><option value="free" data-t="prFree"></option><option value="openai" data-t="prOai"></option></select></label>
+  <div id="aiGem">
+   <label class="field"><span data-t="aiGKey"></span><div class="pw"><input type="password" id="aiGKeyI" dir="ltr" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="AIza…"><button type="button" class="eye" data-i="eye" data-a="showPw"></button></div></label>
+   <div class="note" style="margin:-6px 0 10px"><span data-t="aiGHow"></span> <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a></div>
+   <details><summary data-t="aiAdv"></summary><label class="field"><span data-t="aiModel"></span><input type="text" id="aiGModel" dir="ltr" autocapitalize="none" spellcheck="false" placeholder="gemini-flash-latest"></label></details>
+  </div>
+  <div id="aiGh">
+   <label class="field"><span data-t="aiHKey"></span><div class="pw"><input type="password" id="aiHKeyI" dir="ltr" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="github_pat_…"><button type="button" class="eye" data-i="eye" data-a="showPw"></button></div></label>
+   <div class="note" style="margin:-6px 0 10px"><span data-t="aiHHow"></span> <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a></div>
+  </div>
+  <div id="aiGroq">
+   <label class="field"><span data-t="aiQKey"></span><div class="pw"><input type="password" id="aiQKeyI" dir="ltr" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="gsk_…"><button type="button" class="eye" data-i="eye" data-a="showPw"></button></div></label>
+   <div class="note" style="margin:-6px 0 10px"><span data-t="aiQHow"></span> <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a></div>
+  </div>
+  <div id="aiOai">
+   <label class="field"><span data-t="aiOBase"></span><input type="url" id="aiOBase" dir="ltr" autocapitalize="none" spellcheck="false" placeholder="https://api.openai.com/v1"></label>
+   <label class="field"><span data-t="aiOKey"></span><div class="pw"><input type="password" id="aiOKeyI" dir="ltr" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="sk-…"><button type="button" class="eye" data-i="eye" data-a="showPw"></button></div></label>
+   <label class="field"><span data-t="aiModel"></span><input type="text" id="aiOModel" dir="ltr" autocapitalize="none" spellcheck="false" data-p="aiOModelPh"></label>
+  </div>
+  <label class="field" id="aiPrefW"><span data-t="aiPrefL"></span><select id="aiPref"><option value="" data-t="prefAuto"></option><option value="gemini">Gemini</option><option value="github">ChatGPT (GPT)</option><option value="groq">Groq</option></select></label>
+  <div class="note" id="aiProvNote" style="margin:-4px 0 6px"></div><div class="note" id="aiUse" style="margin:0 0 10px"></div>
+  <div class="row"><button id="aiTest" data-t="aiTestB"></button><span id="aiTestSt" class="small"></span></div>
+  <div class="note" data-t="aiPrivacy"></div>
+ </div>
+
+ <div id="aiPract" class="card slim" hidden>
+  <div class="grid2">
+   <label class="field"><span data-t="aiPLangL"></span><select id="aiPLang"></select></label>
+   <label class="field"><span data-t="aiLevelL"></span><select id="aiLevel"><option value="beg" data-t="lvBeg"></option><option value="mid" data-t="lvMid"></option><option value="adv" data-t="lvAdv"></option></select></label>
+  </div>
+  <label class="chk" style="margin:0"><input type="checkbox" id="aiFix"><span data-t="aiFixL"></span></label>
+ </div>
+
+ <div id="aiLog" class="ailog" aria-live="polite"></div>
+
+ <div class="aicomp">
+  <button id="aiMic" class="icon ghost" data-i="mt" data-a="aiDictate"></button>
+  <textarea id="aiIn" rows="1" dir="auto" data-p="aiPh"></textarea>
+  <button id="aiSend" class="icon main round" data-i="send" data-a="aiSendL" hidden></button>
+  <button id="aiStopB" class="icon main round" data-i="sq" data-a="stop" hidden></button>
+  <button id="aiVoice" class="icon main round" data-i="wave" data-a="aiVoiceL"></button>
+ </div>
 </section>
 
 <!-- conversation -->
@@ -452,6 +649,12 @@ input[type=date]{background:var(--card);color:var(--tx);border:1px solid var(--b
     <button type="submit" class="main" data-t="save"></button>
    </form>
   </details>
+  <details class="mt" id="mrBox"><summary><span data-t="mrTitle"></span> <span id="mrPill" class="pill"></span></summary>
+   <div id="mrSt" class="small" style="margin-bottom:8px"></div>
+   <label class="field"><span data-t="mrUrl"></span><input type="url" id="mrUrl" dir="ltr" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="https://script.google.com/macros/s/…/exec"></label>
+   <div class="row"><button type="button" id="mrOn" class="main" data-t="mrOn"></button><button type="button" id="mrOff" class="danger" data-t="mrOff"></button></div>
+   <div class="note" data-t="mrNote"></div>
+  </details>
   <label class="field mt"><span data-t="autoLock"></span><select id="sLock"><option value="1" data-t="m1"></option><option value="5" data-t="m5"></option><option value="10" data-t="m10"></option><option value="30" data-t="m30"></option><option value="0" data-t="never"></option></select></label>
   <div class="row mt"><button id="stExport" data-t="export"></button><label class="btn"><span data-t="import"></span><input type="file" id="stImport" accept=".json,application/json" hidden></label></div>
   <div class="note" data-t="backupNote"></div>
@@ -505,6 +708,27 @@ input[type=date]{background:var(--card);color:var(--tx);border:1px solid var(--b
 
 </main>
 </div>
+<!-- ================= VOICE MODE ================= -->
+<div id="vm" hidden data-st="idle">
+ <div class="vmtop">
+  <span id="vmName" class="vmname"></span>
+  <span class="grow"></span>
+  <button id="vmCapB" class="vround sm" data-i="cc" data-a="vmCapL"></button>
+  <button id="vmLookB" class="vround sm" data-i="face" data-a="aiLookT"></button>
+ </div>
+ <div class="vmstage" id="vmStage" role="button" tabindex="0" data-a="vmTap">
+  <canvas id="vmOrb" width="300" height="300"></canvas>
+  <div id="vmAv" class="vmav" hidden></div>
+ </div>
+ <div id="vmStatus" class="vmstatus"></div>
+ <div id="vmCap" class="vmcap"><div id="vmYou" dir="auto"></div><div id="vmBot" dir="auto"></div></div>
+ <div id="vmPanel" class="vmpanel" hidden><div class="row between"><b data-t="aiLookT"></b><button id="vmPanelX" class="ghost icon" data-i="x" data-a="back"></button></div><div id="vmLookHost"></div></div>
+ <div class="vmbar">
+  <button id="vmMute" class="vround" data-i="mt" data-a="vmMuteL"></button>
+  <button id="vmLang" class="vround lang" data-a="vmLangL"></button>
+  <button id="vmEnd" class="vround end" data-i="x" data-a="vmEndL"></button>
+ </div>
+</div>
 <div id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -515,7 +739,7 @@ const mk=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=
 
 /* ================= TEXT ================= */
 const T={
-ar:{title:'مساعد الاجتماعات',authSub:'ترجمة فورية، محادثات، اجتماعات وإيميلات بأسلوبك',nTr:'ترجمة',nCv:'محادثة',nMt:'اجتماعات',nEm:'إيميلات',nCo:'تدريب',nSt:'الإعدادات',nTk:'المهام',
+ar:{prGh:'ChatGPT (GPT) عبر GitHub فقط (مجاني)',aiHKey:'مفتاح GitHub لموديلات ChatGPT',aiHHow:'مجاني بحسابك في GitHub: Fine-grained token ← Permissions ← Models: Read-only ← Generate ← انسخه هنا:',prGhN:'موديلات ChatGPT (زي GPT-4.1 و GPT-4o) مجانًا عن طريق GitHub Models. كل موديل ليه حد يومي لوحده (50 أو 150 رسالة)، والتطبيق بيلف عليهم.',aiPrefL:'يبدأ بـ',prefAuto:'تلقائي (Gemini في الكتابة، Groq في الصوت)',prAuto:'تلقائي: كل المجاني مع بعض ⭐',prGroq:'Groq (مفتاح مجاني، سريع جدًا)',prFreeS:'مجاني',aiQKey:'مفتاح Groq API',aiQHow:'مجاني من غير بطاقة: ادخل بحساب Google ← Create API Key ← انسخه هنا:',prAutoN:'التطبيق بيلف لوحده على كل الموديلات المجانية في Gemini و ChatGPT و Groq: لو موديل خلص حده اليومي بينتقل للي بعده من غير ما تحس. بالمفتاحين المجانيين بيبقى عندك آلاف الرسائل في اليوم. في الكلام بالصوت بيبدأ بـ Groq عشان أسرع، وفي الكتابة بـ Gemini عشان البحث في Google.',prGroqN:'سريع جدًا ومناسب للكلام بالصوت، وما بيستخدمش بياناتك في التدريب. البحث بيكون من ويكيبيديا.',aiUseToday:'رسايل النهاردة: {n}',aiAllBusy:'كل الخدمات المجانية وصلت حدها مؤقتًا. استنى دقيقة وجرب تاني. لو ده بيحصل كتير، ضيف المفتاح التاني (Gemini أو Groq) من إعدادات المساعد.',aiKeysBn:'عشان المساعد يتكلم معاك طول اليوم من غير حد عملي، ضيف المفاتيح المجانية (Gemini و ChatGPT و Groq). بتاخد دقايق ومن غير بطاقة.',aiKeysBtn:'ضيف المفاتيح المجانية',nAi:'المساعد',mAsk:'ابحث لي',mLearn:'اشرح لي',mPract:'تدريب لغة',aiHist:'المحادثات السابقة',aiClrAll:'مسح الكل',aiClrQ:'مسح كل المحادثات؟',aiNoHist:'لا توجد محادثات بعد.',aiNewChat:'محادثة جديدة',aiCfgT:'إعدادات المساعد',aiNameL:'اسم المساعد',aiNamePh:'مثال: نور',aiPersL:'الشخصية',pFriendly:'ودود وقريب',pPro:'مهني ودقيق',pFun:'مرح وخفيف',pCalm:'هادئ وصبور',aiSLangL:'اللغة اللي بتتكلم بيها',aiRLangL:'لغة الرد',aiRAuto:'نفس لغتي (تلقائي)',aiDialL:'لهجة الرد بالعربي',dAuto:'نفس لهجتي (تلقائي)',dMsa:'فصحى مبسطة',dSa:'سعودية',dGulf:'خليجية',dEg:'مصرية',dSd:'سودانية',dLev:'شامية',aiVoiceNote:'صوت المساعد (رجالي/نسائي، النبرة والسرعة) بيتغير من الإعدادات ← صوت المساعد.',aiLookT:'شكل المساعد في المحادثة الصوتية',aiProvT:'محرك الذكاء الاصطناعي',aiProvL:'المحرك',prFree:'مجاني بدون مفتاح فقط (محدود)',prGem:'Google Gemini فقط (مفتاح مجاني + بحث Google)',prOai:'OpenAI أو خدمة متوافقة (مفتاح)',aiGKey:'مفتاح Gemini API',aiGHow:'تطلع المفتاح مجانًا في دقيقة: ادخل بحساب Google ← Create API key ← انسخه هنا:',aiAdv:'إعدادات متقدمة',aiModel:'اسم الموديل',aiOBase:'رابط الخدمة',aiOKey:'المفتاح (API key)',aiOModelPh:'مثال: gpt-4o-mini',prFreeN:'شغال من غير أي تسجيل، بس محدود (تقريبًا رسالة كل 15 ثانية) وممكن يبقى مشغول. استخدم «تلقائي» مع المفاتيح المجانية عشان يبقى من غير حد عملي.',prGemN:'ردود ذكية بالعربي واللهجات، وبيبحث في Google ويوريك المصادر. التطبيق بيلف على كل موديلات Gemini المجانية لما واحد يخلص حده.',prOaiN:'لو عندك مفتاح OpenAI أو OpenRouter أو Groq أو أي خدمة متوافقة. البحث بيكون من ويكيبيديا.',aiTestB:'اختبار الاتصال',aiPrivacy:'المفتاح والمحادثات محفوظين مشفّرين على جهازك. رسائلك بتتبعت للمحرك اللي اخترته عشان يرد عليك بس.',aiPLangL:'اللغة اللي بتتدرب عليها',aiLevelL:'مستواك',lvBeg:'مبتدئ',lvMid:'متوسط',lvAdv:'متقدم',aiFixL:'صحّح أخطائي بلطف أثناء الكلام',aiPh:'اكتب رسالتك…',aiSendL:'إرسال',aiVoiceL:'محادثة صوتية',aiDictate:'إملاء بالصوت',aiHiA:'أهلًا، أنا {n}',aiHiL:'أهلًا، أنا {n}',aiHiP:'يلا نتدرب على {l}',aiSubA:'اسألني عن أي معلومة محتاجها وهدوّر لك عليها.',aiSubL:'قولي إيه الموضوع اللي عايز تفهمه، وهشرحه لك خطوة بخطوة.',aiSubP:'هنتكلم مع بعض كأننا أصحاب، وهصحح لك بلطف. ممكن تكتب أو تتكلم.',aiRetry:'إعادة المحاولة',aiNoKey:'محتاج مفتاح للمحرك ده. افتح إعدادات المساعد (أيقونة الإعدادات فوق) والصق المفتاح.',aiBadKey:'المفتاح غير صحيح أو مالوش صلاحية. راجعه في إعدادات المساعد.',aiBusyE:'الخدمة مشغولة دلوقتي (حد الاستخدام). استنى شوية وجرب تاني، أو استخدم مفتاح Gemini المجاني.',aiModelE:'اسم الموديل غير موجود. امسحه من الإعدادات المتقدمة عشان يرجع للافتراضي.',aiNoModel:'اكتب اسم الموديل في إعدادات المساعد.',aiFailE:'ماقدرتش أوصل للمساعد. اتأكد من الإنترنت وجرب تاني.',vmListen:'بسمعك…',vmThink:'بفكر…',vmSpeak:'بتكلم… (المس للمقاطعة)',vmMuted:'المايك مقفول. المس الشاشة أو زر المايك للمتابعة',vmMicErr:'مش قادر أسمعك. اتأكد من إذن المايك وإن مافيش تطبيق تاني بيستخدمه.',vmCapL:'إظهار الكلام مكتوب',vmTap:'المس للمقاطعة أو للإرسال',vmMuteL:'كتم المايك',vmLangL:'لغة الكلام',vmEndL:'إنهاء المحادثة الصوتية',title:'مساعد الاجتماعات',authSub:'ترجمة فورية، محادثات، اجتماعات وإيميلات بأسلوبك',nTr:'ترجمة',nCv:'محادثة',nMt:'اجتماعات',nEm:'إيميلات',nCo:'تدريب',nSt:'الإعدادات',nTk:'المهام',
 tkNew:'مهمة جديدة',tkTitlePh:'ماذا يجب أن تفعل؟',tkDictate:'إملاء بالصوت',tkDue:'موعد التسليم',tkStatus:'الحالة',tkNotes:'ملاحظات',tkAddBtn:'إضافة المهمة',tkList:'المهام',fOpen:'المفتوحة',fClosed:'المُسلّمة',fAll:'الكل',tkIcsAll:'إضافة المهام المفتوحة إلى تقويم الجهاز',tkIcs:'إلى التقويم',
 tkNotif:'الإشعارات والتذكير',tkPermBtn:'تفعيل الإشعارات',tkOnL:'ملخص يومي بالمهام المعلقة والمتأخرة',tkDefDays:'مدة التسليم الافتراضية إن لم تحدد تاريخًا',tkHour:'وقت الملخص اليومي',tkTest:'تجربة إشعار',days:'أيام',day1:'يوم',
 tkNotifNote:'تصل الإشعارات على الكمبيوتر وأندرويد والتابلت. على آيفون وآيباد: أضف التطبيق إلى الشاشة الرئيسية أولًا ثم فعّل الإشعارات. لتذكير مضمون حتى والتطبيق مغلق، أضف المهام إلى تقويم الجهاز (تنبيه قبل الموعد بيوم، يوم الموعد، وبعد 1 و3 أيام من التأخير).',
@@ -525,9 +749,9 @@ dOver:'متأخرة {n} يوم',dToday:'موعدها اليوم',dTom:'موعد�
 dgTitle:'المهام المعلقة',dgOpen:'لديك {n} مهام مفتوحة',dgOver:'{n} تجاوزت موعد التسليم',dgOver3:'{n} متأخرة أكثر من 3 أيام',dgToday:'{n} موعدها اليوم',dgStale:'{n} بدون تحديث منذ يومين أو أكثر',
 addTasks:'أضف المطلوب إلى المهام',addTask:'أضف كمهمة',testBody:'هكذا ستصلك تذكيرات المهام.',
 login:'تسجيل الدخول',user:'اسم المستخدم',pass:'كلمة المرور',pass2:'تأكيد كلمة المرور',newPass:'كلمة المرور الجديدة',curPass:'كلمة المرور الحالية',forgot:'نسيت كلمة المرور؟',newAcc:'إنشاء حساب',haveAcc:'لديّ حساب بالفعل',create:'إنشاء الحساب',back:'رجوع',showPw:'إظهار كلمة المرور',
-resetInfo:'لو نسيت كلمة المرور، تُرسَل طلبات الاستعادة إلى eng.a.asal@gmail.com.',privacy:'بياناتك مشفّرة ومحفوظة على هذا الجهاز فقط.',restoreBk:'استعادة من نسخة احتياطية',
-fgIntro:'اكتب اسم المستخدم، وسيُجهَّز طلب استعادة تُرسله إلى eng.a.asal@gmail.com. ستصلك رسالة فيها مفتاح الاستعادة.',fgMake:'تجهيز طلب الاستعادة',fgStep1:'١. أرسل هذا الطلب بالإيميل (الزر يفتح تطبيق البريد):',fgSend:'إرسال إلى eng.a.asal@gmail.com',copy2:'نسخ الطلب',fgStep2:'٢. عندما يصلك مفتاح الاستعادة، الصقه هنا واختر كلمة مرور جديدة:',fgKey:'مفتاح الاستعادة',fgSet:'تعيين كلمة المرور',
-eNouser:'اسم المستخدم غير موجود على هذا الجهاز.',eBad:'كلمة المرور غير صحيحة.',eWait:'محاولات كثيرة. انتظر {s} ثانية.',eExists:'اسم المستخدم مستخدم بالفعل.',eShort:'كلمة المرور يجب ألا تقل عن 6 أحرف.',eMismatch:'كلمتا المرور غير متطابقتين.',eUname:'اسم المستخدم من 2 إلى 32 حرفًا بدون مسافات.',eKey:'مفتاح الاستعادة غير صحيح أو قديم.',eIsReq:'هذا رمز الطلب وليس مفتاح الاستعادة. افتح أداة المفتاح والصق فيها رمز الطلب، ثم الصق هنا المفتاح الذي تُخرجه.',eFile:'الملف غير صالح.',eCrypto:'المتصفح لا يدعم التشفير هنا. افتح التطبيق من رابط https.',
+resetInfo:'لو نسيت كلمة المرور، يوصلك رابط تأكيد على eng.a.asal@gmail.com وتختار كلمة مرور جديدة على طول.',privacy:'بياناتك مشفّرة ومحفوظة على هذا الجهاز فقط.',restoreBk:'نقل حساب من جهاز آخر',
+fgIntro:'اكتب اسم المستخدم، وهيوصلك رابط تأكيد على eng.a.asal@gmail.com. افتحه واضغط «تأكيد»، وبعدين اختار كلمة مرور جديدة.',fgSendMail:'ابعت رابط الاستعادة على الإيميل',fgSent:'تم إرسال الرابط على eng.a.asal@gmail.com',fgWaitTx:'افتح الإيميل من أي جهاز واضغط «تأكيد وتغيير كلمة المرور» ثم «تأكيد». خليك على الصفحة دي، هتكمل لوحدها أول ما تأكد.',fgResend:'إعادة إرسال الرابط',fgVerified:'✓ تم التأكيد من الإيميل. اختار كلمة المرور الجديدة:',fgSetIn:'حفظ كلمة المرور والدخول',fgNoSvc:'الاستعادة بالإيميل لسه ما اتفعلتش للحساب ده على الجهاز ده. بعد ما تدخل، فعّلها من الإعدادات ← الحساب والأمان ← الاستعادة بالإيميل.',fgAltT:'طريقة بديلة (مفتاح المدير)',fgAltIntro:'انسخ الرمز ده وافتحه في أداة admin-reset.html، والصق المفتاح اللي تطلعه هنا.',copy2:'نسخ الرمز',fgKey:'مفتاح الاستعادة',fgSet:'تعيين كلمة المرور',
+eNouser:'اسم المستخدم غير موجود على هذا الجهاز.',eBad:'كلمة المرور غير صحيحة.',eWait:'محاولات كثيرة. انتظر {s} ثانية.',eExists:'اسم المستخدم مستخدم بالفعل.',eShort:'كلمة المرور يجب ألا تقل عن 6 أحرف.',eMismatch:'كلمتا المرور غير متطابقتين.',eUname:'اسم المستخدم من 2 إلى 32 حرفًا بدون مسافات.',eKey:'مفتاح الاستعادة غير صحيح أو قديم.',eNoSvc:'الاستعادة بالإيميل غير مفعّلة على هذا الجهاز.',eSvc:'تعذر الاتصال بخدمة الإيميل. تأكد من الإنترنت ورابط الخدمة، وحاول تاني.',eSvcWait:'تم إرسال رابط قبل لحظات. استنى دقيقة قبل ما تطلب رابط جديد.',eSvcLimit:'وصلت للحد اليومي لرسائل الاستعادة. حاول بكرة.',eLinkOld:'انتهت صلاحية الرابط. اطلب رابط جديد.',eIsReq:'هذا رمز الطلب وليس مفتاح الاستعادة. افتح أداة المفتاح والصق فيها رمز الطلب، ثم الصق هنا المفتاح الذي تُخرجه.',eFile:'الملف غير صالح.',eCrypto:'المتصفح لا يدعم التشفير هنا. افتح التطبيق من رابط https.',
 checking:'جارٍ التحقق…',welcome:'أهلًا {n}',resetDone:'تم تعيين كلمة المرور الجديدة.',pwChanged:'تم تغيير كلمة المرور.',migrated:'تم نقل بياناتك القديمة إلى حسابك المشفّر.',
 themeBtn:'تبديل الثيم',lockNow:'قفل التطبيق',from:'من',to:'إلى',swap:'تبديل اللغتين',copyAll:'نسخ الكل',share:'مشاركة',
 speakTr:'انطق الترجمة بصوت المساعد',start:'ابدأ الترجمة الفورية',stop:'إيقاف',clear:'مسح',trHint:'يستمر الاستماع بدون توقف حتى تضغط إيقاف، والشاشة تبقى مضاءة.',typePh:'أو اكتب نصًا لترجمته',translate:'ترجم',phrases:'عباراتي المحفوظة',noPhrases:'اضغط النجمة بجانب أي ترجمة لحفظها هنا وتشغيلها لاحقًا.',
@@ -540,7 +764,7 @@ recv:'إيميل وصلك',emInPh:'ألصق نص الإيميل هنا (مع س�
 prof:'ملفك المهني',pName:'اسمك',pRole:'وظيفتك',pCo:'شركتك',pInd:'مجال العمل',pAbout:'نبذة عن الشركة ومنتجاتها أو خدماتها',pAboutPh:'مثال: شركة توريد وتجهيز معدات رياضية للأندية والفنادق في السعودية والخليج',pPhone:'رقم الهاتف',pWeb:'الموقع الإلكتروني',pSig:'التوقيع',pSigPh:'اتركه فارغًا ليُنشأ تلقائيًا من بياناتك',learnOn:'تعلّم من الإيميلات التي أترجمها وأكتبها',learned:'ما تعلّمه عنك',teachLbl:'علّمه من إيميلاتك السابقة',teachPh:'ألصق إيميلًا كتبته سابقًا ليتعلم أسلوبك منه',teachBtn:'علّمه',reset:'مسح ما تعلّمه',localNote:'كل ما يتعلمه مشفّر على جهازك فقط ولا يُرسل لأي مكان.',taught:'تعلّمت من الإيميل.',
 asked:'المطلوب منك',dates:'تواريخ',money:'مبالغ',trans:'الترجمة',sugg:'ردود مقترحة',emType:'نوع الإيميل',sender:'المرسل',learnedFrom:'مبني على',mailsIn:'إيميل وارد',mailsOut:'إيميل صادر',stWork:'طبيعة العمل',stTypes:'طبيعة الإيميلات',stStyle:'أسلوب الكتابة',stGreet:'التحية المعتادة',stClose:'الخاتمة المعتادة',stOrgs:'الجهات والشركات',stPpl:'أكثر من تراسلهم',stTerms:'مصطلحات متكررة',stLang:'لغة المراسلات',lenS:'جمل قصيرة ومباشرة',lenM:'جمل متوسطة',lenL:'جمل مفصلة',fmF:'رسمي',fmC:'ودّي ومباشر',noData:'سيظهر هنا ما يتعلمه عن عملك وأسلوبك مع كل إيميل.',confirmReset:'مسح كل ما تعلّمه؟',
 sumNone:'أكمل بياناتك وألصق بعض إيميلاتك ليفهم طريقة عملك ويكتب بأسلوبك.',
-stAcc:'الحساب والأمان',signedAs:'مسجل باسم',chgPw:'تغيير كلمة المرور',save:'حفظ',autoLock:'القفل التلقائي عند عدم الاستخدام',m1:'بعد دقيقة',m5:'بعد 5 دقائق',m10:'بعد 10 دقائق',m30:'بعد 30 دقيقة',never:'أبدًا',export:'تصدير نسخة احتياطية',import:'استيراد نسخة',backupNote:'النسخة مشفّرة بكلمة مرورك. استخدمها لنقل بياناتك إلى موبايل أو تابلت آخر.',delAcc:'حذف الحساب من هذا الجهاز',confirmDel:'سيتم حذف الحساب وكل بياناته من هذا الجهاز نهائيًا. متأكد؟',confirmOver:'يوجد حساب بنفس الاسم على هذا الجهاز. استبداله بالنسخة؟',imported:'تم الاستيراد. سجّل الدخول بكلمة مرور الحساب.',
+stAcc:'الحساب والأمان',signedAs:'مسجل باسم',chgPw:'تغيير كلمة المرور',save:'حفظ',autoLock:'القفل التلقائي عند عدم الاستخدام',m1:'بعد دقيقة',m5:'بعد 5 دقائق',m10:'بعد 10 دقائق',m30:'بعد 30 دقيقة',never:'أبدًا',export:'تصدير نسخة احتياطية',import:'استيراد نسخة',backupNote:'النسخة مشفّرة بكلمة مرورك. استخدمها لنقل بياناتك إلى موبايل أو تابلت آخر.',mrTitle:'الاستعادة بالإيميل',mrUrl:'رابط خدمة الاستعادة (Google Apps Script)',mrOn:'تفعيل',mrOff:'إلغاء الرابط',mrOnSt:'مفعّلة ✓ لو نسيت كلمة المرور، هيوصل رابط تأكيد على eng.a.asal@gmail.com.',mrOffSt:'غير مفعّلة. الصق رابط خدمة الاستعادة واضغط «تفعيل» (الخطوات في ملف دليل-الاستعادة).',mrPend:'الرابط محفوظ، بس الحساب لسه ما اتسجلش. اضغط «تفعيل» وانت متصل بالإنترنت.',mrBadUrl:'الرابط لازم يبدأ بـ https://script.google.com وينتهي بـ /exec',mrDone:'تم التفعيل. لو نسيت كلمة المرور هيوصلك رابط على الإيميل.',mrNote:'الخدمة بتشتغل على حساب Google بتاعك، ومش بتشوف كلمة المرور ولا بياناتك. فعّلها مرة واحدة على كل جهاز بتستخدمه.',delAcc:'حذف الحساب من هذا الجهاز',confirmDel:'سيتم حذف الحساب وكل بياناته من هذا الجهاز نهائيًا. متأكد؟',confirmOver:'يوجد حساب بنفس الاسم على هذا الجهاز. استبداله بالنسخة؟',imported:'تم الاستيراد. سجّل الدخول بكلمة مرور الحساب.',
 stLook:'المظهر',mode:'الثيم',mAuto:'تلقائي',mLight:'فاتح',mDark:'داكن',mBlack:'أسود',accent:'اللون الأساسي',fsize:'حجم الخط',uiLang:'لغة الواجهة',
 stVoice:'صوت المساعد',voicePick:'صوت المساعد',female:'أنثى',male:'ذكر',femaleD:'صوت نسائي',maleD:'صوت رجالي',pitch:'نبرة الصوت',low:'أعمق',high:'أحدّ',rate:'سرعة الكلام',slowW:'أبطأ',fast:'أسرع',vLang:'لغة الصوت',vVoice:'الصوت',vAuto:'تلقائي حسب الاختيار',vTest:'جرّب الصوت',vNoVoice:'لا يوجد صوت لهذه اللغة على جهازك. ثبّت الصوت من إعدادات الجهاز (تحويل النص إلى كلام).',vFallback:'لم أجد صوتًا {g} لهذه اللغة على جهازك، فعدّلت النبرة لتقريبه. يمكنك اختيار صوت آخر من القائمة.',vOk:'الصوت المستخدم: {v}',gF:'نسائي',gM:'رجالي',gU:'غير معروف',
 sample:'أهلًا، أنا مساعدك. سأترجم لك المحادثات والاجتماعات والإيميلات.',
@@ -548,7 +772,7 @@ stTrans:'الترجمة والاستماع',engine:'محرك الترجمة',eAu
 engDev:'ترجمة على الجهاز',engG:'ترجمة Google',engMM:'ترجمة MyMemory',
 stDiag:'فحص الجهاز',dSR:'التعرف على الصوت',dTTS:'نطق الكلام',dDev:'الترجمة على الجهاز',dWake:'إبقاء الشاشة مضاءة',dShare:'المشاركة',dSec:'اتصال آمن (https)',dNet:'الإنترنت',yes:'متاح',no:'غير متاح',
 tips:'للتثبيت كتطبيق: على آيفون افتح الرابط في Safari ثم مشاركة ← إضافة إلى الشاشة الرئيسية. على أندرويد من قائمة Chrome ← إضافة إلى الشاشة الرئيسية. الميكروفون يحتاج فتح التطبيق من رابط https.',full:'مساحة التخزين ممتلئة. صدّر نسخة احتياطية واحذف اجتماعات قديمة.'},
-en:{title:'Meeting Assistant',authSub:'Live translation, conversations, meetings and emails in your style',nTr:'Translate',nCv:'Talk',nMt:'Meetings',nEm:'Emails',nCo:'Coach',nSt:'Settings',nTk:'Tasks',
+en:{prGh:'ChatGPT (GPT) via GitHub only (free)',aiHKey:'GitHub token for ChatGPT models',aiHHow:'Free with your GitHub account: Fine-grained token → Permissions → Models: Read-only → Generate → paste it here:',prGhN:'ChatGPT models (like GPT-4.1 and GPT-4o) for free through GitHub Models. Each model has its own daily limit (50 or 150 messages) and the app rotates through them.',aiPrefL:'Start with',prefAuto:'Automatic (Gemini for text, Groq for voice)',prAuto:'Automatic: all free services ⭐',prGroq:'Groq (free key, very fast)',prFreeS:'Free',aiQKey:'Groq API key',aiQHow:'Free, no card: sign in with Google → Create API Key → paste it here:',prAutoN:'The app rotates through every free model on Gemini, ChatGPT and Groq: when one hits its daily limit it moves to the next without you noticing. With both free keys you get thousands of messages a day. Voice starts with Groq for speed; text starts with Gemini for Google Search.',prGroqN:'Very fast, great for voice, and does not train on your data. Facts come from Wikipedia.',aiUseToday:'Messages today: {n}',aiAllBusy:'All free services hit their limit for the moment. Wait a minute and try again. If this happens often, add the other key (Gemini or Groq) in the assistant settings.',aiKeysBn:'To chat all day with no practical limit, add two free keys (Gemini and Groq). It takes two minutes and no card.',aiKeysBtn:'Add the free keys',nAi:'Chat',mAsk:'Search & ask',mLearn:'Explain',mPract:'Practice',aiHist:'Previous chats',aiClrAll:'Clear all',aiClrQ:'Delete all chats?',aiNoHist:'No chats yet.',aiNewChat:'New chat',aiCfgT:'Assistant settings',aiNameL:'Assistant name',aiNamePh:'e.g. Nour',aiPersL:'Personality',pFriendly:'Warm and friendly',pPro:'Professional and precise',pFun:'Cheerful and witty',pCalm:'Calm and patient',aiSLangL:'Language you speak',aiRLangL:'Reply language',aiRAuto:'Same as mine (auto)',aiDialL:'Arabic dialect for replies',dAuto:'Same as mine (auto)',dMsa:'Simple Standard Arabic',dSa:'Saudi',dGulf:'Gulf',dEg:'Egyptian',dSd:'Sudanese',dLev:'Levantine',aiVoiceNote:'The assistant voice (male/female, pitch and speed) is set in Settings → Assistant voice.',aiLookT:'Assistant look in voice chat',aiProvT:'AI engine',aiProvL:'Engine',prFree:'Free without a key only (limited)',prGem:'Google Gemini only (free key + Google Search)',prOai:'OpenAI or compatible service (key)',aiGKey:'Gemini API key',aiGHow:'Get a free key in a minute: sign in with Google → Create API key → paste it here:',aiAdv:'Advanced',aiModel:'Model name',aiOBase:'Service URL',aiOKey:'API key',aiOModelPh:'e.g. gpt-4o-mini',prFreeN:'Works with no sign-up and uses Wikipedia for facts. It can be slower or busy at times. For the best quality and real Google search, use Gemini.',prGemN:'Best choice: smart replies in Arabic and its dialects, searches Google for current information and shows the sources. The free key is enough for daily use.',prOaiN:'If you have an OpenAI, OpenRouter, Groq or any compatible key. Facts come from Wikipedia.',aiTestB:'Test connection',aiPrivacy:'Your key and chats are stored encrypted on this device. Messages are sent only to the engine you chose so it can reply.',aiPLangL:'Language to practice',aiLevelL:'Your level',lvBeg:'Beginner',lvMid:'Intermediate',lvAdv:'Advanced',aiFixL:'Gently correct my mistakes while we talk',aiPh:'Message…',aiSendL:'Send',aiVoiceL:'Voice chat',aiDictate:'Dictate',aiHiA:'Hi, I’m {n}',aiHiL:'Hi, I’m {n}',aiHiP:'Let’s practice {l}',aiSubA:'Ask me for any information you need and I’ll look it up.',aiSubL:'Tell me what you want to understand and I’ll explain it step by step.',aiSubP:'We’ll chat like friends and I’ll correct you gently. Type or talk.',aiRetry:'Try again',aiNoKey:'This engine needs a key. Open the assistant settings (gear icon above) and paste it.',aiBadKey:'The key is wrong or has no access. Check it in the assistant settings.',aiBusyE:'The service is busy right now (usage limit). Wait a moment and try again, or use the free Gemini key.',aiModelE:'That model name does not exist. Clear it in Advanced settings to use the default.',aiNoModel:'Enter the model name in the assistant settings.',aiFailE:'Could not reach the assistant. Check the internet and try again.',vmListen:'Listening…',vmThink:'Thinking…',vmSpeak:'Speaking… (tap to interrupt)',vmMuted:'Mic is off. Tap the screen or the mic button to continue',vmMicErr:'I can’t hear you. Check the microphone permission and that no other app is using it.',vmCapL:'Show captions',vmTap:'Tap to interrupt or send',vmMuteL:'Mute microphone',vmLangL:'Speaking language',vmEndL:'End voice chat',title:'Meeting Assistant',authSub:'Live translation, conversations, meetings and emails in your style',nTr:'Translate',nCv:'Talk',nMt:'Meetings',nEm:'Emails',nCo:'Coach',nSt:'Settings',nTk:'Tasks',
 tkNew:'New task',tkTitlePh:'What needs to be done?',tkDictate:'Dictate',tkDue:'Due date',tkStatus:'Status',tkNotes:'Notes',tkAddBtn:'Add task',tkList:'Tasks',fOpen:'Open',fClosed:'Delivered',fAll:'All',tkIcsAll:'Add open tasks to the device calendar',tkIcs:'To calendar',
 tkNotif:'Notifications and reminders',tkPermBtn:'Enable notifications',tkOnL:'Daily summary of pending and overdue tasks',tkDefDays:'Default delivery time when no date is set',tkHour:'Daily summary time',tkTest:'Test notification',days:'days',day1:'day',
 tkNotifNote:'Notifications work on computers, Android and tablets. On iPhone and iPad, add the app to the Home Screen first, then enable notifications. For reminders that arrive even when the app is closed, add tasks to the device calendar (alerts the day before, on the due day, and 1 and 3 days after it is overdue).',
@@ -558,9 +782,9 @@ dOver:'Overdue by {n} day(s)',dToday:'Due today',dTom:'Due tomorrow',dLeft:'{n} 
 dgTitle:'Pending tasks',dgOpen:'You have {n} open tasks',dgOver:'{n} past the due date',dgOver3:'{n} overdue by more than 3 days',dgToday:'{n} due today',dgStale:'{n} with no update for 2+ days',
 addTasks:'Add action items to Tasks',addTask:'Add as task',testBody:'This is how task reminders will reach you.',
 login:'Sign in',user:'Username',pass:'Password',pass2:'Confirm password',newPass:'New password',curPass:'Current password',forgot:'Forgot password?',newAcc:'Create account',haveAcc:'I already have an account',create:'Create account',back:'Back',showPw:'Show password',
-resetInfo:'If you forget your password, reset requests go to eng.a.asal@gmail.com.',privacy:'Your data is encrypted and stored on this device only.',restoreBk:'Restore from backup',
-fgIntro:'Enter your username to prepare a reset request for eng.a.asal@gmail.com. You will get a reply with a reset key.',fgMake:'Prepare reset request',fgStep1:'1. Email this request (the button opens your mail app):',fgSend:'Send to eng.a.asal@gmail.com',copy2:'Copy request',fgStep2:'2. When you receive the reset key, paste it here and choose a new password:',fgKey:'Reset key',fgSet:'Set password',
-eNouser:'That username does not exist on this device.',eBad:'Wrong password.',eWait:'Too many attempts. Wait {s} seconds.',eExists:'That username is taken.',eShort:'Password must be at least 6 characters.',eMismatch:'Passwords do not match.',eUname:'Username must be 2–32 characters with no spaces.',eKey:'The reset key is wrong or expired.',eIsReq:'That is the request code, not the reset key. Paste the request code into the key tool, then paste the key it gives you here.',eFile:'Invalid file.',eCrypto:'Encryption is unavailable here. Open the app from an https link.',
+resetInfo:'If you forget your password, a confirmation link goes to eng.a.asal@gmail.com and you choose a new one right away.',privacy:'Your data is encrypted and stored on this device only.',restoreBk:'Move an account from another device',
+fgIntro:'Enter your username and a confirmation link will be sent to eng.a.asal@gmail.com. Open it, tap Confirm, then choose a new password.',fgSendMail:'Email me a reset link',fgSent:'Link sent to eng.a.asal@gmail.com',fgWaitTx:'Open the email on any device, tap “Confirm and change password”, then Confirm. Stay on this page; it continues by itself once you confirm.',fgResend:'Resend link',fgVerified:'✓ Confirmed by email. Choose your new password:',fgSetIn:'Save password and sign in',fgNoSvc:'Email reset is not turned on for this account on this device yet. After you sign in, turn it on in Settings → Account and security → Reset by email.',fgAltT:'Alternative (admin key)',fgAltIntro:'Copy this code into admin-reset.html and paste the key it gives you here.',copy2:'Copy code',fgKey:'Reset key',fgSet:'Set password',
+eNouser:'That username does not exist on this device.',eBad:'Wrong password.',eWait:'Too many attempts. Wait {s} seconds.',eExists:'That username is taken.',eShort:'Password must be at least 6 characters.',eMismatch:'Passwords do not match.',eUname:'Username must be 2–32 characters with no spaces.',eKey:'The reset key is wrong or expired.',eNoSvc:'Email reset is not set up on this device.',eSvc:'Could not reach the email service. Check the internet connection and the service link, then try again.',eSvcWait:'A link was just sent. Wait a minute before asking for another.',eSvcLimit:'Daily limit for reset emails reached. Try tomorrow.',eLinkOld:'The link expired. Ask for a new one.',eIsReq:'That is the request code, not the reset key. Paste the request code into the key tool, then paste the key it gives you here.',eFile:'Invalid file.',eCrypto:'Encryption is unavailable here. Open the app from an https link.',
 checking:'Checking…',welcome:'Welcome {n}',resetDone:'New password set.',pwChanged:'Password changed.',migrated:'Your old data was moved into your encrypted account.',
 themeBtn:'Toggle theme',lockNow:'Lock app',from:'From',to:'To',swap:'Swap languages',copyAll:'Copy all',share:'Share',
 speakTr:'Speak the translation aloud',start:'Start live translation',stop:'Stop',clear:'Clear',trHint:'Listening continues nonstop until you press Stop, and the screen stays on.',typePh:'Or type text to translate',translate:'Translate',phrases:'Saved phrases',noPhrases:'Tap the star next to any translation to save it here and play it later.',
@@ -573,7 +797,7 @@ recv:'Email you received',emInPh:'Paste the email here (include the Subject line
 prof:'Your work profile',pName:'Your name',pRole:'Your job title',pCo:'Your company',pInd:'Industry',pAbout:'About the company, its products or services',pAboutPh:'Example: supplier of fitness equipment for gyms and hotels in Saudi Arabia and the Gulf',pPhone:'Phone',pWeb:'Website',pSig:'Signature',pSigPh:'Leave empty to build it from your details',learnOn:'Learn from emails I translate and write',learned:'What it learned about you',teachLbl:'Teach it from your past emails',teachPh:'Paste an email you wrote earlier so it can learn your style',teachBtn:'Teach it',reset:'Clear learned data',localNote:'Everything it learns is encrypted on this device and never sent anywhere.',taught:'Learned from that email.',
 asked:'What is asked of you',dates:'Dates',money:'Amounts',trans:'Translation',sugg:'Suggested replies',emType:'Email type',sender:'Sender',learnedFrom:'Based on',mailsIn:'incoming emails',mailsOut:'sent emails',stWork:'Nature of work',stTypes:'Kinds of email',stStyle:'Writing style',stGreet:'Usual greeting',stClose:'Usual closing',stOrgs:'Companies and contacts',stPpl:'People you write to most',stTerms:'Frequent terms',stLang:'Email languages',lenS:'short, direct sentences',lenM:'medium sentences',lenL:'detailed sentences',fmF:'formal',fmC:'friendly and direct',noData:'What it learns about your work and style will appear here with each email.',confirmReset:'Clear everything it learned?',
 sumNone:'Fill in your details and paste a few of your emails so it understands your work and writes in your style.',
-stAcc:'Account and security',signedAs:'Signed in as',chgPw:'Change password',save:'Save',autoLock:'Auto-lock when idle',m1:'After 1 minute',m5:'After 5 minutes',m10:'After 10 minutes',m30:'After 30 minutes',never:'Never',export:'Export backup',import:'Import backup',backupNote:'The backup is encrypted with your password. Use it to move your data to another phone or tablet.',delAcc:'Delete account from this device',confirmDel:'This permanently deletes the account and all its data from this device. Are you sure?',confirmOver:'An account with this name exists on this device. Replace it with the backup?',imported:'Imported. Sign in with that account’s password.',
+stAcc:'Account and security',signedAs:'Signed in as',chgPw:'Change password',save:'Save',autoLock:'Auto-lock when idle',m1:'After 1 minute',m5:'After 5 minutes',m10:'After 10 minutes',m30:'After 30 minutes',never:'Never',export:'Export backup',import:'Import backup',backupNote:'The backup is encrypted with your password. Use it to move your data to another phone or tablet.',mrTitle:'Reset by email',mrUrl:'Reset service link (Google Apps Script)',mrOn:'Turn on',mrOff:'Remove link',mrOnSt:'On ✓ If you forget your password, a confirmation link goes to eng.a.asal@gmail.com.',mrOffSt:'Off. Paste the reset service link and tap Turn on (steps in the recovery guide).',mrPend:'The link is saved but this account is not registered yet. Tap Turn on while online.',mrBadUrl:'The link must start with https://script.google.com and end with /exec',mrDone:'Turned on. If you forget your password you will get a link by email.',mrNote:'The service runs on your own Google account and never sees your password or data. Turn it on once on each device you use.',delAcc:'Delete account from this device',confirmDel:'This permanently deletes the account and all its data from this device. Are you sure?',confirmOver:'An account with this name exists on this device. Replace it with the backup?',imported:'Imported. Sign in with that account’s password.',
 stLook:'Appearance',mode:'Theme',mAuto:'Auto',mLight:'Light',mDark:'Dark',mBlack:'Black',accent:'Accent color',fsize:'Text size',uiLang:'Interface language',
 stVoice:'Assistant voice',voicePick:'Assistant voice',female:'Female',male:'Male',femaleD:'Female voice',maleD:'Male voice',pitch:'Voice pitch',low:'Deeper',high:'Higher',rate:'Speaking speed',slowW:'Slower',fast:'Faster',vLang:'Voice language',vVoice:'Voice',vAuto:'Auto, from your choice',vTest:'Test voice',vNoVoice:'No voice for this language on your device. Install one in the device text-to-speech settings.',vFallback:'No {g} voice for this language on your device, so the pitch was adjusted to approximate it. You can pick another voice from the list.',vOk:'Voice in use: {v}',gF:'female',gM:'male',gU:'unknown',
 sample:'Hello, I am your assistant. I will translate your conversations, meetings and emails.',
@@ -603,7 +827,14 @@ cal:'<rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 
 plus:'<path d="M12 5v14M5 12h14"/>',
 cmd:'<rect x="7" y="3" width="6" height="10" rx="3"/><path d="M3.5 10a6.5 6.5 0 0 0 13 0M10 16.5V20M6.5 20h7"/><path d="m19.5 3-1.6 3.2h3.2L19.5 9.5"/>',
 sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
-moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>'};
+moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
+ai:'<path d="M12 3.5l1.9 4.9 4.9 1.9-4.9 1.9-1.9 4.9-1.9-4.9-4.9-1.9 4.9-1.9z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
+wave:'<path d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4"/>',send:'<path d="M12 19V5M6 11l6-6 6 6"/>',sq:'<rect x="7" y="7" width="10" height="10" rx="2" fill="currentColor"/>',
+list:'<path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/>',srch:'<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>',
+cc:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10.5 10.2a2.3 2.3 0 1 0 0 3.6M17 10.2a2.3 2.3 0 1 0 0 3.6"/>',
+face:'<circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8M9 9.5h.01M15 9.5h.01"/>',
+retry:'<path d="M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6"/>',
+micoff:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7M4 4l16 16"/>'};
 const svg=p=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 qa('[data-i]').forEach(e=>e.insertAdjacentHTML('afterbegin',svg(ICON[e.dataset.i])));
 
@@ -616,7 +847,7 @@ const MOBILE=IOS||/Android|Mobile/i.test(navigator.userAgent);
 const base=c=>String(c||'').split('-')[0].toLowerCase();
 const LANGS=[['ar-SA','العربية (السعودية)'],['ar-EG','العربية (مصر)'],['ar-AE','العربية (الإمارات)'],['en-US','English (US)'],['en-GB','English (UK)'],['fr-FR','Français'],['de-DE','Deutsch'],['es-ES','Español'],['it-IT','Italiano'],['tr-TR','Türkçe'],['ru-RU','Русский'],['zh-CN','中文'],['ja-JP','日本語'],['ko-KR','한국어'],['hi-IN','हिन्दी'],['ur-PK','اردو'],['fa-IR','فارسی'],['id-ID','Bahasa Indonesia'],['bn-BD','বাংলা'],['pt-BR','Português'],['nl-NL','Nederlands']];
 const langName=c=>(LANGS.find(l=>l[0]===c)||LANGS.find(l=>base(l[0])===base(c))||[c,c])[1];
-['trFrom','trTo','cvMe','cvThem','mtLang','emTgt','sMe','vLang'].forEach(id=>LANGS.forEach(([v,n])=>$(id).add(new Option(n,v))));
+['trFrom','trTo','cvMe','cvThem','mtLang','emTgt','sMe','vLang','aiSLang','aiRLang','aiPLang'].forEach(id=>LANGS.forEach(([v,n])=>$(id).add(new Option(n,v))));
 
 function toast(m,ms=4000){const e=$('toast');e.textContent=m;e.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>e.style.display='none',ms)}
 const fmt=ms=>{const s=Math.floor(ms/1000);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
@@ -684,8 +915,9 @@ const saveUsers=()=>{try{localStorage.setItem('ma_users',JSON.stringify(USERS));
 const uid=u=>String(u||'').trim().toLowerCase();
 let U=null,DK=null,DKraw=null,V=null;
 const freshProf=()=>({on:true,name:'',role:'',co:'',ind:'',about:'',phone:'',web:'',sig:'',tone:'auto',nIn:0,nOut:0,lang:{ar:0,en:0},g:{},c:{},s:{},w:{},dom:{},org:{},tp:{},ty:{},ppl:{},len:[0,0],fm:[0,0],snips:[]});
-const freshSet=()=>({engine:'auto',autoLock:10,wake:true,me:'ar-SA',trFrom:'en-US',trTo:'ar-SA',trSpeak:false,them:'en-US',cvAuto:true,cvSpeak:true,cvFlip:false,mtLang:'en-US',mtLiveTr:false,recAudio:!IOS,vg:'female',pitch:1,rate:1,vpin:{},tab:'tr',ntOn:true,ntHour:9,defDays:3});
-const freshVault=()=>({v:2,prof:freshProf(),meetings:[],phrases:[],tasks:[],set:freshSet()});
+const freshSet=()=>({engine:'auto',autoLock:10,wake:true,me:'ar-SA',trFrom:'en-US',trTo:'ar-SA',trSpeak:false,them:'en-US',cvAuto:true,cvSpeak:true,cvFlip:false,mtLang:'en-US',mtLiveTr:false,recAudio:!IOS,vg:'female',pitch:1,rate:1,vpin:{},tab:'tr',ntOn:true,ntHour:9,defDays:3,ai:freshAi(),aiCur:''});
+const freshAi=()=>({prov:'auto',pref:'',hkey:'',qkey:'',gkey:'',gmodel:'gemini-flash-latest',okey:'',obase:'https://api.openai.com/v1',omodel:'',name:'',pers:'friendly',dial:'auto',rlang:'auto',slang:'',mode:'ask',plang:'en-US',plevel:'mid',fix:true,look:'orb',orb:'sky',cap:true,av:freshAv()});
+const freshVault=()=>({v:2,prof:freshProf(),meetings:[],phrases:[],tasks:[],chats:[],set:freshSet()});
 function checkPw(p,p2){if(p.length<6)throw'eShort';if(p!==p2)throw'eMismatch'}
 async function createAccount(name,pw,vg){
  if(!S)throw'eCrypto';
@@ -708,7 +940,7 @@ async function login(name,pw){
  /* accounts wrapped for another reset key are moved to the current one at sign-in, so the reset tool keeps working */
  if(rec.kid!==ADMIN_PUB.x){try{const a=await adminWrap(u,raw);rec.eph=a.eph;rec.adm=a.box;rec.kid=ADMIN_PUB.x}catch(e){}}
  const d=JSON.parse(dec.decode(await unseal(DK,rec.vault)));
- V=Object.assign(freshVault(),d);V.prof=Object.assign(freshProf(),d.prof);V.set=Object.assign(freshSet(),d.set);V.set.vpin=V.set.vpin||{};V.tasks=d.tasks||[];
+ V=Object.assign(freshVault(),d);V.prof=Object.assign(freshProf(),d.prof);V.set=Object.assign(freshSet(),d.set);V.set.vpin=V.set.vpin||{};V.tasks=d.tasks||[];V.chats=d.chats||[];V.set.ai=Object.assign(freshAi(),(d.set||{}).ai||{});V.set.ai.av=Object.assign(freshAv(),V.set.ai.av||{});
  saveUsers();
 }
 async function saveVault(now){
@@ -731,23 +963,60 @@ async function changePw(cur,pw){
 }
 function lock(){stopAll();saveVault(true).finally(()=>location.reload())}
 
+/* ---------- password reset by email (Google Apps Script service, see reset-service.gs) ---------- */
+const RESET_API_DEFAULT='';/* optional: paste the Apps Script web-app URL here so every device uses it */
+const resetApi=()=>(localStorage.getItem('ma_reset_api')||RESET_API_DEFAULT).trim();
+async function rApi(q,ms=20000){const url=resetApi();if(!url)throw'eNoSvc';if(!navigator.onLine)throw'offline';
+ const r=await withTimeout(fetch(url+(url.includes('?')?'&':'?')+new URLSearchParams(q),{redirect:'follow'}),ms,'eSvc');if(!r.ok)throw'eSvc';
+ let j;try{j=await r.json()}catch(e){throw'eSvc'}return j}
+/* registers this account with the email service: the data key is sealed with a key only the service can re-derive */
+async function enrollMail(u,raw){const j=await rApi({a:'enroll'});if(!j.ok||!j.id||!j.k)throw'eSvc';const k=unb64(j.k);if(k.length!==32)throw'eSvc';
+ const rec=USERS[u];rec.mid=j.id;rec.mbox=await seal(await aesKey(k),raw);rec.mapi=resetApi();saveUsers();return true}
+async function ensureMail(){if(!U||!DKraw||!resetApi())return false;const rec=USERS[U];if(rec.mid&&rec.mapi===resetApi())return true;try{return await enrollMail(U,DKraw)}catch(e){return false}}
+const mailReady=rec=>!!(rec&&rec.mid&&rec.mbox&&resetApi());
+let RST=null;/* {u,n,id,raw,poll,until} */
+try{const s=JSON.parse(sessionStorage.getItem('ma_rst')||'null');if(s&&s.until>Date.now())RST=s}catch(e){}
+function fgShow(step){['fg1','fgWait','fgNew'].forEach(x=>$(x).hidden=x!==step);$('fgNoSvc').hidden=true;$('fgAlt').hidden=true}
+function fgAltShow(name){const rec=USERS[uid(name)];if(!rec||!rec.eph)return;$('gCode').value=resetRequest(name);$('fgNoSvc').hidden=false;$('fgAlt').hidden=false}
+function fgStop(){if(RST&&RST.poll){clearInterval(RST.poll);RST.poll=null}}
+async function fgSend(){const name=$('gUser').value.trim(),u=uid(name),rec=USERS[u];$('aErr').textContent='';
+ if(!rec)return aErr('eNouser');
+ if(!mailReady(rec)){fgAltShow(name);return}
+ const b=$('gSend'),old=b.textContent;b.disabled=true;b.textContent=t('checking');
+ try{const n=b64(rnd(24)),j=await rApi({a:'send',id:rec.mid,u:rec.name,n});
+  if(!j.ok)throw j.e==='wait'?'eSvcWait':j.e==='limit'?'eSvcLimit':'eSvc';
+  fgStop();RST={u,n,id:rec.mid,until:Date.now()+15*60000};sessionStorage.setItem('ma_rst',JSON.stringify(RST));fgWait()}
+ catch(x){aErr(x)}finally{b.disabled=false;b.textContent=old}}
+function fgWait(){fgShow('fgWait');$('gUser').value=(USERS[RST.u]||{}).name||RST.u;$('gWaitTx').textContent=t('fgWaitTx');fgStop();
+ const tick=async()=>{if(!RST)return;const left=RST.until-Date.now();if(left<=0){fgStop();sessionStorage.removeItem('ma_rst');RST=null;fgShow('fg1');aErr('eLinkOld');return}
+  $('gTimer').textContent=Math.floor(left/60000)+':'+String(Math.floor(left/1000)%60).padStart(2,'0');
+  if(tick.busy||document.visibilityState!=='visible')return;tick.busy=true;
+  try{const j=await rApi({a:'status',id:RST.id,n:RST.n},12000);
+   if(j.ok&&j.k){const rec=USERS[RST.u];RST.raw=await unseal(await aesKey(unb64(j.k)),rec.mbox);fgStop();sessionStorage.removeItem('ma_rst');fgShow('fgNew');$('gPass').focus()}
+   else if(j.e==='expired'||j.e==='bad'){fgStop();sessionStorage.removeItem('ma_rst');RST=null;fgShow('fg1');aErr('eLinkOld')}}
+  catch(e){}finally{tick.busy=false}};
+ RST.poll=setInterval(tick,1000);fgWait.tick=tick;tick()}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&RST&&RST.poll&&fgWait.tick)fgWait.tick()});
+async function setPwRaw(u,raw,pw){const rec=USERS[u],salt=rnd(16);rec.salt=b64(salt);rec.iter=ITER;rec.pw=await seal(await pwKey(pw,salt,ITER),raw);
+ try{const a=await adminWrap(u,raw);rec.eph=a.eph;rec.adm=a.box;rec.kid=ADMIN_PUB.x}catch(e){}rec.fails=0;rec.until=0;delete rec.mid;delete rec.mbox;saveUsers()}
+
 /* ---------- auth UI ---------- */
-function showForm(n){['Login','Signup','Forgot'].forEach(f=>$('f'+f).hidden=f!==n);$('aErr').textContent='';if(n==='Forgot'){$('fg1').hidden=false;$('fg2').hidden=true;$('gUser').value=$('lUser').value}}
+function showForm(n){['Login','Signup','Forgot'].forEach(f=>$('f'+f).hidden=f!==n);$('aErr').textContent='';if(n!=='Forgot')fgStop();if(n==='Forgot'){if(RST&&USERS[RST.u]&&!RST.raw)fgWait();else{fgShow('fg1');$('gUser').value=$('lUser').value||DEV.last||''}}}
 qa('[data-go]').forEach(b=>b.onclick=()=>showForm(b.dataset.go));
 qa('.eye').forEach(b=>b.onclick=()=>{const i=b.previousElementSibling;i.type=i.type==='password'?'text':'password'});
 function aErr(x){const k=typeof x==='string'?x:(x&&x.k)||'';$('aErr').textContent=T.ar[k]?t(k,x&&x.s?{s:x.s}:null):String(x&&x.message||x)}
 async function busy(form,fn){const b=qa('button[type=submit]',form)[0],old=b.textContent;b.disabled=true;b.textContent=t('checking');$('aErr').textContent='';try{await fn()}catch(x){aErr(x)}finally{b.disabled=false;b.textContent=old}}
 function renderUsers(){const w=$('aUsers');w.innerHTML='';Object.values(USERS).forEach(r=>{const b=mk('button','chip',r.name);b.type='button';b.onclick=()=>{$('lUser').value=r.name;$('lPass').focus()};w.append(b)})}
-$('fLogin').onsubmit=e=>{e.preventDefault();busy($('fLogin'),async()=>{await login($('lUser').value,$('lPass').value);enterApp()})};
-$('fSignup').onsubmit=e=>{e.preventDefault();busy($('fSignup'),async()=>{checkPw($('sPass').value,$('sPass2').value);await createAccount($('sUser').value,$('sPass').value,(qa('input[name=sVg]:checked')[0]||{}).value);enterApp()})};
+$('fLogin').onsubmit=e=>{e.preventDefault();busy($('fLogin'),async()=>{await login($('lUser').value,$('lPass').value);enterApp();ensureMail().then(renderMailSt)})};
+$('fSignup').onsubmit=e=>{e.preventDefault();busy($('fSignup'),async()=>{checkPw($('sPass').value,$('sPass2').value);await createAccount($('sUser').value,$('sPass').value,(qa('input[name=sVg]:checked')[0]||{}).value);enterApp();ensureMail().then(renderMailSt)})};
 $('sPass').oninput=()=>{const p=$('sPass').value;let s=0;if(p.length>=6)s++;if(p.length>=10)s++;if(/[A-Z]/.test(p)&&/[a-z]/.test(p))s++;if(/\d/.test(p))s++;if(/[^A-Za-z0-9]/.test(p))s++;const m=$('sMeter');m.style.width=(p?Math.max(12,s*20):0)+'%';m.style.background=s<2?'var(--bad)':s<4?'#d97706':'var(--ok)'};
-$('gMake').onclick=()=>{try{const name=$('gUser').value.trim(),code=resetRequest(name),disp=(USERS[uid(name)]||{}).name||name;
- $('gCode').value=code;$('fg1').hidden=true;$('fg2').hidden=false;$('aErr').textContent='';
- const sub='طلب استعادة كلمة المرور - مساعد الاجتماعات - '+disp;
- const body='مرحبًا،\nأرجو إرسال مفتاح استعادة كلمة المرور لتطبيق مساعد الاجتماعات.\n\nاسم المستخدم: '+disp+'\nرمز الطلب:\n'+code+'\n\n(Password reset request — Meeting Assistant)';
- $('gMail').href='mailto:eng.a.asal@gmail.com?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(body)}catch(x){aErr(x)}};
+$('gSend').onclick=fgSend;
+$('gResend').onclick=()=>{fgStop();RST=null;sessionStorage.removeItem('ma_rst');fgShow('fg1');fgSend()};
 $('gCopy').onclick=()=>copyText($('gCode').value);
-$('fForgot').onsubmit=e=>{e.preventDefault();if($('fg2').hidden)return $('gMake').click();busy($('fForgot'),async()=>{checkPw($('gPass').value,$('gPass2').value);await doReset($('gUser').value,$('gKey').value,$('gPass').value);showForm('Login');$('lUser').value=$('gUser').value;toast(t('resetDone'))})};
+$('gAltSet').onclick=()=>busy($('fForgot'),async()=>{checkPw($('gAPass').value,$('gAPass2').value);await doReset($('gUser').value,$('gKey').value,$('gAPass').value);showForm('Login');$('lUser').value=$('gUser').value;toast(t('resetDone'))});
+$('fForgot').onsubmit=e=>{e.preventDefault();if(!$('fg1').hidden)return fgSend();if($('fgNew').hidden||!RST||!RST.raw)return;
+ busy($('fForgot'),async()=>{const pw=$('gPass').value;checkPw(pw,$('gPass2').value);const u=RST.u,name=USERS[u].name;await setPwRaw(u,RST.raw,pw);RST=null;
+  await login(name,pw);$('gPass').value=$('gPass2').value='';toast(t('resetDone'));enterApp();ensureMail()})};
 function importBackup(file,after){const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(d.app!=='meeting-assistant'||!d.rec||!d.rec.vault||!d.rec.pw||!d.user)throw 0;const u=uid(d.user);if(USERS[u]&&!confirm(t('confirmOver')))return;USERS[u]=d.rec;saveUsers();renderUsers();after&&after(d.rec.name)}catch(e){toast(t('eFile'))}};r.readAsText(file)}
 $('aImport').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)importBackup(f,n=>{showForm('Login');$('lUser').value=n;toast(t('imported'))})};
 $('aUi').onclick=()=>{setUi(L==='ar'?'en':'ar')};
@@ -845,8 +1114,8 @@ function startRec(lang,o){
 }
 let wl=null;
 async function syncWake(){const want=anyActive()&&V&&V.set.wake&&document.visibilityState==='visible';try{if(want&&!wl&&'wakeLock' in navigator){wl=await navigator.wakeLock.request('screen');wl.addEventListener('release',()=>{wl=null})}else if(!want&&wl){const w=wl;wl=null;await w.release()}}catch(e){}}
-const anyActive=()=>trOn||cvOn||mOn||coOn;
-function stopAll(){if(trOn)$('trBtn').click();if(cvOn)cvStop();if(mOn)mStop();if(coOn&&coRec)coRec.stop();try{speechSynthesis.cancel()}catch(e){}}
+const anyActive=()=>trOn||cvOn||mOn||coOn||VM.on;
+function stopAll(){if(VM.on)vmClose();aiStop();if(trOn)$('trBtn').click();if(cvOn)cvStop();if(mOn)mStop();if(coOn&&coRec)coRec.stop();try{speechSynthesis.cancel()}catch(e){}}
 
 /* ================= LIVE TRANSLATE ================= */
 let trOn=false,trR=null;
@@ -1338,10 +1607,10 @@ if('serviceWorker' in navigator&&location.protocol==='https:'){navigator.service
 
 /* ================= VOICE COMMANDS (tap the button, say one command) ================= */
 const nAr=x=>String(x||'').toLowerCase().replace(/[ً-ٰٟـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/[.,،؟?!:;"'«»“”]/g,' ').replace(/\s+/g,' ').trim();
-const TABN={tr:['ترجمه','الترجمه','translate','translation'],cv:['محادثه','المحادثه','talk','conversation'],mt:['اجتماعات','الاجتماعات','اجتماع','الاجتماع','meetings','meeting'],tk:['مهام','المهام','tasks','task'],em:['ايميلات','الايميلات','ايميل','الايميل','البريد','emails','email'],co:['تدريب','التدريب','coach','practice'],st:['اعدادات','الاعدادات','settings']};
+const TABN={ai:['المساعد','مساعد','الدردشه','دردشه','chat','assistant'],tr:['ترجمه','الترجمه','translate','translation'],cv:['محادثه','المحادثه','talk','conversation'],mt:['اجتماعات','الاجتماعات','اجتماع','الاجتماع','meetings','meeting'],tk:['مهام','المهام','tasks','task'],em:['ايميلات','الايميلات','ايميل','الايميل','البريد','emails','email'],co:['تدريب','التدريب','coach','practice'],st:['اعدادات','الاعدادات','settings']};
 let lastField=null;
 addEventListener('focusin',e=>{const a=e.target;if(a&&a.matches&&a.matches('textarea:not([readonly]),input[type=text]'))lastField=a});
-function cmdTarget(){if(lastField&&lastField.closest('.pane.on'))return lastField;return $({mt:'mtText',em:'emDraft',tk:'tkTitle',tr:'trType',co:'coIn',cv:'trType'}[V.set.tab]||'mtText')}
+function cmdTarget(){if(lastField&&lastField.closest('.pane.on'))return lastField;return $({ai:'aiIn',mt:'mtText',em:'emDraft',tk:'tkTitle',tr:'trType',co:'coIn',cv:'trType'}[V.set.tab]||'mtText')}
 function putText(el,x,mode){
  const mt=el===$('mtText')&&cur;let v=mt?cur.transcript:el.value;
  if(mode==='undo'){v=v.replace(/\s+$/,'').replace(/[^.!?؟\n]+[.!?؟]*$/,'').replace(/[ \t]+$/,'');if(mt&&v&&!v.endsWith('\n'))v+='\n'}
@@ -1418,6 +1687,562 @@ function renderCmds(){const w=$('cmdList');if(!w)return;w.innerHTML='';const li=
  [['all',t('cmdAll')],['tr',t('nTr')],['cv',t('nCv')],['mt',t('nMt')],['em',t('nEm')],['co',t('nCo')]].forEach(([g,title])=>{
   w.append(mk('h3',null,title));CMDS.filter(c=>c.g===g).forEach(c=>{const r=mk('div'),a=mk('b',null,'«'+c.say[li]+'»'),b=mk('span',null,c.d[li]);b.className='mu small';b.style.textAlign='end';r.append(a,b);w.append(r)})})}
 
+
+/* ================= AVATAR ================= */
+const freshAv=()=>({skin:'#e0a87e',shape:'oval',hair:'short',hairC:'#1b1410',head:'#ffffff',eyes:'#3b2416',brows:'mid',beard:'none',glasses:'none',outfit:'#1d4ed8',bg:'#dbeafe'});
+const AVO={
+ skin:{c:['#fde3cf','#f3c9a8','#e0a87e','#c58a5e','#9a6240','#6b4129','#4a2c1c']},
+ shape:{o:['oval','round','square','heart']},
+ hair:{o:['short','side','curly','long','bun','buzz','bald','hijab','shemagh','ghutra']},
+ hairC:{c:['#1b1410','#3b2416','#6b4423','#a0522d','#d6b16a','#9ca3af','#e5e7eb']},
+ head:{c:['#111827','#ffffff','#e5e7eb','#1e3a8a','#7f1d1d','#065f46','#a16207','#f9a8d4','#6b21a8'],when:a=>a.hair==='hijab'},
+ eyes:{c:['#1f1410','#3b2416','#6b4423','#8a6d3b','#2f6b3a','#2b6cb0','#6b7280']},
+ brows:{o:['thin','mid','thick']},
+ beard:{o:['none','stubble','short','full','goatee','mustache']},
+ glasses:{o:['none','round','square']},
+ outfit:{c:['#1d4ed8','#0f766e','#111827','#ffffff','#7f1d1d','#6d28d9','#c2410c','#be185d','#64748b']},
+ bg:{c:['#dbeafe','#e0e7ff','#dcfce7','#fef3c7','#fce7f3','#f1f5f9','#1e293b','#0b1220','#fde68a']}};
+const AVL={ar:{skin:'لون البشرة',shape:'شكل الوجه',hair:'الشعر وغطاء الرأس',hairC:'لون الشعر',head:'لون الحجاب',eyes:'لون العيون',brows:'الحواجب',beard:'اللحية',glasses:'النظارة',outfit:'لون الملابس',bg:'الخلفية',
+ oval:'بيضاوي',round:'دائري',square:'مربع',heart:'قلب',short:'قصير',side:'جانبي',curly:'كيرلي',long:'طويل',bun:'كعكة',buzz:'محلوق خفيف',bald:'أصلع',hijab:'حجاب',shemagh:'شماغ',ghutra:'غترة بيضاء',thin:'رفيعة',mid:'عادية',thick:'عريضة',none:'بدون',stubble:'خفيفة',full:'كاملة',goatee:'سكسوكة',mustache:'شنب',
+ look:'طريقة الظهور',orb:'كرة',avatar:'شخصية (أفاتار)',orbC:'لون الكرة',rand:'شكل عشوائي',presets:'جاهز'},
+ en:{skin:'Skin tone',shape:'Face shape',hair:'Hair and headwear',hairC:'Hair color',head:'Hijab color',eyes:'Eye color',brows:'Eyebrows',beard:'Beard',glasses:'Glasses',outfit:'Clothes color',bg:'Background',
+ oval:'Oval',round:'Round',square:'Square',heart:'Heart',short:'Short',side:'Side part',curly:'Curly',long:'Long',bun:'Bun',buzz:'Buzz cut',bald:'Bald',hijab:'Hijab',shemagh:'Shemagh',ghutra:'White ghutra',thin:'Thin',mid:'Normal',thick:'Thick',none:'None',stubble:'Stubble',full:'Full',goatee:'Goatee',mustache:'Mustache',
+ look:'Look',orb:'Orb',avatar:'Avatar',orbC:'Orb color',rand:'Random look',presets:'Presets'}};
+const avl=k=>(AVL[L]||AVL.ar)[k]||k;
+const AVP=[{skin:'#e0a87e',shape:'square',hair:'shemagh',hairC:'#1b1410',eyes:'#3b2416',brows:'thick',beard:'short',glasses:'none',outfit:'#ffffff',bg:'#dbeafe'},
+ {skin:'#f3c9a8',shape:'oval',hair:'hijab',head:'#1e3a8a',hairC:'#1b1410',eyes:'#6b4423',brows:'mid',beard:'none',glasses:'none',outfit:'#1e3a8a',bg:'#fce7f3'},
+ {skin:'#9a6240',shape:'round',hair:'curly',hairC:'#1b1410',eyes:'#1f1410',brows:'mid',beard:'stubble',glasses:'round',outfit:'#0f766e',bg:'#dcfce7'},
+ {skin:'#fde3cf',shape:'heart',hair:'long',hairC:'#a0522d',eyes:'#2f6b3a',brows:'thin',beard:'none',glasses:'none',outfit:'#be185d',bg:'#fef3c7'},
+ {skin:'#c58a5e',shape:'oval',hair:'side',hairC:'#3b2416',eyes:'#3b2416',brows:'mid',beard:'goatee',glasses:'square',outfit:'#111827',bg:'#e0e7ff'}];
+function shade(hex,f){const n=parseInt(hex.slice(1),16);let r=n>>16,g=n>>8&255,b=n&255;const m=f<0?0:255,a=Math.abs(f);r=Math.round(r+(m-r)*a);g=Math.round(g+(m-g)*a);b=Math.round(b+(m-b)*a);return'#'+((1<<24)|(r<<16)|(g<<8)|b).toString(16).slice(1)}
+function avatarSvg(a,id){a=Object.assign(freshAv(),a||{});id=id||'av';
+ const sk=a.skin,skD=shade(sk,-.18),hc=a.hairC,hcD=shade(hc,-.25),lip=shade(sk,-.35);
+ const covered=['hijab','shemagh','ghutra'].includes(a.hair);
+ const face={oval:'M100 42c25 0 41 19 41 47 0 31-17 57-41 57s-41-26-41-57c0-28 16-47 41-47z',round:'M100 44c27 0 44 18 44 46 0 29-18 52-44 52s-44-23-44-52c0-28 17-46 44-46z',
+  square:'M100 43c27 0 42 16 42 42 0 22-2 36-9 46-7 9-18 14-33 14s-26-5-33-14c-7-10-9-24-9-46 0-26 15-42 42-42z',heart:'M100 42c27 0 43 17 43 44 0 30-24 60-43 60S57 116 57 86c0-27 16-44 43-44z'}[a.shape]||'';
+ let back='',front='',over='',defs='';
+ if(a.hair==='long')back=`<path d="M56 92c-4-38 16-58 44-58s48 20 44 58c4 30 6 52 14 70-18 6-38 6-58 6s-40 0-58-6c8-18 10-40 14-70z" fill="${hc}"/>`;
+ if(a.hair==='bun')back=`<circle cx="100" cy="34" r="16" fill="${hc}"/>`;
+ if(a.hair==='hijab'){const h=a.head,hd=shade(h,-.15);back=`<path d="M100 30c34 0 56 26 56 62 0 24-6 44-14 58 18 8 32 22 36 50H22c4-28 18-42 36-50-8-14-14-34-14-58 0-36 22-62 56-62z" fill="${h}"/><path d="M60 150c12 12 26 16 40 16s28-4 40-16" fill="none" stroke="${hd}" stroke-width="3"/>`;
+  over=`<path d="M58 88c0-28 18-44 42-44s42 16 42 44c-6-16-22-26-42-26s-36 10-42 26z" fill="${h}"/><path d="M58 88c2-6 6-12 10-16" stroke="${hd}" stroke-width="2" fill="none"/>`}
+ if(a.hair==='shemagh'||a.hair==='ghutra'){const red=a.hair==='shemagh';
+  if(red)defs=`<pattern id="${id}p" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#fff"/><rect width="4" height="4" fill="#c81e1e"/><rect x="4" y="4" width="4" height="4" fill="#c81e1e" opacity=".55"/></pattern>`;
+  const f=red?`url(#${id}p)`:'#f8fafc',st=red?'#9b1c1c':'#cbd5e1';
+  back=`<path d="M100 28c36 0 58 24 58 60 0 30-4 52-10 74l18 38H34l18-38c-6-22-10-44-10-74 0-36 22-60 58-60z" fill="${f}" stroke="${st}" stroke-width="1.5"/>`;
+  over=`<path d="M56 84c0-26 18-42 44-42s44 16 44 42c-8-12-24-18-44-18s-36 6-44 18z" fill="${f}" stroke="${st}" stroke-width="1.5"/><path d="M55 60c12-8 28-12 45-12s33 4 45 12" fill="none" stroke="#111" stroke-width="5" stroke-linecap="round"/><path d="M56 67c12-7 27-10 44-10s32 3 44 10" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/>`}
+ if(a.hair==='short')front=`<path d="M58 84c-3-30 14-46 42-46s45 16 42 46c-6-14-14-22-24-24-10 4-26 6-40 2-10 4-16 12-20 22z" fill="${hc}"/>`;
+ if(a.hair==='side')front=`<path d="M57 88c-4-34 14-52 44-52 28 0 46 18 42 52-4-14-10-24-20-28-18 0-38-2-52 6-8 4-12 12-14 22z" fill="${hc}"/><path d="M80 44c10 6 26 10 46 12" stroke="${hcD}" stroke-width="2" fill="none"/>`;
+ if(a.hair==='curly'){let c='';[[62,72,12],[70,56,13],[86,46,14],[104,43,14],[121,48,13],[135,60,12],[140,76,10],[60,86,9],[78,60,10],[96,56,10],[114,58,10],[128,68,9]].forEach(([x,y,r])=>c+=`<circle cx="${x}" cy="${y}" r="${r}" fill="${hc}"/>`);front=c}
+ if(a.hair==='long')front=`<path d="M58 92c-4-34 14-54 42-54s46 20 42 54c-4-18-14-30-30-34-6 10-22 18-40 20-8 2-12 8-14 14z" fill="${hc}"/>`;
+ if(a.hair==='bun')front=`<path d="M58 84c-3-30 14-44 42-44s45 14 42 44c-8-14-22-22-42-22s-34 8-42 22z" fill="${hc}"/>`;
+ if(a.hair==='buzz')front=`<path d="M59 82c-2-28 15-42 41-42s43 14 41 42c-8-12-22-18-41-18s-33 6-41 18z" fill="${hc}" opacity=".55"/>`;
+ const bw={thin:2.2,mid:3.4,thick:5}[a.brows]||3.4;
+ const brows=`<g id="${id}br"><path d="M75 79c5-4 12-5 18-3" stroke="${hc==='#e5e7eb'?'#9ca3af':hc}" stroke-width="${bw}" stroke-linecap="round" fill="none"/><path d="M107 76c6-2 13-1 18 3" stroke="${hc==='#e5e7eb'?'#9ca3af':hc}" stroke-width="${bw}" stroke-linecap="round" fill="none"/></g>`;
+ const eye=(x,s)=>`<g id="${id}e${s}"><ellipse cx="${x}" cy="91" rx="7.5" ry="5.2" fill="#fff"/><g id="${id}i${s}"><circle cx="${x}" cy="91" r="3.9" fill="${a.eyes}"/><circle cx="${x}" cy="91" r="1.9" fill="#0b0b0b"/><circle cx="${x+1.3}" cy="89.7" r="1" fill="#fff"/></g><path d="M${x-8} 89c4-5 12-5 16 0" stroke="${skD}" stroke-width="1.6" fill="none"/></g>`;
+ let beard='';
+ const jaw='M62 104c2 22 16 42 38 42s36-20 38-42c-4 10-10 14-16 14-6-6-14-8-22-8s-16 2-22 8c-6 0-12-4-16-14z';
+ if(a.beard==='stubble')beard=`<path d="${jaw}" fill="${hc}" opacity=".22"/>`;
+ if(a.beard==='short')beard=`<path d="${jaw}" fill="${hc}" opacity=".88"/>`;
+ if(a.beard==='full')beard=`<path d="M58 96c0 30 16 58 42 58s42-28 42-58c-4 14-10 20-18 22-6-6-14-9-24-9s-18 3-24 9c-8-2-14-8-18-22z" fill="${hc}"/>`;
+ if(a.beard==='goatee')beard=`<path d="M88 124c2 12 6 20 12 20s10-8 12-20c-4 2-8 3-12 3s-8-1-12-3z" fill="${hc}"/>`;
+ const must=['short','full','goatee','mustache'].includes(a.beard)?`<path d="M86 113c5-4 10-4 14-1 4-3 9-3 14 1-4 3-9 4-14 2-5 2-10 1-14-2z" fill="${hc}"/>`:'';
+ const gl=a.glasses==='round'?`<g fill="none" stroke="#1f2937" stroke-width="2.4"><circle cx="84" cy="91" r="11"/><circle cx="116" cy="91" r="11"/><path d="M95 90c3-2 7-2 10 0M73 89l-12-3M127 89l12-3"/></g>`:
+  a.glasses==='square'?`<g fill="none" stroke="#1f2937" stroke-width="2.6"><rect x="71" y="82" width="26" height="18" rx="5"/><rect x="103" y="82" width="26" height="18" rx="5"/><path d="M97 89c2-2 4-2 6 0M71 88l-11-3M129 88l11-3"/></g>`:'';
+ const ears=covered?'':`<ellipse cx="59" cy="96" rx="6" ry="10" fill="${sk}"/><ellipse cx="141" cy="96" rx="6" ry="10" fill="${sk}"/>`;
+ const oc=a.outfit,ocD=shade(oc,oc==='#ffffff'?-.12:-.2);
+ return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>${defs}</defs>
+<rect width="200" height="200" fill="${a.bg}"/>
+<g id="${id}hd">
+${back}
+<path d="M28 200c4-34 30-52 72-52s68 18 72 52z" fill="${oc}"/><path d="M84 150l16 18 16-18" fill="none" stroke="${ocD}" stroke-width="3"/>
+<rect x="88" y="124" width="24" height="30" rx="10" fill="${skD}"/>
+${ears}
+<path d="${face}" fill="${sk}"/>
+<ellipse cx="78" cy="110" rx="8" ry="5" fill="#f87171" opacity=".14"/><ellipse cx="122" cy="110" rx="8" ry="5" fill="#f87171" opacity=".14"/>
+${front}${over}
+${eye(84,'l')}${eye(116,'r')}
+${brows}
+<path d="M100 95c-2 6-4 10-4 13 2 2 6 2 8 0" fill="none" stroke="${skD}" stroke-width="2" stroke-linecap="round"/>
+${beard}
+<g id="${id}m"><ellipse id="${id}mo" cx="100" cy="121" rx="8" ry="0.6" fill="#5b1f1f"/><path id="${id}ml" d="M89 119c6 5 16 5 22 0" fill="none" stroke="${lip}" stroke-width="2.6" stroke-linecap="round"/></g>
+${must}
+${gl}
+</g></svg>`}
+function avBind(host,id){const g=s=>host.querySelector('#'+id+s);return{hd:g('hd'),el:g('el'),er:g('er'),il:g('il'),ir:g('ir'),mo:g('mo'),ml:g('ml'),br:g('br')}}
+
+/* ---------- look editor ---------- */
+function renderLook(host){if(!host||!V)return;const A=AI();host.innerHTML='';
+ const wrap=mk('div','lookwrap'),prev=mk('div','lookprev'),opts=mk('div');wrap.append(prev,opts);host.append(wrap);
+ const redraw=()=>{if(A.look==='avatar'){prev.classList.remove('orbi');prev.innerHTML=avatarSvg(A.av,'pv')}else{prev.innerHTML='';prev.classList.add('orbi');orbVars(prev,A.orb)}
+  if(VM.on)vmLookApply();if(!AIC||!AIC.msgs.length)aiRender();else qa('#aiLog .mav').forEach(m=>{const n=aiAvatarEl('mav');m.replaceWith(n)})};
+ const row=(label,el)=>{const r=mk('div','lrow');r.append(mk('b',null,label),el);opts.append(r);return r};
+ const seg=mk('div','seg');['orb','avatar'].forEach(v=>{const b=mk('button',null,avl(v));b.type='button';b.classList.toggle('on',A.look===v);b.onclick=()=>{A.look=v;save();renderLook(host)};seg.append(b)});row(avl('look'),seg);
+ if(A.look==='orb'){const o=mk('div','lopts');Object.keys(ORBS).forEach(k=>{const b=mk('button','orbsw');b.type='button';b.style.background=`radial-gradient(circle at 35% 30%,${ORBS[k][0]},${ORBS[k][1]} 55%,${ORBS[k][2]})`;b.setAttribute('aria-label',k);if(A.orb===k)b.style.outline='3px solid var(--tx)';b.onclick=()=>{A.orb=k;save();renderLook(host)};o.append(b)});row(avl('orbC'),o);redraw();return}
+ const pr=mk('div','lopts');AVP.forEach((p,i)=>{const b=mk('button','chip',String(i+1));b.type='button';b.onclick=()=>{A.av=Object.assign(freshAv(),p);save();renderLook(host)};pr.append(b)});
+ const rb=mk('button','chip','🎲 '+avl('rand'));rb.type='button';rb.onclick=()=>{const n={};for(const k in AVO){const s=AVO[k];const arr=s.c||s.o;n[k]=arr[Math.floor(Math.random()*arr.length)]}if(Math.random()<.5)n.beard='none';if(Math.random()<.6)n.glasses='none';A.av=Object.assign(freshAv(),n);save();renderLook(host)};pr.append(rb);row(avl('presets'),pr);
+ for(const k in AVO){const s=AVO[k];if(s.when&&!s.when(A.av))continue;if(k==='hairC'&&['hijab','ghutra','shemagh','bald'].includes(A.av.hair)&&A.av.beard==='none')continue;
+  const o=mk('div','lopts');(s.c||s.o).forEach(v=>{const b=mk('button',s.c?'sw':'chip',s.c?null:avl(v));b.type='button';if(s.c){b.style.background=v;b.setAttribute('aria-label',v);b.classList.toggle('on',A.av[k]===v)}else b.classList.toggle('on',A.av[k]===v);
+   b.onclick=()=>{A.av[k]=v;save();renderLook(host)};o.append(b)});row(avl(k),o)}
+ redraw()}
+
+/* ================= VOICE MODE ================= */
+const VM={on:false,st:'idle',rec:null,buf:'',sil:0,muted:false,lang:'',tok:0,q:[],talk:false,done:true,fails:0,t0:0,lvT:0,lv:0,raf:0,av:null,blinkAt:0,ctrl:null};
+function vmSet(st){VM.st=st;$('vm').dataset.st=st;$('vmStatus').textContent=st==='idle'?'':t({listening:'vmListen',thinking:'vmThink',speaking:'vmSpeak',muted:'vmMuted'}[st]);
+ $('vmMute').classList.toggle('off',VM.muted);$('vmMute').innerHTML=svg(VM.muted?ICON.micoff:ICON.mt)}
+function vmLangBtn(){const b=base(VM.lang);$('vmLang').textContent=b.toUpperCase();$('vmLang').title=langName(VM.lang)}
+function vmLookApply(){const A=AI(),avOn=A.look==='avatar';$('vmOrb').hidden=avOn;$('vmAv').hidden=!avOn;
+ if(avOn){$('vmAv').innerHTML=avatarSvg(A.av,'vmx');VM.av=avBind($('vmAv'),'vmx')}else VM.av=null;$('vmName').textContent=aiName()}
+async function vmOpen(){
+ if(!V)return;if(aiDict)aiDict.stop();aiStop();
+ if(!(await micReady()))return;
+ if(trOn||cvOn||mOn||coOn)stopAll();
+ try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u)}catch(e){}
+ const A=AI();VM.on=true;VM.muted=false;VM.fails=0;VM.lang=A.mode==='practice'?A.plang:aiSpeakLang();
+ $('vm').hidden=false;$('vm').classList.toggle('nocap',!A.cap);$('vmCapB').classList.toggle('on',A.cap);$('vmYou').textContent='';$('vmBot').textContent='';$('vmPanel').hidden=true;
+ vmLookApply();vmLangBtn();document.body.style.overflow='hidden';
+ cancelAnimationFrame(VM.raf);VM.raf=requestAnimationFrame(vmFrame);
+ syncWake();vmListen();
+}
+function vmClose(){if(!VM.on)return;VM.on=false;VM.tok++;clearTimeout(VM.sil);if(VM.rec){try{VM.rec.stop()}catch(e){}VM.rec=null}if(VM.ctrl){try{VM.ctrl.abort()}catch(e){}VM.ctrl=null}
+ try{speechSynthesis.cancel()}catch(e){}VM.talk=false;cancelAnimationFrame(VM.raf);$('vm').hidden=true;document.body.style.overflow='';vmSet('idle');syncWake();aiRender();aiScroll(true)}
+function vmListen(){
+ if(!VM.on)return;clearTimeout(VM.sil);if(VM.muted){vmSet('muted');return}
+ vmSet('listening');VM.buf='';VM.pend='';const tok=++VM.tok;VM.t0=Date.now();let heard=false;
+ VM.rec=startRec(VM.lang,{cont:true,
+  keep:()=>VM.on&&VM.tok===tok&&VM.st==='listening'&&!VM.buf&&!VM.pend,
+  interim:x=>{if(VM.tok!==tok)return;VM.pend=x;if(x){heard=true;VM.lvT=.5+Math.random()*.45;$('vmYou').textContent=(VM.buf+' '+x).trim();vmSil(tok)}},
+  final:x=>{if(VM.tok!==tok)return;heard=true;VM.pend='';VM.buf=(VM.buf+' '+x).trim();$('vmYou').textContent=VM.buf;VM.lvT=.8;vmSil(tok)},
+  end:()=>{if(VM.tok!==tok)return;VM.rec=null;if(!VM.on||VM.st!=='listening')return;
+   if(!VM.buf&&VM.pend)VM.buf=VM.pend;
+   if(VM.buf){VM.fails=0;return vmSubmit()}
+   VM.fails=(heard||Date.now()-VM.t0>2500)?0:VM.fails+1;
+   if(VM.fails>=3){VM.muted=true;vmSet('muted');toast(t('vmMicErr'),7000);return}
+   setTimeout(()=>{if(VM.on&&VM.tok===tok&&VM.st==='listening')vmListen()},350)}});
+ if(!VM.rec){VM.muted=true;vmSet('muted')}
+}
+function vmSil(tok){clearTimeout(VM.sil);VM.sil=setTimeout(()=>{if(VM.tok!==tok||VM.st!=='listening')return;if(!VM.buf&&VM.pend)VM.buf=VM.pend;if(VM.buf)vmSubmit()},MOBILE?1700:1300)}
+function vmSubmit(){
+ const x=VM.buf.trim();if(!x||!VM.on)return;clearTimeout(VM.sil);const tok=++VM.tok;
+ const r=VM.rec;VM.rec=null;if(r)try{r.stop()}catch(e){}
+ vmSet('thinking');$('vmYou').textContent=x;$('vmBot').textContent='';
+ VM.q=[];VM.cut=0;VM.done=false;VM.talk=false;VM.rlang='';
+ const ctrl=new AbortController();VM.ctrl=ctrl;
+ aiAsk(x,{voice:true,signal:ctrl.signal,onDelta:full=>{if(VM.tok!==tok)return;$('vmBot').textContent=plainText(full);vmFeed(full,false,tok)}})
+  .then(full=>{if(VM.tok!==tok)return;vmFeed(full||'',true,tok);VM.done=true;vmNext(tok)})
+  .catch(e=>{if(VM.tok!==tok||(e&&e.name==='AbortError'))return;const m=aiErrText(e);$('vmBot').textContent=m;VM.q=[m];VM.rlang=L==='ar'?'ar-SA':'en-US';VM.done=true;vmNext(tok)});
+}
+/* split the streamed reply into sentences and queue them for speech */
+function vmFeed(full,last,tok){
+ const rest=full.slice(VM.cut);let i=-1;const re=/[.!?؟。\n](?=\s|$)|[؛;:](?=\s)/g;let m;
+ while((m=re.exec(rest)))i=m.index+1;
+ let chunk='';if(last){chunk=rest;VM.cut=full.length}else if(i>0&&(i>=18||/\n/.test(rest.slice(0,i)))){chunk=rest.slice(0,i);VM.cut+=i}
+ chunk=plainText(chunk);if(chunk){VM.q.push(chunk);vmNext(tok)}}
+function vmNext(tok){
+ if(VM.tok!==tok||!VM.on||VM.talk)return;
+ const x=VM.q.shift();
+ if(!x){if(VM.done){VM.lvT=0;setTimeout(()=>{if(VM.tok===tok&&VM.on&&!VM.talk&&!VM.q.length)vmListen()},250)}return}
+ if(!VM.rlang)VM.rlang=localeFor(quickLang(x)||base(VM.lang));
+ const u=new SpeechSynthesisUtterance(x);u.lang=VM.rlang;const p=pickVoice(VM.rlang),want=V.set.vg||'female';if(p.v)u.voice=p.v;
+ const adj=p.match?1:(want==='male'?.72:1.22);u.pitch=Math.max(0,Math.min(2,(V.set.pitch||1)*adj));u.rate=Math.max(.5,Math.min(2,(V.set.rate||1)*(AI().mode==='practice'&&AI().plevel==='beg'?.88:1)));
+ VM.talk=true;let fin=false;const f=()=>{if(fin)return;fin=true;clearTimeout(tm);speaking=false;if(VM.tok!==tok)return;VM.talk=false;vmNext(tok)};
+ const tm=setTimeout(f,Math.min(30000,2500+x.length*110/u.rate));
+ u.onstart=()=>{if(VM.tok===tok)vmSet('speaking')};u.onboundary=()=>{VM.lvT=.95};u.onend=f;u.onerror=f;
+ if(VM.st!=='speaking')vmSet('speaking');speaking=true;
+ try{speechSynthesis.speak(u)}catch(e){f()}
+}
+function vmInterrupt(){if(!VM.on)return;if(VM.st==='speaking'||VM.st==='thinking'){VM.tok++;if(VM.ctrl){try{VM.ctrl.abort()}catch(e){}VM.ctrl=null}try{speechSynthesis.cancel()}catch(e){}VM.talk=false;VM.q=[];vmListen()}
+ else if(VM.st==='listening'){if(VM.buf||VM.pend){if(!VM.buf)VM.buf=VM.pend;vmSubmit()}}
+ else if(VM.st==='muted'){VM.muted=false;VM.fails=0;vmListen()}}
+/* animation: orb or avatar, driven by a smoothed "voice level" */
+function vmFrame(ts){
+ if(!VM.on)return;VM.raf=requestAnimationFrame(vmFrame);const t=ts/1000,st=VM.st;
+ if(st==='speaking'&&VM.talk){if(!vmFrame.n||ts-vmFrame.n>85){vmFrame.n=ts;VM.lvT=Math.max(VM.lvT,.22+Math.random()*.6)}}
+ VM.lv+=(VM.lvT-VM.lv)*.3;VM.lvT*=st==='speaking'?.86:.92;const lv=VM.lv;
+ $('vm').style.setProperty('--lv',lv.toFixed(3));
+ if(VM.av){const a=VM.av;
+  const open=st==='speaking'&&VM.talk?Math.min(1,lv*1.25):0;
+  if(a.mo){a.mo.setAttribute('ry',(0.6+open*7.5).toFixed(2));a.mo.setAttribute('rx',(8+open*2).toFixed(2))}
+  if(a.ml)a.ml.setAttribute('opacity',open>.25?.35:1);
+  if(!VM.blinkAt)VM.blinkAt=ts+2500+Math.random()*2500;let s=1;const bd=ts-VM.blinkAt;if(bd>0&&bd<160)s=Math.max(.08,Math.abs(1-bd/80));else if(bd>=160)VM.blinkAt=ts+2400+Math.random()*3200;
+  [[a.el,84],[a.er,116]].forEach(([e,x])=>e&&e.setAttribute('transform',`translate(${x} 91) scale(1 ${s.toFixed(2)}) translate(${-x} -91)`));
+  const lx=st==='thinking'?-1.8+Math.sin(t*1.4)*1.2:Math.sin(t*.6)*.8,ly=st==='thinking'?-1.6:0;[a.il,a.ir].forEach(e=>e&&e.setAttribute('transform',`translate(${lx.toFixed(2)} ${ly.toFixed(2)})`));
+  if(a.br)a.br.setAttribute('transform',`translate(0 ${(st==='listening'?-1.2-lv*1.5:st==='thinking'?-1.6:0).toFixed(2)})`);
+  const rot=Math.sin(t*.9)*1.6+(st==='listening'?2.2:0)+(st==='speaking'?Math.sin(t*3.1)*lv*1.8:0),bob=Math.sin(t*1.7)*1.1+(st==='speaking'?-lv*1.2:0);
+  if(a.hd)a.hd.setAttribute('transform',`rotate(${rot.toFixed(2)} 100 150) translate(0 ${bob.toFixed(2)})`);
+  return}
+ const cv=$('vmOrb'),dpr=Math.min(2,devicePixelRatio||1),W=Math.round(cv.clientWidth*dpr)||300;if(cv.width!==W){cv.width=W;cv.height=W}
+ const g=cv.getContext('2d'),c=ORBS[AI().orb]||ORBS.sky,cx=W/2,cy=W/2;g.clearRect(0,0,W,W);
+ const R=W*.36*(1+(st==='listening'?lv*.14:st==='speaking'?lv*.1:0)+Math.sin(t*(st==='thinking'?3:1.2))*(st==='thinking'?.025:.012));
+ const wob=st==='thinking'?.05:.03+lv*.05;
+ g.save();g.beginPath();for(let k=0;k<=96;k++){const an=k/96*Math.PI*2,r=R*(1+wob*Math.sin(3*an+t*1.3)+wob*.7*Math.sin(5*an-t*1.9)+lv*.035*Math.sin(8*an+t*5));const x=cx+Math.cos(an)*r,y=cy+Math.sin(an)*r;k?g.lineTo(x,y):g.moveTo(x,y)}g.closePath();
+ g.shadowColor=c[2]+'66';g.shadowBlur=W*.08;
+ const rg=g.createRadialGradient(cx-R*.35,cy-R*.4,R*.1,cx,cy,R*1.05);rg.addColorStop(0,c[0]);rg.addColorStop(.5,c[1]);rg.addColorStop(1,c[2]);g.fillStyle=rg;g.fill();g.shadowBlur=0;g.clip();
+ g.globalCompositeOperation='lighter';const sp=st==='thinking'?2.2:.6;
+ for(let k=0;k<3;k++){const an=t*sp*(k%2?-1:1)+k*2.1,x=cx+Math.cos(an)*R*.45,y=cy+Math.sin(an*1.3)*R*.35,cr=R*(.55+.12*Math.sin(t+k));const cg=g.createRadialGradient(x,y,0,x,y,cr);cg.addColorStop(0,'rgba(255,255,255,'+(.28+lv*.25)+')');cg.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=cg;g.fillRect(0,0,W,W)}
+ g.restore();
+}
+
+/* ================= AI ASSISTANT ================= */
+const ORBS={sky:['#f0f9ff','#7dd3fc','#2563eb'],ocean:['#ecfeff','#22d3ee','#1e40af'],mint:['#f0fdf4','#5eead4','#0f766e'],violet:['#faf5ff','#c4b5fd','#6d28d9'],sunset:['#fff7ed','#fdba74','#db2777'],gold:['#fffbeb','#fcd34d','#c2410c'],mono:['#ffffff','#cbd5e1','#334155']};
+function orbVars(el,k){const c=ORBS[k]||ORBS.sky;el.style.setProperty('--o1',c[0]);el.style.setProperty('--o2',c[1]);el.style.setProperty('--o3',c[2])}
+const AI=()=>V.set.ai;
+const aiName=()=>(AI().name||'').trim()||(L==='ar'?(V.set.vg==='male'?'سامي':'نور'):(V.set.vg==='male'?'Sam':'Nour'));
+const aiSpeakLang=()=>AI().slang||V.set.me||'ar-SA';
+let AIC=null,aiAbort=null,aiBusy=false;
+
+/* ---------- language helpers ---------- */
+function quickLang(x){x=String(x||'');const ar=(x.match(/[؀-ۿ]/g)||[]).length,lat=(x.match(/[A-Za-z]/g)||[]).length;
+ if(ar>lat)return /[پچگژ]/.test(x)?'fa':/[ٹڈڑںے]/.test(x)?'ur':'ar';
+ if(/[一-鿿]/.test(x))return'zh';if(/[぀-ヿ]/.test(x))return'ja';if(/[가-힯]/.test(x))return'ko';if(/[Ѐ-ӿ]/.test(x))return'ru';if(/[ऀ-ॿ]/.test(x))return'hi';if(/[ঀ-৿]/.test(x))return'bn';
+ if(/[äöüß]/i.test(x)&&/\b(und|der|die|das|ist|nicht|ich|sie)\b/i.test(x))return'de';if(/\b(le|la|les|des|est|vous|nous|je|pour|avec)\b/i.test(x))return'fr';
+ if(/\b(el|los|las|para|usted|gracias|está|que|muy)\b/i.test(x))return'es';if(/\b(você|obrigado|não|está|muito)\b/i.test(x))return'pt';if(/\b(ve|bir|için|bu|ben|sen)\b/i.test(x)&&/[ğışç]/i.test(x))return'tr';
+ if(/\b(il|che|sono|della|grazie|perché)\b/i.test(x))return'it';if(/\b(het|een|niet|ik|jij|bedankt)\b/i.test(x))return'nl';if(/\b(saya|anda|tidak|terima kasih|apa)\b/i.test(x))return'id';
+ return lat?'en':''}
+function localeFor(b){if(!b)return aiSpeakLang();const A=AI();for(const c of [aiSpeakLang(),V.set.me,A.mode==='practice'?A.plang:'',A.rlang!=='auto'?A.rlang:'',A.plang])if(c&&base(c)===b)return c;const f=LANGS.find(l=>base(l[0])===b);return f?f[0]:b}
+
+/* ---------- system prompt ---------- */
+const DIAL={msa:'Modern Standard Arabic, simple and warm',sa:'Saudi (Najdi/Hijazi) Arabic dialect',gulf:'Gulf Arabic dialect',eg:'Egyptian Arabic dialect',sd:'Sudanese Arabic dialect',lev:'Levantine Arabic dialect'};
+const PERS={friendly:'warm, friendly and encouraging, like a smart close friend',pro:'professional, precise and polite, like a trusted senior consultant',fun:'cheerful and witty with light humor, but still helpful',calm:'calm, patient and reassuring'};
+const LVL={beg:'beginner (A1–A2): very simple words, short sentences, speak slowly and clearly',mid:'intermediate (B1–B2): everyday and work vocabulary, natural sentences',adv:'advanced (C1+): natural, idiomatic, native-like speed and vocabulary'};
+function aiSys(mode,voice,extra){
+ const A=AI(),P=V.prof,me=langName(V.set.me),nm=aiName();
+ const now=new Date(),date=now.toLocaleDateString('en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+' '+now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+ const who=[P.name&&('name: '+P.name),P.role&&('job: '+P.role),P.co&&('company: '+P.co),P.ind&&('industry: '+P.ind)].filter(Boolean).join(', ');
+ const L1=[];
+ L1.push(`You are ${nm}, a real-feeling conversation companion inside the user's personal "Meeting Assistant" app. Personality: ${PERS[A.pers]||PERS.friendly}.`);
+ L1.push(`Talk like a thoughtful human, not a robot: natural phrasing, empathy, short paragraphs, show genuine interest, remember what the user said earlier in this chat, and ask a short follow-up question when it helps. Do not say you are an AI or a language model unless the user asks directly.`);
+ L1.push(`Current date and time for the user: ${date}.`+(who?` About the user: ${who}.`:'')+` The user's main language: ${me}.`);
+ const dial=A.dial==='auto'?'match the Arabic dialect the user uses (if unclear, use simple Modern Standard Arabic)':'use '+(DIAL[A.dial]||DIAL.msa);
+ if(mode==='practice'){
+  const pl=langName(A.plang);
+  L1.push(`MODE: language practice partner. The user wants to practice speaking ${pl}. Level: ${LVL[A.plevel]||LVL.mid}.`);
+  L1.push(`Hold a real, engaging conversation in ${pl}: pick everyday, travel or work topics (or continue the user's topic), react naturally, then ask one question so the user keeps talking. Keep your turns short so the user speaks more.`);
+  if(A.fix)L1.push(`When the user's last message has a mistake (grammar, word choice, unnatural phrasing), start your reply with ONE short correction line that begins with "✏️ " giving the corrected sentence and a very short reason in ${me}. If there is no mistake, skip the correction line. Then continue the conversation in ${pl}.`);
+  L1.push(`If the user writes or speaks in ${me}, they are probably stuck: help briefly in ${me} (give the ${pl} words they need), then return to ${pl}.`);
+ }else{
+  L1.push(A.rlang==='auto'?`Language: always reply in the same language the user writes or speaks in. For Arabic, ${dial}.`:`Language: always reply in ${langName(A.rlang)}`+(base(A.rlang)==='ar'?`; ${dial}.`:'.'));
+  if(mode==='learn')L1.push(`MODE: patient teacher. Explain clearly: start with the simple core idea in 1–2 sentences, then the details step by step, use a concrete example or an everyday analogy, and finish by checking understanding with a short question. Adapt depth to the user's answers.`);
+  else L1.push(`MODE: research assistant. Help the user find the information they need: give a direct, accurate answer first, then the key details. Use the search results when available and prefer recent, reliable sources. If you are not sure or the information may be outdated, say so honestly instead of guessing.`);
+ }
+ if(voice)L1.push(`This is a live VOICE conversation: your reply is spoken aloud. Reply in 1–3 short spoken sentences (max ~45 words), like a person on a call. No markdown, no lists, no emojis (except the ✏️ correction line), no URLs, no symbols. Spell numbers naturally.`);
+ else L1.push(`This is a text chat: you may use light markdown (bold, short bullet lists) when it helps. Keep replies focused; no long walls of text.`);
+ if(extra)L1.push(extra);
+ return L1.join('\n');
+}
+
+/* ---------- web knowledge for the free/OpenAI providers (Wikipedia, no key) ---------- */
+const WIKI=['ar','en','fr','de','es','it','tr','ru','zh','ja','ko','hi','ur','fa','id','bn','pt','nl'];
+async function wikiCtx(q,lb){const wl=WIKI.includes(lb)?lb:'en';
+ const url=`https://${wl}.wikipedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrsearch=${encodeURIComponent(q.slice(0,200))}&gsrlimit=3&prop=extracts%7Cinfo&inprop=url&exintro=1&explaintext=1&exchars=1100&redirects=1`;
+ const r=await withTimeout(fetch(url),4500);const j=await r.json();const pg=Object.values((j.query||{}).pages||{}).sort((a,b)=>(a.index||0)-(b.index||0)).filter(p=>p.extract);
+ if(!pg.length)return null;
+ return{txt:pg.map((p,i)=>`[${i+1}] ${p.title}: ${p.extract.replace(/\s+/g,' ').trim()}`).join('\n'),src:pg.map(p=>({t:p.title+' · Wikipedia',u:p.fullurl}))}}
+
+/* ---------- streaming helpers ---------- */
+async function sseRead(res,cb){const rd=res.body.getReader(),dc=new TextDecoder();let buf='';
+ for(;;){const {done,value}=await rd.read();if(done)break;buf+=dc.decode(value,{stream:true});let i;
+  while((i=buf.indexOf('\n'))>=0){const line=buf.slice(0,i).replace(/\r$/,'');buf=buf.slice(i+1);if(!line.startsWith('data:'))continue;const d=line.slice(5).trim();if(!d||d==='[DONE]')continue;try{cb(JSON.parse(d))}catch(e){}}}
+ const tail=buf.trim();if(tail.startsWith('data:')){const d=tail.slice(5).trim();if(d&&d!=='[DONE]')try{cb(JSON.parse(d))}catch(e){}}}
+const aiE=(k,x)=>Object.assign(new Error(k),{k},x||{});
+const ek=e=>e&&(e.k||(typeof e==='string'?e:''));
+/* parse "try again in 1m30.5s" / "37s" style hints */
+function waitMs(s){s=String(s||'');let m=s.match(/(?:in|after)\s+((?:\d+h)?(?:\d+m)?(?:[\d.]+s)?)/i)||s.match(/"retryDelay"\s*:\s*"([\d.]+s)"/);if(!m||!m[1])return 0;
+ const x=m[1];const h=+(x.match(/(\d+)h/)||[0,0])[1],mi=+(x.match(/(\d+)m(?!s)/)||[0,0])[1],se=+(x.match(/([\d.]+)s/)||[0,0])[1];return((h*60+mi)*60+se)*1000}
+async function failOf(r){const b=await r.text().catch(()=>'');const st=r.status;
+ if(st===401||((st===400||st===403)&&/API[_ ]?KEY|api key|invalid_api_key|PERMISSION_DENIED|authentication/i.test(b)))return aiE('aiBadKey');
+ if(st===429||/RESOURCE_EXHAUSTED|rate[_ ]limit/i.test(b)){const day=/per ?day|PerDay|RPD|TPD|daily/i.test(b);const ra=+(r.headers.get('retry-after')||0)*1000;return aiE('aiBusy',{day:day&&!/search|grounding/i.test(b),body:b.slice(0,300),ms:waitMs(b)||ra||(day?0:65000)})}
+ if(st===404||/model_not_found|not found|decommissioned|does not exist|is not supported/i.test(b))return aiE('aiModel');
+ return aiE('aiFail',{st,body:b.slice(0,300)})}
+
+/* ---------- free-tier rotation memory (per device; not secret) ---------- */
+const lsJ=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||'null')||d}catch(e){return d}};
+let COOL=lsJ('ma_ai_cool',{}),MODELS=lsJ('ma_ai_models',{}),USE=lsJ('ma_ai_use',{});
+const lsS=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const cooled=k=>COOL[k]>Date.now();
+function msToPacificMidnight(){const now=new Date(),la=new Date(now.toLocaleString('en-US',{timeZone:'America/Los_Angeles'})),nx=new Date(la);nx.setHours(24,3,0,0);return Math.max(60000,nx-la)}
+function coolFor(k,ms){COOL[k]=Date.now()+ms;const n=Date.now();for(const x in COOL)if(COOL[x]<n)delete COOL[x];lsS('ma_ai_cool',COOL)}
+function useAdd(p){const d=new Date().toLocaleDateString('en-CA');if(USE.d!==d)USE={d};USE[p]=(USE[p]||0)+1;lsS('ma_ai_use',USE)}
+const kTag=k=>String(k||'').slice(-6);
+
+/* ---------- model discovery ---------- */
+async function gemModels(){const A=AI(),ck='g'+kTag(A.gkey),c=MODELS[ck];if(c&&Date.now()-c.at<864e5&&c.list.length)return c.list;
+ let list=[];
+ const r=await withTimeout(fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=200',{headers:{'x-goog-api-key':A.gkey}}),9000).catch(e=>null);
+ if(r&&!r.ok){const f=await failOf(r);if(f.k==='aiBadKey')throw f}
+ if(r&&r.ok){const j=await r.json().catch(()=>({}));
+  list=(j.models||[]).filter(m=>(m.supportedGenerationMethods||[]).includes('generateContent')).map(m=>String(m.name).replace(/^models\//,''))
+   .filter(n=>/^gemini-[\d.]+-flash/.test(n)&&!/image|tts|live|audio|embed|exp|robotics|computer|native|thinking|learnlm|-\d{3}$/.test(n));
+  const ver=n=>parseFloat((n.match(/gemini-([\d.]+)/)||[])[1]||0),sc=n=>ver(n)*10+(/lite/.test(n)?-1:2)+(/preview/.test(n)?-6:0)-(/\d{2}-\d{4}/.test(n)?1:0);
+  list.sort((a,b)=>sc(b)-sc(a));list=list.slice(0,8)}
+ ['gemini-flash-latest','gemini-flash-lite-latest'].forEach(x=>{if(!list.includes(x))list.push(x)});
+ MODELS[ck]={at:Date.now(),list};lsS('ma_ai_models',MODELS);return list}
+const GQ_PREF=['openai/gpt-oss-120b','llama-3.3-70b-versatile','moonshotai/kimi-k2-instruct-0905','moonshotai/kimi-k2-instruct','qwen/qwen3-32b','meta-llama/llama-4-maverick-17b-128e-instruct','openai/gpt-oss-20b','meta-llama/llama-4-scout-17b-16e-instruct','llama-3.1-8b-instant','allam-2-7b'];
+async function groqModels(){const A=AI(),ck='q'+kTag(A.qkey),c=MODELS[ck];if(c&&Date.now()-c.at<864e5&&c.list.length)return c.list;
+ let ids=[];
+ const r=await withTimeout(fetch('https://api.groq.com/openai/v1/models',{headers:{Authorization:'Bearer '+A.qkey}}),9000).catch(e=>null);
+ if(r&&!r.ok){const f=await failOf(r);if(f.k==='aiBadKey')throw f}
+ if(r&&r.ok){const j=await r.json().catch(()=>({}));ids=(j.data||[]).filter(m=>m.active!==false).map(m=>m.id).filter(id=>!/whisper|tts|guard|playai|orpheus|distil|safeguard/i.test(id))}
+ let list=ids.length?[...GQ_PREF.filter(x=>ids.includes(x)),...ids.filter(x=>!GQ_PREF.includes(x)&&!/compound/.test(x)),...ids.filter(x=>/^groq\/compound/.test(x))]:GQ_PREF.slice(0,4);
+ MODELS[ck]={at:Date.now(),list};lsS('ma_ai_models',MODELS);return list}
+
+const GH_PREF=['openai/gpt-5-chat','openai/gpt-4.1','openai/gpt-4o','openai/gpt-5-mini','openai/gpt-4.1-mini','openai/gpt-4o-mini','openai/gpt-5-nano','openai/gpt-4.1-nano'];
+async function ghModels(){const A=AI(),ck='h'+kTag(A.hkey),c=MODELS[ck];if(c&&Date.now()-c.at<864e5&&c.list.length)return c.list;
+ let ids=[];
+ const r=await withTimeout(fetch('https://models.github.ai/catalog/models',{headers:{Authorization:'Bearer '+A.hkey,Accept:'application/vnd.github+json'}}),9000).catch(e=>null);
+ if(r&&r.ok){const j=await r.json().catch(()=>[]);ids=(Array.isArray(j)?j:j.models||[]).filter(m=>/^openai\//.test(m.id)&&!/embed|\/o\d|whisper|tts|image|audio|realtime|codex/i.test(m.id)&&(!m.supported_output_modalities||m.supported_output_modalities.includes('text'))).map(m=>m.id)}
+ const list=ids.length?[...GH_PREF.filter(x=>ids.includes(x)),...ids.filter(x=>!GH_PREF.includes(x))].slice(0,8):GH_PREF.slice(1,7);
+ MODELS[ck]={at:Date.now(),list};lsS('ma_ai_models',MODELS);return list}
+/* the ordered list of engines to try for this message */
+async function aiCands(mode,voice){
+ const A=AI(),p=A.prov,gem=[],gq=[],out=[];let bad='';
+ if(A.gkey&&(p==='auto'||p==='gemini')){try{(await gemModels()).forEach(m=>gem.push({p:'gemini',m}))}catch(e){bad=bad||ek(e)}}
+ if(A.qkey&&(p==='auto'||p==='groq')){try{const ms=await groqModels();
+  const comp=ms.filter(m=>/^groq\/compound/.test(m));ms.filter(m=>!/compound/.test(m)).forEach(m=>gq.push({p:'groq',m}));
+  if(mode==='ask'&&!voice)comp.reverse().forEach(m=>gq.unshift({p:'groq',m,search:1}));else comp.forEach(m=>gq.push({p:'groq',m,search:1}))}catch(e){bad=bad||ek(e)}}
+ const gh=[];if(A.hkey&&(p==='auto'||p==='github')&&!cooled('github:*')){try{(await ghModels()).forEach(m=>gh.push({p:'github',m}))}catch(e){}}
+ if(p==='openai')out.push({p:'openai',m:A.omodel});
+ if(p==='gemini'&&!A.gkey)throw aiE('aiNoKey');if(p==='groq'&&!A.qkey)throw aiE('aiNoKey');if(p==='github'&&!A.hkey)throw aiE('aiNoKey');
+ /* voice wants speed (Groq first); text wants search and depth (Gemini first) */
+ const G={gemini:gem,groq:gq,github:gh};let ord=voice?['groq','github','gemini']:['gemini','github','groq'];
+ if(A.pref&&G[A.pref])ord=[A.pref,...ord.filter(x=>x!==A.pref)];
+ ord.forEach(k=>out.push(...G[k]));
+ if(p==='auto'||p==='free')out.push({p:'free',m:'openai'});
+ if(!out.length&&bad)throw aiE(bad);
+ const live=out.filter(c=>!cooled(c.p+':'+c.m));
+ return live.length?live:out.slice(-1);
+}
+
+async function gemOne(hist,sys,o,model,search){
+ const A=AI(),contents=hist.map(m=>({role:m.r==='u'?'user':'model',parts:[{text:m.c}]}));
+ const nk='nothink:'+model;let think=/gemini-3|flash-latest|lite-latest/.test(model)&&!lsJ('ma_ai_flags',{})[nk],tools=!!search,last=null;
+ for(let i=0;i<4;i++){
+  const body={systemInstruction:{parts:[{text:sys}]},contents,generationConfig:{temperature:o.voice?.85:.7,maxOutputTokens:o.voice?600:4096}};
+  if(think)body.generationConfig.thinkingConfig={thinkingLevel:'minimal'};
+  if(tools)body.tools=[{google_search:{}}];
+  let r;try{r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:streamGenerateContent?alt=sse`,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':A.gkey},body:JSON.stringify(body),signal:o.signal})}
+  catch(e){if(e&&e.name==='AbortError')throw e;throw aiE(navigator.onLine?'aiFail':'offline')}
+  if(!r.ok){last=await failOf(r);
+   if(last.k==='aiFail'&&last.st===400&&think&&/thinking/i.test(last.body)){think=false;const f=lsJ('ma_ai_flags',{});f[nk]=1;lsS('ma_ai_flags',f);continue}
+   if(last.k==='aiFail'&&last.st===400&&think){think=false;continue}
+   if(tools&&((last.k==='aiBusy'&&(!last.day||/search|grounding/i.test(last.body||'')))||last.k==='aiFail')){tools=false;continue}
+   throw last}
+  let text='';const src=[];
+  await sseRead(r,j=>{const c=(j.candidates||[])[0];if(!c)return;((c.content||{}).parts||[]).forEach(p=>{if(p.text&&!p.thought)text+=p.text});
+   const g=c.groundingMetadata;if(g&&g.groundingChunks)g.groundingChunks.forEach(k=>{const w=k.web;if(w&&w.uri&&!src.some(s=>s.u===w.uri))src.push({t:w.title||w.uri,u:w.uri})});o.onDelta&&o.onDelta(text)});
+  if(text.trim())return{text,src};throw aiE('aiFail');
+ }
+ throw last||aiE('aiFail');
+}
+const noThink=x=>x.replace(/<think>[\s\S]*?(<\/think>|$)/g,'').replace(/^\s+/,'');
+async function oaiCall(hist,sys,o,url,key,model,extra){
+ const messages=[{role:'system',content:sys},...hist.map(m=>({role:m.r==='u'?'user':'assistant',content:m.c}))];
+ const body=Object.assign(o.bare?{model,messages,stream:true}:{model,messages,stream:true,temperature:o.voice?.85:.7,max_tokens:o.voice?600:4096},extra||{});
+ let r;try{r=await fetch(url,{method:'POST',headers:Object.assign({'Content-Type':'application/json'},key?{Authorization:'Bearer '+key}:{}),body:JSON.stringify(body),signal:o.signal})}
+ catch(e){if(e&&e.name==='AbortError')throw e;throw aiE(navigator.onLine?'aiFail':'offline',{net:true})}
+ if(!r.ok){const f=await failOf(r);if(f.k==='aiFail'&&f.st===400&&extra&&Object.keys(extra).length&&/reasoning|unsupported|unknown|unrecognized|property/i.test(f.body))return oaiCall(hist,sys,o,url,key,model,null);throw f}
+ let raw='';const ct=r.headers.get('content-type')||'';
+ if(ct.includes('event-stream')&&r.body){await sseRead(r,j=>{const d=((j.choices||[])[0]||{}).delta||{};if(d.content){raw+=d.content;o.onDelta&&o.onDelta(noThink(raw))}})}
+ else{const tx=await r.text();try{const j=JSON.parse(tx);raw=(((j.choices||[])[0]||{}).message||{}).content||''}catch(e){raw=tx}o.onDelta&&o.onDelta(noThink(raw))}
+ const text=noThink(raw);if(!text.trim())throw aiE('aiFail');return{text,src:[]};
+}
+async function freeCall(hist,sys,o){
+ try{return await oaiCall(hist,sys,o,'https://text.pollinations.ai/openai','','openai',{referrer:'meeting-assistant',private:true})}
+ catch(e){if(e&&e.name==='AbortError')throw e;if(ek(e)==='offline'||ek(e)==='aiBusy')throw e;
+  const conv=hist.slice(-8).map(m=>(m.r==='u'?'User: ':'Assistant: ')+m.c.slice(0,700)).join('\n')+'\nAssistant:';
+  let r;try{r=await fetch('https://text.pollinations.ai/'+encodeURIComponent(conv.slice(-3500))+'?model=openai&referrer=meeting-assistant&private=true&system='+encodeURIComponent(sys.slice(0,2500)),{signal:o.signal})}catch(x){if(x&&x.name==='AbortError')throw x;throw aiE('aiFail')}
+  if(!r.ok)throw await failOf(r);const text=(await r.text()).trim();if(!text)throw aiE('aiFail');o.onDelta&&o.onDelta(text);return{text,src:[]}}}
+const viaName=c=>c?(c.p==='gemini'?'Gemini':c.p==='github'?'ChatGPT':c.p==='groq'?'Groq':c.p==='openai'?'API':t('prFreeS'))+(c.p==='free'?'':' · '+String(c.m).replace(/^.*\//,'')):'';
+
+async function llm(hist,mode,o){
+ const A=AI(),q=(hist[hist.length-1]||{}).c||'';
+ let wiki;const getWiki=async()=>{if(wiki!==undefined)return wiki;wiki=null;if(mode!=='practice'&&q.trim().length>5){try{wiki=await wikiCtx(q,quickLang(q)||base(V.set.me))}catch(e){}}return wiki};
+ const cands=await aiCands(mode,o.voice);
+ let lastErr=null;const badP=new Set();
+ for(const c of cands){
+  if(o.signal&&o.signal.aborted)throw new DOMException('Aborted','AbortError');
+  if(badP.has(c.p))continue;
+  let extra='',src=[];
+  if(!(c.p==='gemini'||c.search)&&mode!=='practice'){const w=await getWiki();if(w){extra='Background from Wikipedia (use it if relevant and mention it briefly as the source; ignore it if unrelated):\n'+w.txt;src=w.src}}
+  const sys=aiSys(mode,o.voice,extra);
+  let shown=false;const oo=Object.assign({},o,{onDelta:x=>{shown=true;o.onDelta&&o.onDelta(x)}});
+  try{
+   let res;
+   if(c.p==='gemini')res=await gemOne(hist,sys,oo,c.m,mode!=='practice');
+   else if(c.p==='github'){const h=hist.slice(-10).map(m=>({r:m.r,c:m.c.slice(0,1500)}));res=await oaiCall(h,sys,Object.assign({},oo,{bare:true}),'https://models.github.ai/inference/chat/completions',A.hkey,c.m)}
+   else if(c.p==='groq')res=await oaiCall(hist,sys,oo,'https://api.groq.com/openai/v1/chat/completions',A.qkey,c.m,/gpt-oss/.test(c.m)?{reasoning_effort:'low'}:/qwen3/.test(c.m)?{reasoning_effort:'none'}:null);
+   else if(c.p==='openai'){const b=(A.obase||'https://api.openai.com/v1').trim().replace(/\/+$/,'');if(!A.okey&&!/localhost|127\.0\.0\.1/.test(b))throw aiE('aiNoKey');if(!A.omodel)throw aiE('aiNoModel');res=await oaiCall(hist,sys,oo,/\/chat\/completions$/.test(b)?b:b+'/chat/completions',A.okey,A.omodel)}
+   else res=await freeCall(hist,sys,oo);
+   if(!res.src.length)res.src=src;res.via=c;useAdd(c.p);return res;
+  }catch(e){
+   if(e&&e.name==='AbortError')throw e;
+   const k=ek(e)||'aiFail',key=c.p+':'+c.m;lastErr=e&&e.k?e:aiE(k);
+   if(k==='aiBusy')coolFor(key,c.p==='free'?20000:e.day?msToPacificMidnight():Math.min(e.ms||65000,6*3600e3));
+   else if(k==='aiModel')coolFor(key,3*864e5);
+   else if(k==='aiBadKey'||k==='aiNoKey'||k==='aiNoModel')badP.add(c.p);
+   else if(k==='offline')throw e;
+   else if(c.p==='github'&&e&&e.net){coolFor('github:*',6*3600e3);badP.add('github')}
+   else coolFor(key,90000);
+   if(shown)o.onDelta&&o.onDelta('');
+  }
+ }
+ if(lastErr&&ek(lastErr)==='aiBusy'&&cands.length>1)throw aiE('aiAllBusy');
+ throw lastErr||aiE('aiFail');
+}
+
+/* ---------- markdown-lite ---------- */
+function mdHtml(x){
+ const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const inl=s=>esc(s).replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/__([^_]+)__/g,'<b>$1</b>').replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s).,!?؟،]|$)/g,'$1<i>$2</i>')
+  .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>').replace(/(^|\s)(https?:\/\/[^\s<]+[^\s<.,!?؟،)])/g,'$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+ const out=[];let list=null,code=null,para=[];
+ const flushP=()=>{if(para.length){out.push('<p>'+para.map(inl).join('<br>')+'</p>');para=[]}};
+ const flushL=()=>{if(list){out.push('<'+list.t+'>'+list.i.map(x=>'<li>'+inl(x)+'</li>').join('')+'</'+list.t+'>');list=null}};
+ for(const ln of String(x).replace(/\r/g,'').split('\n')){
+  if(code){if(/^\s*```/.test(ln)){out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');code=null}else code.push(ln);continue}
+  if(/^\s*```/.test(ln)){flushP();flushL();code=[];continue}
+  let m;
+  if(!ln.trim()){flushP();flushL();continue}
+  if((m=ln.match(/^\s*#{1,6}\s+(.*)/))){flushP();flushL();out.push('<h4>'+inl(m[1])+'</h4>');continue}
+  if(/^\s*✏️/.test(ln)){flushP();flushL();out.push('<div class="fixl">'+inl(ln.trim())+'</div>');continue}
+  if((m=ln.match(/^\s*[-*•]\s+(.*)/))){flushP();if(!list||list.t!=='ul'){flushL();list={t:'ul',i:[]}}list.i.push(m[1]);continue}
+  if((m=ln.match(/^\s*\d+[.)]\s+(.*)/))){flushP();if(!list||list.t!=='ol'){flushL();list={t:'ol',i:[]}}list.i.push(m[1]);continue}
+  flushL();para.push(ln.trim());
+ }
+ if(code)out.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');flushP();flushL();return out.join('');
+}
+const plainText=x=>String(x||'').replace(/```[\s\S]*?```/g,' ').replace(/\[([^\]]+)\]\([^)]+\)/g,'$1').replace(/https?:\/\/\S+/g,'').replace(/[*_#`>|]/g,'').replace(/\[\d+\]/g,'').replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu,'').replace(/\s+/g,' ').trim();
+
+/* ---------- chats ---------- */
+function aiFind(id){return(V.chats||[]).find(c=>c.id===id)||null}
+function aiSetMode(m){const A=AI();if(AIC&&AIC.msgs.length&&AIC.mode!==m)AIC=null;A.mode=m;if(AIC)AIC.mode=m;save();aiRenderBar();aiRender()}
+function aiNewChat(){aiStop();AIC=null;V.set.aiCur='';save();aiRender();$('aiIn').focus()}
+function aiOpen(id){aiStop();AIC=aiFind(id);if(AIC){AI().mode=AIC.mode||'ask';V.set.aiCur=id;save()}$('aiHist').hidden=true;aiRenderBar();aiRender()}
+function aiStop(){if(aiAbort){try{aiAbort.abort()}catch(e){}aiAbort=null}}
+function aiRenderBar(){const A=AI();$('aiPLang').value=A.plang;$('aiLevel').value=A.plevel;$('aiFix').checked=A.fix;qa('#aiMode button').forEach(b=>b.classList.toggle('on',b.dataset.v===A.mode));$('aiPract').hidden=A.mode!=='practice'}
+const SUG={ask:{ar:['إيه آخر أخبار سوق معدات اللياقة في السعودية؟','ابحث لي عن أفضل طريقة للتفاوض مع مورد صيني','قارن لي بين جهاز المشي التجاري والمنزلي','إيه المطلوب عشان أسجل علامة تجارية في السعودية؟'],en:['What are the latest trends in the fitness equipment market?','Find me tips for negotiating with a supplier in China','Compare commercial and home treadmills','What do I need to register a trademark in Saudi Arabia?']},
+ learn:{ar:['اشرح لي الذكاء الاصطناعي ببساطة','وضّح لي الفرق بين الربح الإجمالي وصافي الربح','علمني أساسيات التسويق الرقمي','اشرح لي يعني إيه Incoterms زي FOB و CIF'],en:['Explain AI to me simply','What is the difference between gross and net profit?','Teach me the basics of digital marketing','Explain Incoterms like FOB and CIF']},
+ practice:{ar:['خلينا نتكلم عن يومي في الشغل','مثّل إنك عميل في معرض وأنا بايع','أنا مسافر وعايز أحجز فندق','اسألني أسئلة مقابلة عمل'],en:["Let's talk about my day at work",'Pretend you are a customer at a trade show and I am the seller',"I'm traveling and need to book a hotel",'Ask me job interview questions']}};
+function aiAvatarEl(cls){const d=mk('div',cls);const A=AI();if(A.look==='avatar'){d.innerHTML=avatarSvg(A.av,'m'+Math.random().toString(36).slice(2,7))}else{d.classList.add('orbi');orbVars(d,A.orb)}return d}
+function aiRender(){
+ const log=$('aiLog');log.innerHTML='';const A=AI();
+ if(!AIC||!AIC.msgs.length){const e=mk('div','aiempty');e.append(aiAvatarEl('big'));
+  e.append(mk('h2',null,t(A.mode==='practice'?'aiHiP':A.mode==='learn'?'aiHiL':'aiHiA',{n:aiName(),l:langName(A.plang)})),mk('p','mu small',t(A.mode==='practice'?'aiSubP':A.mode==='learn'?'aiSubL':'aiSubA')));
+  if(['auto','free'].includes(A.prov)&&!A.gkey&&!A.qkey&&!A.hkey){const bn=mk('div','keysbn');bn.append(mk('div',null,t('aiKeysBn')));const kb=mk('button','main',t('aiKeysBtn'));kb.onclick=()=>{$('aiCfg').hidden=false;$('aiHist').hidden=true;aiRenderCfg();$('aiGKeyI').scrollIntoView({block:'center',behavior:'smooth'});setTimeout(()=>$('aiGKeyI').focus(),400)};bn.append(kb);e.append(bn)}
+  const ch=mk('div','chips');(SUG[A.mode]||SUG.ask)[L==='ar'?'ar':'en'].forEach(s=>{const b=mk('button','chip sug',s);b.onclick=()=>{if(A.mode==='practice'){aiSend(s)}else{$('aiIn').value=s;aiInput();aiSend()}};ch.append(b)});e.append(ch);
+  const vb=mk('button','main');vb.innerHTML=svg(ICON.wave)+'<span></span>';vb.lastChild.textContent=t('aiVoiceL');vb.onclick=vmOpen;vb.style.marginTop='6px';e.append(vb);log.append(e);return}
+ AIC.msgs.forEach(m=>log.append(aiMsgEl(m)));
+}
+function aiMsgEl(m){
+ const d=mk('div','msg '+(m.r==='u'?'usr':'bot'));
+ if(m.r==='u'){const b=mk('div','mb',m.c);b.dir='auto';d.append(b);return d}
+ d.append(aiAvatarEl('mav'));const c=mk('div','mc'),tx=mk('div','mtx');tx.dir='auto';c.append(tx);d.append(c);
+ m.el=tx;
+ if(m.err){tx.innerHTML='';tx.append(mk('span','merr',m.c));const rb=mk('button','chip');rb.innerHTML=svg(ICON.retry)+'<span></span>';rb.lastChild.textContent=t('aiRetry');rb.onclick=()=>aiRetry();const rw=mk('div','row mt');rw.append(rb);c.append(rw);return d}
+ if(m.pending&&!m.c){tx.innerHTML='<span class="typing"><i></i><i></i><i></i></span>';return d}
+ tx.innerHTML=mdHtml(m.c);
+ if(m.src&&m.src.length){const s=mk('div','msrc');m.src.slice(0,6).forEach(x=>{const a=mk('a',null,'↗ '+x.t);a.href=x.u;a.target='_blank';a.rel='noopener';s.append(a)});c.append(s)}
+ if(!m.pending){const ac=mk('div','macts');
+  const sp=mk('button');sp.innerHTML=svg(ICON.spk);sp.setAttribute('aria-label',t('listen'));sp.title=t('listen');sp.onclick=()=>{const p=plainText(m.c);if(speaking){speechSynthesis.cancel();return}say(p,localeFor(quickLang(p)))};
+  const cp=mk('button');cp.innerHTML=svg(ICON.copy);cp.setAttribute('aria-label',t('copy'));cp.title=t('copied');cp.onclick=()=>copyText(m.c);
+  const tb=mk('button');tb.innerHTML=svg(ICON.tr);tb.setAttribute('aria-label',t('translate'));tb.title=t('translate');
+  tb.onclick=async()=>{const ex=c.querySelector('.mtr');if(ex){ex.remove();return}const box=mk('div','mtr','…');box.dir='auto';ac.before(box);try{box.textContent=await tr(plainText(m.c),quickLang(m.c)||'en',base(V.set.me))}catch(e){box.textContent=errMsg(e)}};
+  ac.append(sp,cp);if(quickLang(m.c)!==base(V.set.me))ac.append(tb);if(m.via){const v=mk('span','via',m.via);ac.append(v)}c.append(ac)}
+ return d;
+}
+function aiScroll(force){const near=innerHeight+scrollY>=document.body.scrollHeight-220;if(force||near)scrollTo({top:document.body.scrollHeight,behavior:force?'smooth':'auto'})}
+function aiInput(){const i=$('aiIn');i.style.height='auto';i.style.height=Math.min(180,i.scrollHeight)+'px';const has=!!i.value.trim();$('aiSend').hidden=!has||aiBusy;$('aiVoice').hidden=has||aiBusy;$('aiStopB').hidden=!aiBusy}
+const aiErrText=e=>t({aiNoKey:'aiNoKey',aiBadKey:'aiBadKey',aiBusy:'aiBusyE',aiAllBusy:'aiAllBusy',aiModel:'aiModelE',aiNoModel:'aiNoModel',offline:'offline'}[ek(e)]||'aiFailE');
+
+/* ask the assistant; returns the reply text (used by text chat and voice mode) */
+async function aiAsk(text,o={}){
+ text=String(text||'').trim();if(!text||!V)return'';
+ const A=AI();
+ if(!AIC){AIC={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),mode:A.mode,title:text.slice(0,60),at:Date.now(),msgs:[]};V.chats=V.chats||[];V.chats.unshift(AIC);if(V.chats.length>60)V.chats.length=60;V.set.aiCur=AIC.id}
+ if(!o.retry)AIC.msgs.push({r:'u',c:text,at:Date.now()});
+ AIC.at=Date.now();
+ const bot={r:'a',c:'',pending:true,at:Date.now()};AIC.msgs.push(bot);
+ aiRender();aiScroll(true);
+ aiBusy=true;aiInput();const ctrl=new AbortController();aiAbort=ctrl;if(o.signal)o.signal.addEventListener('abort',()=>ctrl.abort());
+ const hist=AIC.msgs.filter(m=>m!==bot&&!m.err&&m.c).slice(-24).map(m=>({r:m.r,c:m.c.slice(0,4000)}));
+ let raf=0;
+ try{
+  const res=await llm(hist,AIC.mode||A.mode,{voice:!!o.voice,signal:ctrl.signal,onDelta:full=>{bot.c=full;o.onDelta&&o.onDelta(full);if(!raf)raf=requestAnimationFrame(()=>{raf=0;if(bot.el){bot.el.innerHTML=mdHtml(bot.c)}aiScroll()})}});
+  bot.c=res.text.trim();bot.src=res.src;bot.via=viaName(res.via);delete bot.pending;
+ }catch(e){
+  delete bot.pending;
+  if(e&&e.name==='AbortError'){if(bot.c.trim()){bot.c=bot.c.trim()+' …'}else AIC.msgs.pop()}
+  else{bot.err=true;bot.c=aiErrText(e);bot.code=e}
+ }finally{cancelAnimationFrame(raf);if(aiAbort===ctrl)aiAbort=null;aiBusy=false;
+  AIC.msgs.forEach(m=>delete m.el);if(AIC.msgs.length>200)AIC.msgs.splice(0,AIC.msgs.length-200);
+  save();aiRender();aiScroll();aiInput()}
+ if(bot.err)throw bot.code;
+ return bot.c;
+}
+function aiRetry(){if(!AIC)return;const i=AIC.msgs.length-1;if(i>=0&&AIC.msgs[i].err)AIC.msgs.pop();const lastU=[...AIC.msgs].reverse().find(m=>m.r==='u');if(lastU)aiAsk(lastU.c,{retry:true}).catch(()=>{})}
+function aiSend(preset){const x=(preset||$('aiIn').value).trim();if(!x||aiBusy)return;if(aiDict)aiDict.stop();$('aiIn').value='';aiInput();
+ /* drop an error bubble before sending something new */
+ if(AIC&&AIC.msgs.length&&AIC.msgs[AIC.msgs.length-1].err)AIC.msgs.pop();
+ aiAsk(x).catch(()=>{})}
+
+/* ---------- history ---------- */
+function aiRenderHist(){const w=$('aiHistList');w.innerHTML='';const list=V.chats||[];
+ if(!list.length){w.append(mk('div','note',t('aiNoHist')));return}
+ const ic={ask:'srch',learn:'co',practice:'cv'};
+ list.forEach(c=>{const r=mk('div','hitem'+(AIC&&AIC.id===c.id?' on':'')),b=mk('button');b.innerHTML=svg(ICON[ic[c.mode]||'srch']);const tt=mk('div');tt.style.minWidth='0';tt.append(mk('span',null,c.title||'…'),mk('small',null,fDate(c.at)+' · '+t(c.mode==='practice'?'mPract':c.mode==='learn'?'mLearn':'mAsk')));b.append(tt);b.onclick=()=>aiOpen(c.id);
+  const x=mk('button','x');x.innerHTML=svg(ICON.x);x.setAttribute('aria-label',t('del'));x.onclick=()=>{V.chats=V.chats.filter(k=>k!==c);if(AIC===c){AIC=null;aiRender()}save();aiRenderHist()};r.append(b,x);w.append(r)})}
+
+/* ---------- settings ---------- */
+function aiRenderCfg(){const A=AI();
+ $('aiName').value=A.name;$('aiPers').value=A.pers;$('aiSLang').value=aiSpeakLang();$('aiRLang').value=A.rlang;$('aiDial').value=A.dial;
+ $('aiProv').value=A.prov;$('aiGKeyI').value=A.gkey;$('aiQKeyI').value=A.qkey||'';$('aiHKeyI').value=A.hkey||'';$('aiPref').value=A.pref||'';$('aiGModel').value=A.gmodel==='gemini-flash-latest'?'':A.gmodel;$('aiOBase').value=A.obase;$('aiOKeyI').value=A.okey;$('aiOModel').value=A.omodel;
+ $('aiPLang').value=A.plang;$('aiLevel').value=A.plevel;$('aiFix').checked=A.fix;
+ aiProvUi();renderLook($('aiLook'))}
+function aiProvUi(){const A=AI(),p=A.prov;$('aiGem').hidden=!(p==='gemini'||p==='auto');$('aiGroq').hidden=!(p==='groq'||p==='auto');$('aiGh').hidden=!(p==='github'||p==='auto');$('aiPrefW').hidden=p!=='auto';$('aiOai').hidden=p!=='openai';
+ $('aiProvNote').textContent=t({auto:'prAutoN',gemini:'prGemN',github:'prGhN',groq:'prGroqN',openai:'prOaiN'}[p]||'prFreeN');$('aiTestSt').textContent='';
+ const d=new Date().toLocaleDateString('en-CA'),u=USE.d===d?USE:{},parts=[['gemini','Gemini'],['github','ChatGPT'],['groq','Groq'],['free',t('prFreeS')],['openai','API']].filter(([k])=>u[k]).map(([k,n])=>n+' '+u[k]);
+ $('aiUse').textContent=t('aiUseToday',{n:parts.reduce((a,x)=>a+ +x.split(' ').pop(),0)})+(parts.length?' · '+parts.join(' · '):'')}
+function aiBindCfg(){
+ const A=()=>V.set.ai,bind=(id,k,ev='change',fn)=>$(id).addEventListener(ev,()=>{const el=$(id);A()[k]=el.type==='checkbox'?el.checked:el.value.trim();save();fn&&fn()});
+ bind('aiName','name','input',()=>{if(!AIC||!AIC.msgs.length)aiRender()});bind('aiPers','pers');bind('aiSLang','slang');bind('aiRLang','rlang');bind('aiDial','dial');
+ bind('aiProv','prov','change',aiProvUi);bind('aiGKeyI','gkey','input',()=>{if(!AIC||!AIC.msgs.length)aiRender()});bind('aiHKeyI','hkey','input',()=>{const A=AI();Object.keys(COOL).forEach(k=>{if(k.startsWith('github:'))delete COOL[k]});lsS('ma_ai_cool',COOL);if(!AIC||!AIC.msgs.length)aiRender()});bind('aiPref','pref');bind('aiQKeyI','qkey','input',()=>{if(!AIC||!AIC.msgs.length)aiRender()});bind('aiGModel','gmodel','input',()=>{if(!A().gmodel)A().gmodel='gemini-flash-latest'});bind('aiOBase','obase','input');bind('aiOKeyI','okey','input');bind('aiOModel','omodel','input');
+ bind('aiPLang','plang','change',()=>{if(!AIC||!AIC.msgs.length)aiRender()});bind('aiLevel','plevel');bind('aiFix','fix');
+ $('aiTest').onclick=async()=>{const st=$('aiTestSt'),b=$('aiTest');b.disabled=true;st.style.color='var(--mu)';st.textContent=t('checking');
+  try{const r=await llm([{r:'u',c:L==='ar'?'قل: أهلاً، أنا جاهز. (كلمتين بس)':'Say: Hi, I am ready. (two words)'}],'learn',{voice:true});st.style.color='var(--ok)';st.textContent='✓ '+viaName(r.via)+' — '+plainText(r.text).slice(0,50);aiProvUi()}
+  catch(e){st.style.color='var(--bad)';st.textContent=aiErrText(e)}finally{b.disabled=false}};
+}
+
+/* ---------- composer + dictation ---------- */
+let aiDict=null;
+async function aiDictate(){if(aiDict){aiDict.stop();return}if(!(await micReady()))return;const i=$('aiIn'),start=i.value;let fin='';
+ $('aiMic').classList.add('rec');
+ aiDict=startRec(AI().mode==='practice'?AI().plang:aiSpeakLang(),{cont:true,keep:()=>!!aiDict,interim:x=>{i.value=(start+' '+fin+' '+x).replace(/\s+/g,' ').trimStart();aiInput()},final:x=>{fin=(fin+' '+x).trim();i.value=(start+' '+fin).replace(/\s+/g,' ').trimStart();aiInput()},end:()=>{aiDict=null;$('aiMic').classList.remove('rec')}});
+ if(!aiDict)$('aiMic').classList.remove('rec')}
+
+/* ---------- AI + voice mode wiring ---------- */
+qa('#aiMode button').forEach(b=>b.onclick=()=>aiSetMode(b.dataset.v));
+$('aiNew').onclick=aiNewChat;
+$('aiHistB').onclick=()=>{const h=$('aiHist');h.hidden=!h.hidden;$('aiCfg').hidden=true;if(!h.hidden)aiRenderHist()};
+$('aiHistClr').onclick=()=>{if(!confirm(t('aiClrQ')))return;V.chats=[];AIC=null;save();aiRenderHist();aiRender()};
+$('aiCfgB').onclick=()=>{const c=$('aiCfg');c.hidden=!c.hidden;$('aiHist').hidden=true;if(!c.hidden){aiRenderCfg();c.scrollIntoView({block:'start',behavior:'smooth'})}};
+$('aiIn').addEventListener('input',aiInput);
+$('aiIn').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing&&!MOBILE){e.preventDefault();aiSend()}});
+$('aiSend').onclick=()=>aiSend();
+$('aiStopB').onclick=aiStop;
+$('aiVoice').onclick=vmOpen;
+$('aiMic').onclick=aiDictate;
+aiBindCfg();
+$('vmEnd').onclick=vmClose;
+$('vmStage').onclick=vmInterrupt;
+$('vmStage').onkeydown=e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();vmInterrupt()}};
+$('vmMute').onclick=()=>{VM.muted=!VM.muted;if(VM.muted){VM.tok++;clearTimeout(VM.sil);if(VM.rec){try{VM.rec.stop()}catch(e){}VM.rec=null}if(VM.st==='listening')vmSet('muted');else vmSet(VM.st)}else{VM.fails=0;if(VM.st==='muted')vmListen();else vmSet(VM.st)}};
+$('vmLang').onclick=()=>{const A=AI(),opts=[...new Set([aiSpeakLang(),A.mode==='practice'?A.plang:'',V.set.me,base(aiSpeakLang())==='ar'?'en-US':'ar-SA'].filter(Boolean))];
+ VM.lang=opts[(opts.indexOf(VM.lang)+1)%opts.length];vmLangBtn();toast('🎤 '+langName(VM.lang),2000);if(VM.st==='listening'){VM.tok++;if(VM.rec){try{VM.rec.stop()}catch(e){}VM.rec=null}setTimeout(vmListen,250)}};
+$('vmCapB').onclick=()=>{const A=AI();A.cap=!A.cap;save();$('vm').classList.toggle('nocap',!A.cap);$('vmCapB').classList.toggle('on',A.cap)};
+$('vmLookB').onclick=()=>{const p=$('vmPanel');p.hidden=!p.hidden;if(!p.hidden)renderLook($('vmLookHost'))};
+$('vmPanelX').onclick=()=>{$('vmPanel').hidden=true};
+addEventListener('keydown',e=>{if(e.key==='Escape'&&VM.on){if(!$('vmPanel').hidden)$('vmPanel').hidden=true;else vmClose()}});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState!=='visible'&&VM.on&&VM.st==='listening'){VM.muted=true;VM.tok++;if(VM.rec){try{VM.rec.stop()}catch(e){}VM.rec=null}vmSet('muted')}});
+
 /* ================= SETTINGS ================= */
 function setUi(l){L=l;DEV.ui=l;saveDev();applyUI()}
 qa('#segUi button').forEach(b=>b.onclick=()=>setUi(b.dataset.v));
@@ -1448,6 +2273,18 @@ $('fChg').onsubmit=async e=>{e.preventDefault();const b=qa('button[type=submit]'
 $('stExport').onclick=async()=>{await saveVault(true);download('meeting-assistant-'+U+'-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({app:'meeting-assistant',v:2,user:U,date:new Date().toISOString(),rec:USERS[U]}),'application/json')};
 $('stImport').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)importBackup(f,n=>toast(t('imported')))};
 $('stDel').onclick=()=>{if(!confirm(t('confirmDel')))return;stopAll();delete USERS[U];saveUsers();U=null;DK=null;V=null;location.reload()};
+
+/* ---------- email reset settings ---------- */
+function renderMailSt(){if(!$('mrSt'))return;const on=!!(U&&mailReady(USERS[U]));$('mrUrl').value=resetApi();$('mrOff').hidden=!localStorage.getItem('ma_reset_api');
+ $('mrPill').textContent=on?'✓':'';$('mrPill').style.background=on?'color-mix(in srgb,var(--ok) 18%,transparent)':'';$('mrPill').style.color=on?'var(--ok)':'';
+ $('mrSt').textContent=on?t('mrOnSt'):resetApi()?t('mrPend'):t('mrOffSt');$('mrSt').style.color=on?'var(--ok)':'var(--mu)';if(!on&&!$('mrBox').dataset.auto){$('mrBox').dataset.auto=1;$('mrBox').open=true}}
+$('mrOn').onclick=async()=>{const url=$('mrUrl').value.trim(),b=$('mrOn'),old=b.textContent;
+ if(!/^https:\/\/script\.google(usercontent)?\.com\/.+/.test(url))return toast(t('mrBadUrl'),6000);
+ b.disabled=true;b.textContent=t('checking');const prev=localStorage.getItem('ma_reset_api');
+ try{localStorage.setItem('ma_reset_api',url);const j=await rApi({a:'ping'});if(!j.ok)throw'eSvc';delete USERS[U].mid;await enrollMail(U,DKraw);toast(t('mrDone'),5000)}
+ catch(x){if(prev)localStorage.setItem('ma_reset_api',prev);else localStorage.removeItem('ma_reset_api');toast(typeof x==='string'&&T.ar[x]?t(x):t('eSvc'),7000)}
+ finally{b.disabled=false;b.textContent=old;renderMailSt()}};
+$('mrOff').onclick=()=>{localStorage.removeItem('ma_reset_api');renderMailSt()};
 function renderDiag(){const d=$('diag');d.innerHTML='';const devOk='Translator' in self;
  [['dSR',!!SR],['dTTS','speechSynthesis' in self],['dDev',devOk],['dWake','wakeLock' in navigator],['dShare',!!navigator.share],['dSec',isSecureContext],['dNet',navigator.onLine]].forEach(([k,ok])=>{const r=mk('div');r.append(mk('span',null,t(k)),mk('b',null,(ok?'✓ ':'✗ ')+t(ok?'yes':'no')));r.lastChild.style.color=ok?'var(--ok)':'var(--mu)';d.append(r)})}
 
@@ -1458,7 +2295,7 @@ function refresh(){
  $('coBtn').textContent=coOn?t('stopS'):t('speak');$('coBtn').classList.toggle('rec',coOn);
  $('cvStop').disabled=!cvOn;cvLabels();
 }
-function showTab(id){qa('nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===id));qa('.pane').forEach(p=>p.classList.toggle('on',p.id===id));if(V){V.set.tab=id;save()}if(id==='st'){renderDiag();renderVoiceSel()}if(id==='tk'){renderTasks();permStatus()}$('hSet').classList.toggle('on',id==='st');scrollTo({top:0})}
+function showTab(id){qa('nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===id));qa('.pane').forEach(p=>p.classList.toggle('on',p.id===id));if(V){V.set.tab=id;save()}if(id==='st'){renderDiag();renderVoiceSel();renderMailSt()}if(id==='tk'){renderTasks();permStatus()}if(id==='ai'){aiRenderBar();aiRender();aiInput()}$('hSet').classList.toggle('on',id==='st');scrollTo({top:0})}
 qa('nav button').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
 function applyUI(){
  document.documentElement.lang=L;document.documentElement.dir=L==='ar'?'rtl':'ltr';document.title=t('title')+(L==='ar'?' | Meeting Assistant':'');
@@ -1468,7 +2305,7 @@ function applyUI(){
  $('aUi').textContent=L==='ar'?'EN':'عربي';
  qa('#segUi button').forEach(b=>b.classList.toggle('on',b.dataset.v===L));
  renderUsers();
- if(V){renderCmds();refresh();renderList();renderProfile();renderPhrases();renderIntents();renderVoice();renderDiag();trEmpty();cvEmpty();tkLabels();renderTasks();permStatus();if(lastEng){const m=lastEng;lastEng='';setEng(m)}}
+ if(V){aiRenderBar();aiRender();if(!$('aiCfg').hidden)aiRenderCfg();renderCmds();refresh();renderList();renderProfile();renderPhrases();renderIntents();renderVoice();renderDiag();trEmpty();cvEmpty();tkLabels();renderTasks();permStatus();if(lastEng){const m=lastEng;lastEng='';setEng(m)}}
 }
 let inited=false;
 function enterApp(){
@@ -1481,6 +2318,7 @@ function enterApp(){
  $('emTgt').value='en-US';$('sEngine').value=s.engine;$('sLock').value=String(s.autoLock);$('sWake').checked=s.wake;$('sMe').value=s.me;$('vLang').value=s.me;
  $('stUser').textContent=USERS[U].name;
  $('tkOn').checked=s.ntOn;$('tkDef').value=String(s.defDays);$('tkHour').value=String(s.ntHour);$('tkDue').value=addDays(today(),+s.defDays||3);
+ AIC=aiFind(s.aiCur)||null;if(AIC)s.ai.mode=AIC.mode||s.ai.mode;
  if(!inited){inited=true;renderTarget()}
  applyUI();showTab(s.tab||'tr');
  try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
@@ -1500,6 +2338,7 @@ applyTheme();applyUI();
 if(!S)$('aErr').textContent=t('eCrypto');
 setTimeout(()=>notifTick(false),3000);
 if(!Object.keys(USERS).length)showForm('Signup');else{showForm('Login');$('lUser').value=DEV.last||Object.values(USERS)[0].name}
+if(RST&&USERS[RST.u])showForm('Forgot');
 </script>
 </body>
 </html>

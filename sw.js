@@ -1,6 +1,6 @@
 /* Meeting Assistant service worker: offline cache + daily task summary notification.
    Put this file in the same folder as the app's HTML file. */
-const CACHE = 'ma-app-v1';
+const CACHE = 'ma-app-v2';
 
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
