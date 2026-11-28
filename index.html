@@ -964,7 +964,9 @@ async function changePw(cur,pw){
 function lock(){stopAll();saveVault(true).finally(()=>location.reload())}
 
 /* ---------- password reset by email (Google Apps Script service, see reset-service.gs) ---------- */
-const RESET_API_DEFAULT='https://script.google.com/macros/s/AKfycbwIgTYRW5bFTBfTuMBCJYUVuEGazuqCh-K7ML0jFsrfSgRA7lj1DeiSF7yo4qB2o1wP/exec';/* optional: paste the Apps Script web-app URL here so every device uses it */
+const RESET_API_DEFAULT='https://script.google.com/macros/s/AKfycbwJCwjSMYVWGaiJn0ThpmIDFImY-64os7qjmwHbFok-GZbLzF1ggjk9E39u1zulTqAS2Q/exec';
+/* links of deleted Apps Script projects: a device that saved one goes back to the default */
+try{if(['AKfycbwIgTYRW5bFTBfTuMBCJYUVuEGazuqCh-K7ML0jFsrfSgRA7lj1DeiSF7yo4qB2o1wP'].some(x=>(localStorage.getItem('ma_reset_api')||'').includes(x)))localStorage.removeItem('ma_reset_api')}catch(e){}/* optional: paste the Apps Script web-app URL here so every device uses it */
 const resetApi=()=>(localStorage.getItem('ma_reset_api')||RESET_API_DEFAULT).trim();
 async function rApi(q,ms=20000){const url=resetApi();if(!url)throw'eNoSvc';if(!navigator.onLine)throw'offline';
  let r;try{r=await withTimeout(fetch(url+(url.includes('?')?'&':'?')+new URLSearchParams(q),{redirect:'follow'}),ms,'eSvc')}catch(e){throw e==='eSvc'?{k:'eSvc',d:'timeout'}:{k:'eSvcAccess',d:String(e&&e.message||e)}}
